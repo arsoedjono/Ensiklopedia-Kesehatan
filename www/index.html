@@ -1,45 +1,598 @@
 <html>
-    <head>    
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bayi Sehat</title>
-    <link rel="stylesheet" href="js/jquery-mobile/jquery.mobile.min.css">   
-    <link rel="stylesheet" href="js/themes/themes.min.css" />
-    <link rel="stylesheet" href="js/themes/jquery.mobile.icons.min.css" />
-    <link rel="stylesheet" href="css/ProjectBayi.css"/>
-    <script src="js/jquery/jquery-1.11.0.min.js"></script>
-    <script>
-        $(document).on('mobileinit', function (){
-           $.mobile.defaultPageTransition="none"; 
-        });       
-    </script>
-    <script src="js/jquery-mobile/jquery.mobile.min.js"></script>
-    <script src="js/projectBayi.js"></script>       
-    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bayi Sehat</title>
+        <link rel="stylesheet" href="js/jquery-mobile/jquery.mobile.min.css">   
+        <link rel="stylesheet" href="js/themes/themes.min.css" />
+        <link rel="stylesheet" href="js/themes/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="css/ProjectEnsiklopedia.css"/>
+        <script src="js/jquery/jquery-1.11.0.min.js"></script>
+        <script>
+            $(document).on('mobileinit', function (){
+               $.mobile.defaultPageTransition="none"; 
+            });       
+        </script>
+        <script src="js/jquery-mobile/jquery.mobile.min.js"></script>
+        <script src="js/projectEnsiklopedia.js"></script>
     </head>
-    <body>         
+
+    <body>
         <!-- MAIN MENU -->
-        <div data-role="page" id="main" data-url="main">
+        <div data-role="page" id="main-menu" data-url="main-menu">
+            <div class="ui-header" data-role="header" data-position="fixed">
+                <h1 class="ui-title" role="heading">MENU UTAMA ENSIKLOPEDIA KESEHATAN</h1>
+            </div>
+            <div data-role="main" class="ui-content">
+                <ul data-role="listview" data-inset="true">
+                    <li>
+                        <a href="#balita-main">
+                            <img src="img/balita-logo.png" style="margin-left: 10px" class="ui-li-thumb">
+                            <h3>Balita</h3>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#ibuhamil-main">
+                            <img src="img/ibuhamil-logo.png" style="margin-left: 10px" class="ui-li-thumb">
+                            <h3>Ibu Hamil</h3>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /MAIN MENU -->
+
+        <!-- IBU HAMIL -->
+        <!-- MAIN PAGE IBU HAMIL -->
+        <div data-role="page" id="ibuhamil-main" data-url="ibuhamil-main">
+            <div class="ui-header"  data-role="header" data-position="fixed">       
+                <h1 class="ui-title" role="heading">Ibu Sehat: Panduan</h1>
+                <a href="#main-menu" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
+            </div>            
+            <div data-role="main" class="ui-content">  
+                <center><img src="img/ibuhamil-logo.png" class="ui-li-thumb" style="max-height: 140px;"></center>
+                <ul data-role="listview" data-inset="true">
+                    <li>
+                        <a href="#ibuhamil-rekomendasi">
+                            <img src="img/balita-nutrisi.jpg" class="ui-li-thumb">
+                            <h3>Nutrisi</h3>                           
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#ibuhamil-informasi">
+                            <img src="img/balita-perkembangan.jpg" class="ui-li-thumb">
+                            <h3>Informasi Kehamilan</h3>            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#ibuhamil-persiapan">
+                            <img src="img/balita-p3k.jpg" class="ui-li-thumb">
+                            <h3>Persiapan</h3>                
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#ibuhamil-faq">
+                            <img src="" class="ui-li-thumb">
+                            <h3>FAQ</h3>                
+                        </a>
+                    </li>
+                </ul>
+            </div>            
+        </div>
+        <!-- /MAIN PAGE IBU HAMIL -->
+
+        <!-- REKOMENDASI -->
+        <div data-role="page" id="ibuhamil-rekomendasi" data-url="ibuhamil-rekomendasi"> 
+            <div class="ui-header"  data-role="header" data-position="fixed">       
+                <h1 class="ui-title" role="heading">Nutrisi</h1>    
+                <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#" class="ui-btn-active">Rekomendasi</a></li>
+                        <li><a href="#ibuhamil-informasimakanan">Informasi Makanan</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div data-role="content">                
+                <fieldset data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false">
+                    <legend>Pencarian</legend>
+                    <label><b>Pola hidup:</b></label>
+                    <div data-role="controlgroup" data-mini="true">
+                        <input type="checkbox" name="aVegetarian" id="aVegetarian">
+                        <label for="aVegetarian" style="white-space: normal">Vegetarian</label>
+                    </div>
+                    <label><b>Penyakit:</b></label>
+                    <div data-role="controlgroup" data-mini="true">
+                        <input type="checkbox" name="hasDiabetes" id="hasDiabetes">
+                        <label for="hasDiabetes" style="white-space: normal">Diabetes</label>
+                    </div>
+                    <label><b>Makanan yang harus dihindari:</b></label>
+                    <div data-role="controlgroup" data-mini="true">
+                        <input type="checkbox" name="noFish" id="noFish">
+                        <label for="noFish" style="white-space: normal">Ikan</label>
+                        <input type="checkbox" name="noEgg" id="noEgg">
+                        <label for="noEgg" style="white-space: normal">Telur</label>
+                    </div>
+                    <button data-mini="true" onclick="RekomendasiIbuHamil()">Cari...</button>
+                </fieldset>
+                <div data-role="collapsibleset">
+                    <div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false" >
+                        <h4>Bahan Makanan</h4>
+                        <ul data-role="listview" data-inset="false" id="listviewBahanMakanan">  
+                        </ul>
+                    </div>
+                    <div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h4>Resep</h4>
+                        <ul data-role="listview" data-inset="false" id="listviewResep">  
+                        </ul>
+                    </div>
+                </div>                
+            </div>            
+        </div>
+        <!-- /REKOMENDASI -->
+
+        <!-- INFORMASI MAKANAN -->
+        <div data-role="page" id="ibuhamil-informasimakanan" data-url="ibuhamil-informasimakanan">  
+            <div class="ui-header"  data-role="header" data-position="fixed">       
+                <h1 class="ui-title" role="heading">Nutrisi</h1>    
+                <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#ibuhamil-rekomendasi" class="ui-btn-active">Rekomendasi</a></li>
+                        <li><a href="#">Informasi Makanan</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div data-role="content">
+                <p>Source: <a href="http://bidanku.com/makanan-untuk-ibu-hamil-1-bulan">click here</a></p>
+                <form>
+                    <input data-type="search" id="cariInformasiMakananIbuHamil" placeholder="Cari..."> 
+                </form>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariInformasiMakananIbuHamil">
+                    <div data-role="collapsible">
+                        <h4>1 Bulan</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li >                                
+                                Keterampilan Utama
+                                <p style="white-space: normal">Menunjukkan perilaku pemicu kasih sayang, menangis, meringkuk, mendekut</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Terbaring seperti ketika masih di dalam rahim</p>
+                                <p>Ototnya seperti pegas</p>
+                                <p>Kepala sedikit diangkat</p>
+                                <p style="white-space: normal">Otot terkadang kejang kaki tidak merasakan berat</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Tangan terkepal erat</p>
+                                <p style="white-space: normal">Tidak dapat menggenggam giring-giring</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Menangis karena meminta sesuatu</p>
+                                <p style="white-space: normal">Mendengkur dengan suara tenggorokan</p>
+                                <p style="white-space: normal">Tersenyum-senyum</p>
+                                <p style="white-space: normal">Menangis disaat tidur</p>
+                                <p style="white-space: normal">Mengenali orang tuanya sebagai "si suara asing"</p>
+                                <p style="white-space: normal">Penglihatan paling baik berjarak 8-10 inci dan masih buram</p>
+                                <p style="white-space: normal">Tidur, bangun, makan secara tidak menentu</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p>
+                                <p style="white-space: normal">Tingkah lakunya lebih sering dilakukan secara refleks (otomatis) dibandingkan dengan berpikir dulu</p>
+                                <p style="white-space: normal">Mengantisipasi bahwa dengan hilangnya stres akan diikuti dengan kenyamanan</p>
+                                <p style="white-space: normal">Mulai belajar mempercayai</p>
+                            </li>
+                            <li>
+                                Tips
+                                <p style="white-space: normal"><b>Kiat untuk mempertahankan perhatian visual bayi:</b></p>
+                                <p style="white-space: normal">Dudukkan atau pegang tubuh bayi dalam posisi tegak, tunggu bayi hingga dalam keadaan diam, pegang objek atau wajah dalam jarak dalam jarak sekitar 25cm dari wajah bayi, gunakan gerakan wajah yang lucu (mulut dan mata terbuka lebar) sambil berbicara perlahan, berirama, serta nada yang dilebih-lebihkan</p>
+                                <p style="white-space: normal">*bayi yang baru lahir suka melihat wajah, terutama yang ia kenal.</p>
+                            </li>
+                        </ul>
+                    </div>  
+                    <div data-role="collapsible">
+                        <h4>2 Bulan</h4>
+                    </div>  
+                    <div data-role="collapsible">
+                        <h4>3 Bulan</h4>
+                    </div>  
+                    <div data-role="collapsible">
+                        <h4>4 Bulan</h4>
+                    </div>  
+                    <div data-role="collapsible">
+                        <h4>5 Bulan</h4>
+                    </div>  
+                    <div data-role="collapsible">
+                        <h4>6 Bulan</h4>
+                    </div>  
+                    <div data-role="collapsible">
+                        <h4>7 Bulan</h4>
+                    </div>  
+                    <div data-role="collapsible">
+                        <h4>8 Bulan</h4>
+                    </div>  
+                    <div data-role="collapsible">
+                        <h4>9 Bulan</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /INFORMASI MAKANAN -->
+
+        <!-- INFORMASI KEHAMILAN -->
+        <div data-role="page" id="ibuhamil-informasi" data-url="ibuhamil-informasi"> 
+            <div class="ui-header"  data-role="header" data-position="fixed">       
+                <h1 class="ui-title" role="heading">Informasi</h1>    
+                <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#" class="ui-btn-active">Perkembangan janin</a></li>
+                        <li><a href="#ibuhamil-olahraga">Olahraga</a></li>
+                        <li><a href="#ibuhamil-tips">Tips</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div data-role="content">
+                <p>Source: <a href="http://perkembanganjanin.blogspot.com/2008/10/perkembangan-janin-dari-minggu-ke.html">click here</a></p>
+                <form>
+                    <input data-type="search" id="cariInformasiPerkembanganJanin" placeholder="Cari..."> 
+                </form>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariInformasiPerkembanganJanin">
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-1</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li >                                
+                                Keterampilan Utama
+                                <p style="white-space: normal">Menunjukkan perilaku pemicu kasih sayang, menangis, meringkuk, mendekut</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Terbaring seperti ketika masih di dalam rahim</p>
+                                <p>Ototnya seperti pegas</p>
+                                <p>Kepala sedikit diangkat</p>
+                                <p style="white-space: normal">Otot terkadang kejang kaki tidak merasakan berat</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Tangan terkepal erat</p>
+                                <p style="white-space: normal">Tidak dapat menggenggam giring-giring</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Menangis karena meminta sesuatu</p>
+                                <p style="white-space: normal">Mendengkur dengan suara tenggorokan</p>
+                                <p style="white-space: normal">Tersenyum-senyum</p>
+                                <p style="white-space: normal">Menangis disaat tidur</p>
+                                <p style="white-space: normal">Mengenali orang tuanya sebagai "si suara asing"</p>
+                                <p style="white-space: normal">Penglihatan paling baik berjarak 8-10 inci dan masih buram</p>
+                                <p style="white-space: normal">Tidur, bangun, makan secara tidak menentu</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p>
+                                <p style="white-space: normal">Tingkah lakunya lebih sering dilakukan secara refleks (otomatis) dibandingkan dengan berpikir dulu</p>
+                                <p style="white-space: normal">Mengantisipasi bahwa dengan hilangnya stres akan diikuti dengan kenyamanan</p>
+                                <p style="white-space: normal">Mulai belajar mempercayai</p>
+                            </li>
+                            <li>
+                                Tips
+                                <p style="white-space: normal"><b>Kiat untuk mempertahankan perhatian visual bayi:</b></p>
+                                <p style="white-space: normal">Dudukkan atau pegang tubuh bayi dalam posisi tegak, tunggu bayi hingga dalam keadaan diam, pegang objek atau wajah dalam jarak dalam jarak sekitar 25cm dari wajah bayi, gunakan gerakan wajah yang lucu (mulut dan mata terbuka lebar) sambil berbicara perlahan, berirama, serta nada yang dilebih-lebihkan</p>
+                                <p style="white-space: normal">*bayi yang baru lahir suka melihat wajah, terutama yang ia kenal.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-2</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-3</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-4</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-5</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-6</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-7</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-8</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-9</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-10</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-11</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-12</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-13</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-14</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-15</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-16</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-17</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-18</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-19</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-20</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-21</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-22</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-23</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-24</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-25</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-26</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-27</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-28</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-29</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-30</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-31</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-32</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-33</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-34</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-35</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-36</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-37</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-38 hingga 40</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /INFORMASI KEHAMILAN -->
+
+        <!-- OLAHRAGA -->
+        <div data-role="page" id="ibuhamil-olahraga" data-url="ibuhamil-olahraga"> 
+            <div class="ui-header"  data-role="header" data-position="fixed">       
+                <h1 class="ui-title" role="heading">Informasi</h1>    
+                <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#ibuhamil-informasi">Perkembangan janin</a></li>
+                        <li><a href="#" class="ui-btn-active">Olahraga</a></li>
+                        <li><a href="#ibuhamil-tips">Tips</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div data-role="content">
+                <p>Source: <a href="http://bidanku.com/jenis-jenis-dan-manfaat-olahraga-untuk-ibu-hamil">click here</a></p>
+                <form>
+                    <input data-type="search" id="cariInformasiOlahraga" placeholder="Cari..."> 
+                </form>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariInformasiOlahraga">
+                    <div data-role="collapsible">
+                        <h4>Jalan Kaki</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li >                                
+                                Keterampilan Utama
+                                <p style="white-space: normal">Menunjukkan perilaku pemicu kasih sayang, menangis, meringkuk, mendekut</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Terbaring seperti ketika masih di dalam rahim</p>
+                                <p>Ototnya seperti pegas</p>
+                                <p>Kepala sedikit diangkat</p>
+                                <p style="white-space: normal">Otot terkadang kejang kaki tidak merasakan berat</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Tangan terkepal erat</p>
+                                <p style="white-space: normal">Tidak dapat menggenggam giring-giring</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Menangis karena meminta sesuatu</p>
+                                <p style="white-space: normal">Mendengkur dengan suara tenggorokan</p>
+                                <p style="white-space: normal">Tersenyum-senyum</p>
+                                <p style="white-space: normal">Menangis disaat tidur</p>
+                                <p style="white-space: normal">Mengenali orang tuanya sebagai "si suara asing"</p>
+                                <p style="white-space: normal">Penglihatan paling baik berjarak 8-10 inci dan masih buram</p>
+                                <p style="white-space: normal">Tidur, bangun, makan secara tidak menentu</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p>
+                                <p style="white-space: normal">Tingkah lakunya lebih sering dilakukan secara refleks (otomatis) dibandingkan dengan berpikir dulu</p>
+                                <p style="white-space: normal">Mengantisipasi bahwa dengan hilangnya stres akan diikuti dengan kenyamanan</p>
+                                <p style="white-space: normal">Mulai belajar mempercayai</p>
+                            </li>
+                            <li>
+                                Tips
+                                <p style="white-space: normal"><b>Kiat untuk mempertahankan perhatian visual bayi:</b></p>
+                                <p style="white-space: normal">Dudukkan atau pegang tubuh bayi dalam posisi tegak, tunggu bayi hingga dalam keadaan diam, pegang objek atau wajah dalam jarak dalam jarak sekitar 25cm dari wajah bayi, gunakan gerakan wajah yang lucu (mulut dan mata terbuka lebar) sambil berbicara perlahan, berirama, serta nada yang dilebih-lebihkan</p>
+                                <p style="white-space: normal">*bayi yang baru lahir suka melihat wajah, terutama yang ia kenal.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Berenang</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Senam Hamil</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Yoga</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Latihan Beban</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Peregangan</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /OLAHRAGA -->
+
+        <!-- TIPS -->
+        <div data-role="page" id="ibuhamil-tips" data-url="ibuhamil-tips"> 
+            <div class="ui-header"  data-role="header" data-position="fixed">       
+                <h1 class="ui-title" role="heading">Informasi</h1>    
+                <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#ibuhamil-informasi">Perkembangan janin</a></li>
+                        <li><a href="#ibuhamil-olahraga">Olahraga</a></li>
+                        <li><a href="#" class="ui-btn-active">Tips</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /TIPS -->
+
+        <!-- PERSIAPAN -->
+        <div data-role="page" id="ibuhamil-persiapan" data-url="ibuhamil-persiapan"> 
+            <div class="ui-header"  data-role="header" data-position="fixed">       
+                <h1 class="ui-title" role="heading">Persiapan</h1>    
+                <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+            </div>
+            <div data-role="content">
+                <p>Source tanda: <a href="http://bidanku.com/tanda-tanda-akan-melahirkan">click here</a></p>
+                <p>Source persalinan: <a href="http://bidanku.com/persiapan-persalinan">click here</a></p>
+                <form>
+                    <input data-type="search" id="cariInformasiOlahraga" placeholder="Cari..."> 
+                </form>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariInformasiOlahraga">
+                    <div data-role="collapsible">
+                        <h4>Tanda-tanda kelahiran</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li >                                
+                                Keterampilan Utama
+                                <p style="white-space: normal">Menunjukkan perilaku pemicu kasih sayang, menangis, meringkuk, mendekut</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Terbaring seperti ketika masih di dalam rahim</p>
+                                <p>Ototnya seperti pegas</p>
+                                <p>Kepala sedikit diangkat</p>
+                                <p style="white-space: normal">Otot terkadang kejang kaki tidak merasakan berat</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Tangan terkepal erat</p>
+                                <p style="white-space: normal">Tidak dapat menggenggam giring-giring</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Menangis karena meminta sesuatu</p>
+                                <p style="white-space: normal">Mendengkur dengan suara tenggorokan</p>
+                                <p style="white-space: normal">Tersenyum-senyum</p>
+                                <p style="white-space: normal">Menangis disaat tidur</p>
+                                <p style="white-space: normal">Mengenali orang tuanya sebagai "si suara asing"</p>
+                                <p style="white-space: normal">Penglihatan paling baik berjarak 8-10 inci dan masih buram</p>
+                                <p style="white-space: normal">Tidur, bangun, makan secara tidak menentu</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p>
+                                <p style="white-space: normal">Tingkah lakunya lebih sering dilakukan secara refleks (otomatis) dibandingkan dengan berpikir dulu</p>
+                                <p style="white-space: normal">Mengantisipasi bahwa dengan hilangnya stres akan diikuti dengan kenyamanan</p>
+                                <p style="white-space: normal">Mulai belajar mempercayai</p>
+                            </li>
+                            <li>
+                                Tips
+                                <p style="white-space: normal"><b>Kiat untuk mempertahankan perhatian visual bayi:</b></p>
+                                <p style="white-space: normal">Dudukkan atau pegang tubuh bayi dalam posisi tegak, tunggu bayi hingga dalam keadaan diam, pegang objek atau wajah dalam jarak dalam jarak sekitar 25cm dari wajah bayi, gunakan gerakan wajah yang lucu (mulut dan mata terbuka lebar) sambil berbicara perlahan, berirama, serta nada yang dilebih-lebihkan</p>
+                                <p style="white-space: normal">*bayi yang baru lahir suka melihat wajah, terutama yang ia kenal.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Persiapan persalinan</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /PERSIAPAN -->
+
+        <!-- PERSIAPAN -->
+        <!-- /PERSIAPAN -->
+        <!-- /IBU HAMIL -->
+
+        <!-- BALITA -->
+        <!-- MAIN PAGE BALITA -->
+        <div data-role="page" id="balita-main" data-url="balita-main">
             <div class="ui-header"  data-role="header" data-position="fixed">		
-				<h1 class="ui-title" role="heading">Bayi Sehat: Panduan</h1>	
+				<h1 class="ui-title" role="heading">Bayi Sehat: Panduan</h1>
+                <a href="#main-menu" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
             </div>            
             <div data-role="main" class="ui-content">  
                 <center><img src="img/balita-logo.png" class="ui-li-thumb" style="max-height: 140px;"></center>
                 <ul data-role="listview" data-inset="true">
                     <li>
-                        <a href="#rekomendasi">
+                        <a href="#balita-rekomendasi">
                             <img src="img/balita-nutrisi.jpg" class="ui-li-thumb">
-                            <h3>Nutrisi</h3>                            
+                            <h3>Nutrisi</h3>                           
                         </a>
                     </li>
                     <li>
-                        <a href="#perkembangan">
+                        <a href="#balita-perkembangan">
                             <img src="img/balita-perkembangan.jpg" class="ui-li-thumb">
-                            <h3>Perkembangan</h3>                            
+                            <h3>Perkembangan</h3>            
                         </a>
                     </li>
                     <li>
-                        <a href="#P3K">
+                        <a href="#balita-P3K">
                             <img src="img/balita-p3k.jpg" class="ui-li-thumb">
                             <h3>P3K</h3>                            
                         </a>
@@ -47,19 +600,21 @@
                 </ul>
             </div>            
         </div>
+        <!-- /MAIN PAGE BALITA -->
+
         <!-- REKOMENDASI -->
-        <div data-role="page" id="rekomendasi" data-url="rekomendasi"> 
+        <div data-role="page" id="balita-rekomendasi" data-url="balita-rekomendasi"> 
             <div class="ui-header"  data-role="header" data-position="fixed">		
-		<h1 class="ui-title" role="heading">Nutrisi</h1>	
-                <a href="#main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+		        <h1 class="ui-title" role="heading">Nutrisi</h1>	
+                <a href="#balita-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
                 <div data-role="navbar">
-                   <ul>
-                       <li><a href="#" class="ui-btn-active">Rekomendasi</a></li>
-                       <li><a href="#bolehkah">Bolehkah?</a></li>
-                       <li><a href="#informasi">Informasi</a></li>
-                   </ul>
-                </div><!-- /navbar -->
-	    </div>              
+                    <ul>
+                        <li><a href="#" class="ui-btn-active">Rekomendasi</a></li>
+                        <li><a href="#balita-bolehkah">Bolehkah?</a></li>
+                        <li><a href="#balita-informasi">Informasi</a></li>
+                    </ul>
+                </div>
+	        </div>              
             <div data-role="content">                
                 <fieldset data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false">
                     <legend>Pilih Usia dan Jenis Alergi</legend>
@@ -83,35 +638,37 @@
                         <input type="checkbox" name="chkIkan" id="chkIkan">
                         <label for="chkIkan" style="white-space: normal">Ikan Laut</label>
                     </div>
-                    <button data-mini="true" onclick="Rekomendasi()">Cari...</button>
+                    <button data-mini="true" onclick="RekomendasiBalita()">Cari...</button>
                 </fieldset>
                 <div data-role="collapsibleset">
                     <div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false" >
-                            <h4>Bahan Makanan</h4>
-                            <ul data-role="listview" data-inset="false" id="listviewBahanMakanan">  
-                            </ul>
+                        <h4>Bahan Makanan</h4>
+                        <ul data-role="listview" data-inset="false" id="listviewBahanMakanan">  
+                        </ul>
                     </div>
                     <div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
-                            <h4>Resep</h4>
-                            <ul data-role="listview" data-inset="false" id="listviewResep">  
-                            </ul>
+                        <h4>Resep</h4>
+                        <ul data-role="listview" data-inset="false" id="listviewResep">  
+                        </ul>
                     </div>
                 </div>                
             </div>            
         </div>
+        <!-- /REKOMENDASI -->
+
         <!-- BOLEHKAH? -->
-        <div data-role="page" id="bolehkah" data-url="bolehkah"> 
+        <div data-role="page" id="balita-bolehkah" data-url="balita-bolehkah">
             <div class="ui-header"  data-role="header" data-position="fixed">		
-		<h1 class="ui-title" role="heading">Nutrisi</h1>	
-                <a href="#main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+		        <h1 class="ui-title" role="heading">Nutrisi</h1>	
+                <a href="#balita-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
                 <div data-role="navbar">
-                   <ul>
-                       <li><a href="#rekomendasi" >Rekomendasi</a></li>
-                       <li><a href="#" class="ui-btn-active">Bolehkah?</a></li>
-                       <li><a href="#informasi">Informasi</a></li>
-                   </ul>
-                </div><!-- /navbar -->
-	    </div>              
+                    <ul>
+                        <li><a href="#balita-rekomendasi" >Rekomendasi</a></li>
+                        <li><a href="#" class="ui-btn-active">Bolehkah?</a></li>
+                        <li><a href="#balita-informasi">Informasi</a></li>
+                    </ul>
+                </div>
+	        </div>              
             <div data-role="content">                
                 <fieldset data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false">
                     <legend>Masukkan data yang ditanyakan...</legend>
@@ -135,7 +692,7 @@
                         <input type="checkbox" name="chkIkanBK" id="chkIkanBK">
                         <label for="chkIkanBK" style="white-space: normal">Ikan Laut</label>
                     </div>
-                    <label><b>Bahan Makanan:</b></label>                  
+                    <label><b>Bahan Makanan:</b></label>
                     <select id="slctBahanBK" data-native-menu="false" data-mini="true">
                         <option value="ASI">ASI</option>
                         <option value="Susu Formula">Susu Formula</option>
@@ -162,7 +719,7 @@
                         <option value="Stroberi">Stroberi</option>
                         <option value="Melon">Melon</option>
                         <option value="Mangga">Mangga</option>
-                        <option value="Kiwi">Kiwi</option>                        
+                        <option value="Kiwi">Kiwi</option>
                         <option value="Wortel">Wortel</option>
                         <option value="Labu">Labu</option>
                         <option value="Ubi Jalar">Ubi Jalar</option>
@@ -172,9 +729,9 @@
                         <option value="Kacang Polong">Kacang Polong</option>
                         <option value="Tomat">Tomat</option>
                         <option value="Brokoli">Brokoli</option>
-                        <option value="Bunga Kol">Bunga Kol</option>                        
+                        <option value="Bunga Kol">Bunga Kol</option>
                         <option value="Kuning Telur">Kuning Telur</option>
-                        <option value="Telur">Telur</option>                        
+                        <option value="Telur">Telur</option>
                         <option value="Daging Kambing">Daging Kambing</option>
                         <option value="Daging Anak Sapi">Daging Anak Sapi</option>
                         <option value="Daging Ayam">Daging Ayam</option>
@@ -185,7 +742,7 @@
                         <option value="Sarden">Sarden</option> 
                         <option value="Makarel">Makarel</option> 
                         <option value="Udang">Udang</option> 
-                        <option value="Kerang">Kerang</option>                         
+                        <option value="Kerang">Kerang</option>
                         <option value="Sereal dari Beras">Sereal dari Beras</option> 
                         <option value="Sereal Gandum">Sereal Gandum</option> 
                         <option value="Maizena">Maizena</option> 
@@ -197,7 +754,7 @@
                         <option value="Pancake">Pancake</option> 
                         <option value="Roti Lapis">Roti Lapis</option> 
                         <option value="Puding Bergizi">Puding Bergizi</option> 
-                        <option value="Madu">Madu</option>                         
+                        <option value="Madu">Madu</option>
                     </select>
                     <button data-mini="true" onclick="Bolehkah()">Bolehkah?</button>
                     <br>
@@ -206,24 +763,26 @@
                 </fieldset>               
             </div>            
         </div>
+        <!-- /BOLEHKAH? -->
+
         <!-- INFORMASI -->
-        <div data-role="page" id="informasi" data-url="informasi" data-transition="none"> 
+        <div data-role="page" id="balita-informasi" data-url="balita-informasi" data-transition="none"> 
             <div class="ui-header"  data-role="header" data-position="fixed">		
-		<h1 class="ui-title" role="heading">Nutrisi</h1>	
-                <a href="#main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+		    <h1 class="ui-title" role="heading">Nutrisi</h1>	
+                <a href="#balita-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#rekomendasi" >Rekomendasi</a></li>
-                        <li><a href="#bolehkah">Bolehkah?</a></li>
+                        <li><a href="#balita-rekomendasi" >Rekomendasi</a></li>
+                        <li><a href="#balita-bolehkah">Bolehkah?</a></li>
                         <li><a href="#" class="ui-btn-active">Informasi</a></li>
                     </ul>
-                </div><!-- /navbar -->
-	    </div>
+                </div>
+	        </div>
             <div data-role="content">
                 <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan">
                     <div data-role="collapsible">
                         <h4>Alergi</h4>
-                        <ul data-role="listview" data-inset="false" >    
+                        <ul data-role="listview" data-inset="false" >
                             <li data-role="list-divider" style="white-space: normal"><b><big>Laktosa Intoleran</big></b></li>
                             <li style="white-space: normal">
                                 Alergi laktosa intoleran tidaklah murni sebuah alergi. Hal ini merupakan suatu keadaan dimana laktosa (gula yang terkandung dalam susu) tidak dapat dicerna karena kurang atau tidak adanya enzim laktose. Biasanya pengidap alergi ini adalah keturunan. Umumnya hal ini dapat terjadi seumur hidup.<br><br>
@@ -239,7 +798,7 @@
                             <li style="white-space: normal">
                                 Telur yang sering mengandung bakteri Salmonella yg dapat menyebabkan gejala alergi bahkan keracunan adalah telur bebek/itik. Hal ini banyak disebabkan oleh konsumsi telur bebek atau telur yang direbusnya tidak matang.<br><br>
                                 <b>Gejala:</b><br>Dimulai dengan sakit perut, mual, muntah, panas tubuh meningkat, dan terkadang disertai diare.
-                                <br><br><b>Cara mengatasi:</b><br>Agar tidak terjadi risiko alergi terhadap telur, maka sebaiknya bayi baru boleh diberi telur setelah melewati usia 6 bulan. Telur yg diberikan harus matang, baik putih maupun kuningnya. Telur setengah matang baru boleh diberikan setelah bayi berumur 1 tahun. 
+                                <br><br><b>Cara mengatasi:</b><br>Agar tidak terjadi risiko alergi terhadap telur, maka sebaiknya bayi baru boleh diberi telur setelah melewati usia 6 bulan. Telur yg diberikan harus matang, baik putih maupun kuningnya. Telur setengah matang baru boleh diberikan setelah bayi berumur 1 tahun.
                             </li>
                             <li data-role="list-divider" style="white-space: normal"><b><big>Kacang-kacangan</big></b></li>
                             <li style="white-space: normal">
@@ -252,7 +811,6 @@
                                 <b>Gejala:</b><br>Timbul ruam kulit seperti eksim.
                                 <br><br><b>Cara mengatasi:</b><br>Jangan memberikan makanan yang berbahan tomat mentah atau olahan seperti saus tomat, pasta tomat ataupun tomat kemasan. Jika, anak sudah memiliki riwayat alergi tomat, tunda dulu memberikan tomat pada bayi hingga usia 9 bulan.
                                 <br><br>Untuk anak yang alergi stroberi, sebaiknya ibu tidak memberikan buah jeruk segar yang berasa masam atau kecut, yogurt buah, labu, dan permen jeruk. Lebih baik memberikan buah pepaya, pisang, alpukat, atau jus apel yang lebih aman untuk tubuh bayi.
-
                             </li>
                             <li data-role="list-divider" style="white-space: normal"><b><big>Ikan Laut</big></b></li>
                             <li style="white-space: normal">
@@ -264,22 +822,24 @@
                     </div>
                     <div data-role="collapsible">
                         <h4>Zat Gizi</h4>
-                        <ul data-role="listview" data-inset="false" >                            
-                            <li><a href="#karbohidrat">Karbohidrat</a></li>
-                            <li><a href="#lemak">Lemak</a></li>
-                            <li><a href="#protein">Protein</a></li>
-                            <li><a href="#vitamin">Vitamin</a></li>
-                            <li><a href="#mineral">Mineral</a></li>
+                        <ul data-role="listview" data-inset="false" >
+                            <li><a href="#balita-karbohidrat">Karbohidrat</a></li>
+                            <li><a href="#balita-lemak">Lemak</a></li>
+                            <li><a href="#balita-protein">Protein</a></li>
+                            <li><a href="#balita-vitamin">Vitamin</a></li>
+                            <li><a href="#balita-mineral">Mineral</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>        
-        <!-- Karbohidrat -->
-        <div data-role="page" id="karbohidrat" data-url="karbohidrat"> 
+        </div>
+        <!-- /INFORMASI -->
+
+        <!-- KARBOHIDRAT -->
+        <div data-role="page" id="balita-karbohidrat" data-url="balita-karbohidrat"> 
             <div class="ui-header"  data-role="header" data-position="fixed">		
-		<h1 class="ui-title" role="heading">Sumber Zat Gizi</h1>
-                <a href="#informasi" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
+		        <h1 class="ui-title" role="heading">Sumber Zat Gizi</h1>
+                <a href="#balita-informasi" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
             </div>
             <div data-role="content">
                 <b>Karbohidrat</b>
@@ -288,7 +848,7 @@
                 <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan">
                     <div data-role="collapsible">
                         <h4>Karbohidrat baik</h4>
-                        <ul data-role="listview" data-inset="false" >                            
+                        <ul data-role="listview" data-inset="false" >
                             <li style="white-space: normal">Buah/sayuran tertentu yang berasa manis madu</li>
                             <li>Gandum kasar</li>
                             <li>Beras merah</li>
@@ -296,12 +856,12 @@
                             <li>Kentang</li>
                             <li>Pisang</li>
                             <li>Jagung</li>
-                            <li>Sagu, dan lain-lain</li>                            
+                            <li>Sagu, dan lain-lain</li>
                         </ul>
                     </div>
-                     <div data-role="collapsible">
+                    <div data-role="collapsible">
                         <h4>Karbohidrat jahat</h4>
-                        <ul data-role="listview" data-inset="false" >                            
+                        <ul data-role="listview" data-inset="false" >
                             <li>Gula pasir</li>
                             <li>Gula merah</li>
                             <li>Soft drink</li>
@@ -320,12 +880,14 @@
                     </div>
                 </div>             
             </div>
-        </div>        
-        <!-- Lemak -->
-        <div data-role="page" id="lemak" data-url="lemak"> 
+        </div>
+        <!-- /KARBOHIDRAT -->
+
+        <!-- LEMAK -->
+        <div data-role="page" id="balita-lemak" data-url="balita-lemak"> 
             <div class="ui-header"  data-role="header" data-position="fixed">		
-		<h1 class="ui-title" role="heading">Sumber Zat Gizi</h1>
-                <a href="#informasi" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
+		        <h1 class="ui-title" role="heading">Sumber Zat Gizi</h1>
+                <a href="#balita-informasi" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
             </div>
             <div data-role="content">
                 <b>Lemak</b>
@@ -334,7 +896,7 @@
                 <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan">
                     <div data-role="collapsible">
                         <h4>Asam lemak tidak jenuh</h4>
-                        <ul data-role="listview" data-inset="false" >                          
+                        <ul data-role="listview" data-inset="false" >
                             <li>Minyak zaitun</li>
                             <li>Minyak jagung</li>
                             <li>Minyak bunga matahari</li>
@@ -343,7 +905,7 @@
                     </div>
                     <div data-role="collapsible">
                         <h4>Asam lemak omega 3/DHA</h4>
-                        <ul data-role="listview" data-inset="false" >                          
+                        <ul data-role="listview" data-inset="false" >
                             <li>Ikan salmon</li>
                             <li>Tuna</li>
                             <li>Sarden</li>
@@ -356,7 +918,7 @@
                     </div>
                     <div data-role="collapsible">
                         <h4>Asam lemak omega 6/AA/ARA</h4>
-                        <ul data-role="listview" data-inset="false" >                          
+                        <ul data-role="listview" data-inset="false" >
                             <li>Almond</li>
                             <li>Kenari</li>
                             <li>Alpukat</li>
@@ -365,7 +927,7 @@
                     </div>
                     <div data-role="collapsible">
                         <h4>Asam lemak jenuh</h4>
-                        <ul data-role="listview" data-inset="false" >                          
+                        <ul data-role="listview" data-inset="false" >
                             <li style="white-space: normal">Minyak kelapa dan minyak kelapa sawit</li>
                             <li>Mentega</li>
                             <li style="white-space: normal">Susu <i>whole fat</i> atau produk susu beserta olahannya termasuk keju.</li>
@@ -375,20 +937,22 @@
                 </div>
             </div>
         </div>
-        <!-- Protein -->
-        <div data-role="page" id="protein" data-url="protein"> 
+        <!-- /LEMAK -->
+
+        <!-- PROTEIN -->
+        <div data-role="page" id="balita-protein" data-url="balita-protein"> 
             <div class="ui-header"  data-role="header" data-position="fixed">		
-		<h1 class="ui-title" role="heading">Sumber Zat Gizi</h1>
-                <a href="#informasi" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
+		        <h1 class="ui-title" role="heading">Sumber Zat Gizi</h1>
+                <a href="#balita-informasi" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
             </div>
-             <div data-role="content">
+            <div data-role="content">
                 <b>Protein</b>
                 <p>Fungsi utama protein adalah sebagai bahan dasar pembentukan sel-sel dan jaringan tubuh. Fungsi lainnya yaitu berperan dalam proses pertumbuhan, pemeliharaan, dan perbaikan jaringan tubuh yang rusak, membantu proses pembuatan sel darah merah, serta membantu membentuk anti bodi untuk melawan penyakit dan infeksi.</p>
                 <b>Sumber makanan:</b>
                 <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan">
                     <div data-role="collapsible">
                         <h4>Protein hewani</h4>
-                        <ul data-role="listview" data-inset="false" >                            
+                        <ul data-role="listview" data-inset="false" >
                             <li style="white-space: normal">Daging sapi</li>
                             <li>Daging kambing</li>
                             <li>Daging kambing</li>
@@ -401,7 +965,7 @@
                     </div>
                     <div data-role="collapsible">
                         <h4>Protein nabati</h4>
-                        <ul data-role="listview" data-inset="false" >                            
+                        <ul data-role="listview" data-inset="false" >
                             <li style="white-space: normal">Kacang kedelai dan produk olahannya</li>
                             <li>Kacang almond</li>
                             <li>Kacang polong</li>
@@ -411,13 +975,15 @@
                 </div>
              </div>            
         </div>
-        <!-- Vitamin -->
-        <div data-role="page" id="vitamin" data-url="vitamin"> 
+        <!-- /PROTEIN -->
+
+        <!-- VITAMIN -->
+        <div data-role="page" id="balita-vitamin" data-url="balita-vitamin"> 
             <div class="ui-header"  data-role="header" data-position="fixed">		
-		<h1 class="ui-title" role="heading">Sumber Zat Gizi</h1>
-                <a href="#informasi" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
+		        <h1 class="ui-title" role="heading">Sumber Zat Gizi</h1>
+                <a href="#balita-informasi" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
             </div>
-             <div data-role="content">
+            <div data-role="content">
                 <b>Vitamin</b>
                 <p>Vitamin adalah zat-zat organik kompleks yang dibutuhkan dalam jumlah yang relatif kecil dan pada umumnya tidak dapat dibentuk atau disintesis oleh tubuh.</p>
                 <b>Sumber makanan:</b>
@@ -449,7 +1015,7 @@
                     </div>
                     <div data-role="collapsible">
                         <h4>Vitamin B kompleks</h4>
-                        <ul data-role="listview" data-inset="false" >                            
+                        <ul data-role="listview" data-inset="false" >
                             <li>Biji-bijian</li>
                             <li>Kacang-kacangan</li>
                             <li>Sayuran hijau</li>
@@ -474,7 +1040,7 @@
                             <li>Pepaya</li> 
                             <li>Stroberi</li>
                             <li>Tomat</li>
-                            <li style="white-space: normal"><small>Diperlukan untuk pertumbuhan, kesehatan jaringan tubuh, dan penyembuhan luka serta membantu dalam proses penyerapan zat besi. Selain itu penting untuk mengatur laju basal metabolisme dan menjaga suhu tubuh, membantu pembuluh darah agar tetap elastis dan kuat sehingga mencegah luka memar pada tubuh.</small></li>                            
+                            <li style="white-space: normal"><small>Diperlukan untuk pertumbuhan, kesehatan jaringan tubuh, dan penyembuhan luka serta membantu dalam proses penyerapan zat besi. Selain itu penting untuk mengatur laju basal metabolisme dan menjaga suhu tubuh, membantu pembuluh darah agar tetap elastis dan kuat sehingga mencegah luka memar pada tubuh.</small></li>
                         </ul>
                     </div>
                     <div data-role="collapsible">
@@ -524,15 +1090,17 @@
                         </ul>
                     </div>
                 </div>
-             </div>
-        </div>
-        <!-- Mineral -->
-        <div data-role="page" id="mineral" data-url="mineral"> 
-            <div class="ui-header"  data-role="header" data-position="fixed">		
-		<h1 class="ui-title" role="heading">Sumber Zat Gizi</h1>
-                <a href="#informasi" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
             </div>
-             <div data-role="content">
+        </div>
+        <!-- /VITAMIN -->
+
+        <!-- MINERAL -->
+        <div data-role="page" id="balita-mineral" data-url="balita-mineral"> 
+            <div class="ui-header"  data-role="header" data-position="fixed">		
+		        <h1 class="ui-title" role="heading">Sumber Zat Gizi</h1>
+                <a href="#balita-informasi" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
+            </div>
+            <div data-role="content">
                 <b>Mineral</b>
                 <p>Mineral merupakan bagian yang memegang peranan penting dalam pemeliharaan fungsi tubuh, baik pada tingkat sel, jaringan, organ maupun fungsi tubuh secara keseluruhan. Disamping itu mineral berperan dalam berbagai tahap proses metabolisme, terutama sebagai kofaktor dalam aktifitas enzim-enzim.</p>
                 <b>Sumber makanan:</b>
@@ -628,13 +1196,15 @@
                         </ul>
                     </div>
                 </div>                
-             </div>
-        </div>   
+            </div>
+        </div>
+        <!-- /MINERAL -->
+
         <!-- PERKEMBANGAN -->
-        <div data-role="page" id="perkembangan" data-url="perkembangan"> 
+        <div data-role="page" id="balita-perkembangan" data-url="balita-perkembangan"> 
             <div class="ui-header"  data-role="header" data-position="fixed">		
-		<h1 class="ui-title" role="heading">Perkembangan</h1>
-                <a href="#main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+		        <h1 class="ui-title" role="heading">Perkembangan</h1>
+                <a href="#balita-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
             </div>
             <div data-role="content">
                 <form>
@@ -643,7 +1213,7 @@
                 <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan">
                     <div data-role="collapsible">
                         <h4>1 Bulan</h4>
-                        <ul data-role="listview" data-inset="false" >                            
+                        <ul data-role="listview" data-inset="false" >
                             <li >                                
                                 Keterampilan Utama
                                 <p style="white-space: normal">Menunjukkan perilaku pemicu kasih sayang, menangis, meringkuk, mendekut</p>
@@ -672,7 +1242,7 @@
                             </li>
                             <li>
                                 Keterampilan Kognitif (Berpikir)
-                                <p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p>                                
+                                <p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p>
                                 <p style="white-space: normal">Tingkah lakunya lebih sering dilakukan secara refleks (otomatis) dibandingkan dengan berpikir dulu</p>
                                 <p style="white-space: normal">Mengantisipasi bahwa dengan hilangnya stres akan diikuti dengan kenyamanan</p>
                                 <p style="white-space: normal">Mulai belajar mempercayai</p>
@@ -782,7 +1352,7 @@
                                 <p style="white-space: normal">3. Berbahan plastik.</p>
                                 <p style="white-space: normal">4. Mainan yang tidak dapat ditelan dan tidak memiliki bagian yang tajam atau bagian yang dapat dilepaskan.</p>
                                 <p style="white-space: normal"><b>Kiat sikap tubuh bayi untuk merangsang permainan tangan:</b></p>
-                                <p style="white-space: normal">Bayi harus berada pada posisi semi tegak pada gendongan anda atau pada kursi bayi. Pada saat mengangkat bayi anda pada posisi tersebut pastikan bahwa wajahnya akan menghadap ke depan. Sikap badan yang semi-tegak mendorong lengan dan tangan untuk bergerak bersama-sama, sehingga merangsang bayi untuk bermain dengan tangannya atau dengan mainan yang ada dihadapannya. Hal tersebut akan membantu bayi untuk melatih keseimbangannya.</p>                                
+                                <p style="white-space: normal">Bayi harus berada pada posisi semi tegak pada gendongan anda atau pada kursi bayi. Pada saat mengangkat bayi anda pada posisi tersebut pastikan bahwa wajahnya akan menghadap ke depan. Sikap badan yang semi-tegak mendorong lengan dan tangan untuk bergerak bersama-sama, sehingga merangsang bayi untuk bermain dengan tangannya atau dengan mainan yang ada dihadapannya. Hal tersebut akan membantu bayi untuk melatih keseimbangannya.</p>
                             </li>
                         </ul>
                     </div>
@@ -865,7 +1435,7 @@
                                 <p style="white-space: normal">Mempelajari suara dan mimik wajah yang akan ditanggapi orang</p>
                                 <p style="white-space: normal">Menunjukkan ekspresi pengambilan keputusan sewaktu bermain-main dengan tangannya</p>
                                 <p style="white-space: normal">Mencari tahu objek dan mengubah bentuk tangan untuk mengakomodasi bentuk objek sebelum melakukan kontak</p>
-                                <p style="white-space: normal">Menggunakan tangan untuk mendorong lengan anda apabila anda memberinya obat</p>                                
+                                <p style="white-space: normal">Menggunakan tangan untuk mendorong lengan anda apabila anda memberinya obat</p>
                             </li>
                         </ul>
                     </div>
@@ -882,7 +1452,7 @@
                                 <p style="white-space: normal">Duduk di kursi bayi</p>
                                 <p style="white-space: normal">Berdiri dengan berpegangan</p>
                                 <p style="white-space: normal">Berguling-guling</p>
-                                <p style="white-space: normal">Jari kaki dan tangan digunakan untuk menggerakkan mainan</p>                                
+                                <p style="white-space: normal">Jari kaki dan tangan digunakan untuk menggerakkan mainan</p>
                             </li>
                             <li style="white-space: normal">
                                 Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
@@ -954,7 +1524,7 @@
                                 <p style="white-space: normal">2. Bermain dengan cermin</p>
                                 <p style="white-space: normal">Dudukkan bayi di depan cermin sehingga bayi dapat memegang bayangannya. Perhatikan bayi yang mencoba menyesuaikan tangan dan wajahnya dengan bayangan di cermin.</p>
                                 <p style="white-space: normal">3. Permainan berguling</p>
-                                <p style="white-space: normal">Tengkurapkan bayi anda diatas guling, lalu taruh mainan pada jarak yang dapat dijangkaunya. Perhatikan tumpuan yang dilakukan bayi untuk mendorong dan menggulingkan tubuhnya ke depan dalam usahanya menjangkau mainan.</p>                                 
+                                <p style="white-space: normal">Tengkurapkan bayi anda diatas guling, lalu taruh mainan pada jarak yang dapat dijangkaunya. Perhatikan tumpuan yang dilakukan bayi untuk mendorong dan menggulingkan tubuhnya ke depan dalam usahanya menjangkau mainan.</p>
                             </li>
                         </ul>
                     </div>
@@ -1075,7 +1645,6 @@
                                 <p style="white-space: normal">Mengendarai mainan beroda empat</p>
                                 <p style="white-space: normal">Mencoba menendang bola, sering meleset</p>
                                 <p style="white-space: normal">Mencari posisi sendiri diatas kursi</p>
-                                
                             </li>
                             <li style="white-space: normal">
                                 Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
@@ -1084,7 +1653,6 @@
                                 <p style="white-space: normal">Menurut bila dipakaikan baju</p>
                                 <p style="white-space: normal">Melempar bola dengan seluruh kekuatan lengannya</p>
                                 <p style="white-space: normal">Mengonsumsi makanan berkuah</p>
-                                
                             </li>
                             <li>
                                 Keterampilan Berbahasa dan Sosial
@@ -1097,7 +1665,7 @@
                                 <p style="white-space: normal">Mengerti kata-kata: naik, turun, mati, panas</p>
                                 <p style="white-space: normal">Menggunakan kata-kata untuk meminta: "num-num" atau "ba-ba"</p>
                                 <p style="white-space: normal">Mengerti kata "yang lain"</p>
-                                <p style="white-space: normal">Menggunakan isyarat "shhh" untuk "diam"</p>                                                           
+                                <p style="white-space: normal">Menggunakan isyarat "shhh" untuk "diam"</p>
                             </li>
                             <li>
                                 Keterampilan Kognitif (Berpikir)
@@ -1125,7 +1693,7 @@
                                 <p style="white-space: normal">Menendang bola tanpa terjatuh</p>
                                 <p style="white-space: normal">Bisa memanjat keluar dari ranjangnya</p>
                                 <p style="white-space: normal">Menaiki tangga tanpa bantuan, kedua kaki pada tiap anak tangga, bisa saja meminta tolong untuk turun</p>
-                                <p style="white-space: normal">Membuka pintu</p>                                
+                                <p style="white-space: normal">Membuka pintu</p>
                             </li>
                             <li style="white-space: normal">
                                 Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
@@ -1161,17 +1729,19 @@
                     </div>
                 </div>
             </div>
-        </div>       
-         <!-- P3K -->
-        <div data-role="page" id="P3K" data-url="P3K"> 
+        </div>
+        <!-- /PERKEMBANGAN -->
+
+        <!-- P3K -->
+        <div data-role="page" id="balita-P3K" data-url="balita-P3K"> 
             <div class="ui-header"  data-role="header" data-position="fixed">		
-		<h1 class="ui-title" role="heading">P3K</h1>
-                <a href="#main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+		        <h1 class="ui-title" role="heading">P3K</h1>
+                <a href="#balita-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
             </div>                        
             <div data-role="content">                    
                 <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan">
                     <div data-role="collapsible">
-                        <h4>Tersedak</h4>                                                       
+                        <h4>Tersedak</h4>
                         <p style="white-space: normal">Tersedak bermakna bahwa anak sedang berusaha untuk mengeluarkan sesuatu dari saluran udara yang sebagian terhalang atau berupaya sekuat tenaga untuk mendapatkan udara. Ini adalah salah satu penyebab kematian yang paling umum pada anak-anak.</p>
                         <b>Ciri-ciri:</b>
                         <p style="white-space: normal">• Sulit bernafas atau wajah berubah biru.<br></p>
@@ -1227,7 +1797,7 @@
                         <p style="white-space: normal">• Jaga posisi anak anda tetap tegak lurus supaya darah tidak menetes ke lehernya.</p>
                         <p style="white-space: normal">• Doronglah anak anda agar terus membuka mulutnya.</p>
                         <p style="white-space: normal">• Setelah pendarahan berhenti tinggalkan kapas dalam lubang hidung dalam beberapa jam untuk menyumbat pendarahan, agar pembekuan terjadi.</p>
-                        <p style="white-space: normal">• Jika tindakan  ini tidak menghentikan mimisan, bawalah anak anda ke dokter atau UGD.</p>                        
+                        <p style="white-space: normal">• Jika tindakan  ini tidak menghentikan mimisan, bawalah anak anda ke dokter atau UGD.</p>
                     </div>
                     <div data-role="collapsible">
                         <h4>Demam</h4>
@@ -1346,6 +1916,8 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
+        <!-- /P3K -->
+        <!-- /BALITA -->
     </body>         
 </html>

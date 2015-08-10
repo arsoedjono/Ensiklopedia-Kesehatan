@@ -9,6 +9,12 @@
 - Febryan Yeremi Sianipar (5112 100 166)
 
 ## Perkembangan Versi Aplikasi
+####v1.0.1
+> - Refaktorisasi kode sumber
+> - Penambahan menu utama untuk memilih kategori subjek panduan ibu hamil
+> - Penambahan fitur panduan nutrisi untuk ibu hamil
+> - Penambahan fitur panduan informasi kehamilan
+> - Penambahan fitur panduan informasi persiapan persalinan
 ####v1.0.0
 > Merupakan proyek sebelumnya yang berisikan panduan kesehatan untuk balita saja
 

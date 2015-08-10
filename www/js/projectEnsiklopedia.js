@@ -204,7 +204,11 @@ function InsertResep()
     },errorHandler,nullHandler);
 }
 
-function Rekomendasi()
+function RekomendasiIbuHamil() {
+    /* empty */
+}
+
+function RekomendasiBalita()
 {
     var usiaSlc = $('#slctUsiaBM').val();
     var laktosa = $('#chkLaktosa').is(":checked");
