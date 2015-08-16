@@ -9,7 +9,12 @@
 - Febryan Yeremi Sianipar (5112 100 166)
 
 ## Perkembangan Versi Aplikasi
-####v2.0.2
+####v2.0.3
+> - Perbaikan bug
+> - Pengelompokan kategori balita dan ibu hamil
+> - Penambahan UI: informasi kehamilan, tips, persiapan persalinan, dan FAQ
+
+#####v2.0.2
 > - Perbaikan UI
 > - Menambahkan penyakit Hipertensi untuk rekomendasi nutrisi ibu hamil
 
