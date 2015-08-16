@@ -86,16 +86,23 @@
             <div class="ui-header"  data-role="header" data-position="fixed">       
                 <h1 class="ui-title" role="heading">Nutrisi</h1>    
                 <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#" class="ui-btn-active">Rekomendasi</a></li>
-                        <li><a href="#ibuhamil-informasimakanan">Informasi Makanan</a></li>
-                    </ul>
-                </div>
             </div>
             <div data-role="content">                
+                <p>Source: <a href="http://bidanku.com/makanan-untuk-ibu-hamil-1-bulan">click here</a></p>
                 <fieldset data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false">
                     <legend>Pencarian</legend>
+                    <label><b>Usia kehamilan:</b></label>
+                    <select name="slctUmurBM" id="slctUsiaBM" data-mini="true">
+                        <option value="1">1 bulan</option>
+                        <option value="2">2 bulan</option>
+                        <option value="3">3 bulan</option>
+                        <option value="4">4 bulan</option>
+                        <option value="5">5 bulan</option>
+                        <option value="6">6 bulan</option>
+                        <option value="7">7 bulan</option>
+                        <option value="8">8 bulan</option>
+                        <option value="9">9 bulan</option>
+                    </select>
                     <label><b>Pola hidup:</b></label>
                     <div data-role="controlgroup" data-mini="true">
                         <input type="checkbox" name="aVegetarian" id="aVegetarian">
@@ -105,6 +112,8 @@
                     <div data-role="controlgroup" data-mini="true">
                         <input type="checkbox" name="hasDiabetes" id="hasDiabetes">
                         <label for="hasDiabetes" style="white-space: normal">Diabetes</label>
+                        <input type="checkbox" name="hasHipertensi" id="hasHipertensi">
+                        <label for="hasHipertensi" style="white-space: normal">Hipertensi</label>
                     </div>
                     <label><b>Makanan yang harus dihindari:</b></label>
                     <div data-role="controlgroup" data-mini="true">
@@ -130,97 +139,6 @@
             </div>            
         </div>
         <!-- /REKOMENDASI -->
-
-        <!-- INFORMASI MAKANAN -->
-        <div data-role="page" id="ibuhamil-informasimakanan" data-url="ibuhamil-informasimakanan">  
-            <div class="ui-header"  data-role="header" data-position="fixed">       
-                <h1 class="ui-title" role="heading">Nutrisi</h1>    
-                <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#ibuhamil-rekomendasi" class="ui-btn-active">Rekomendasi</a></li>
-                        <li><a href="#">Informasi Makanan</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div data-role="content">
-                <p>Source: <a href="http://bidanku.com/makanan-untuk-ibu-hamil-1-bulan">click here</a></p>
-                <form>
-                    <input data-type="search" id="cariInformasiMakananIbuHamil" placeholder="Cari..."> 
-                </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariInformasiMakananIbuHamil">
-                    <div data-role="collapsible">
-                        <h4>1 Bulan</h4>
-                        <ul data-role="listview" data-inset="false" >
-                            <li >                                
-                                Keterampilan Utama
-                                <p style="white-space: normal">Menunjukkan perilaku pemicu kasih sayang, menangis, meringkuk, mendekut</p>
-                            </li>
-                            <li>
-                                Keterampilan Motorik Kasar
-                                <p style="white-space: normal">Terbaring seperti ketika masih di dalam rahim</p>
-                                <p>Ototnya seperti pegas</p>
-                                <p>Kepala sedikit diangkat</p>
-                                <p style="white-space: normal">Otot terkadang kejang kaki tidak merasakan berat</p>
-                            </li>
-                            <li style="white-space: normal">
-                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
-                                <p style="white-space: normal">Tangan terkepal erat</p>
-                                <p style="white-space: normal">Tidak dapat menggenggam giring-giring</p>
-                            </li>
-                            <li>
-                                Keterampilan Berbahasa dan Sosial
-                                <p style="white-space: normal">Menangis karena meminta sesuatu</p>
-                                <p style="white-space: normal">Mendengkur dengan suara tenggorokan</p>
-                                <p style="white-space: normal">Tersenyum-senyum</p>
-                                <p style="white-space: normal">Menangis disaat tidur</p>
-                                <p style="white-space: normal">Mengenali orang tuanya sebagai "si suara asing"</p>
-                                <p style="white-space: normal">Penglihatan paling baik berjarak 8-10 inci dan masih buram</p>
-                                <p style="white-space: normal">Tidur, bangun, makan secara tidak menentu</p>
-                            </li>
-                            <li>
-                                Keterampilan Kognitif (Berpikir)
-                                <p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p>
-                                <p style="white-space: normal">Tingkah lakunya lebih sering dilakukan secara refleks (otomatis) dibandingkan dengan berpikir dulu</p>
-                                <p style="white-space: normal">Mengantisipasi bahwa dengan hilangnya stres akan diikuti dengan kenyamanan</p>
-                                <p style="white-space: normal">Mulai belajar mempercayai</p>
-                            </li>
-                            <li>
-                                Tips
-                                <p style="white-space: normal"><b>Kiat untuk mempertahankan perhatian visual bayi:</b></p>
-                                <p style="white-space: normal">Dudukkan atau pegang tubuh bayi dalam posisi tegak, tunggu bayi hingga dalam keadaan diam, pegang objek atau wajah dalam jarak dalam jarak sekitar 25cm dari wajah bayi, gunakan gerakan wajah yang lucu (mulut dan mata terbuka lebar) sambil berbicara perlahan, berirama, serta nada yang dilebih-lebihkan</p>
-                                <p style="white-space: normal">*bayi yang baru lahir suka melihat wajah, terutama yang ia kenal.</p>
-                            </li>
-                        </ul>
-                    </div>  
-                    <div data-role="collapsible">
-                        <h4>2 Bulan</h4>
-                    </div>  
-                    <div data-role="collapsible">
-                        <h4>3 Bulan</h4>
-                    </div>  
-                    <div data-role="collapsible">
-                        <h4>4 Bulan</h4>
-                    </div>  
-                    <div data-role="collapsible">
-                        <h4>5 Bulan</h4>
-                    </div>  
-                    <div data-role="collapsible">
-                        <h4>6 Bulan</h4>
-                    </div>  
-                    <div data-role="collapsible">
-                        <h4>7 Bulan</h4>
-                    </div>  
-                    <div data-role="collapsible">
-                        <h4>8 Bulan</h4>
-                    </div>  
-                    <div data-role="collapsible">
-                        <h4>9 Bulan</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /INFORMASI MAKANAN -->
 
         <!-- INFORMASI KEHAMILAN -->
         <div data-role="page" id="ibuhamil-informasi" data-url="ibuhamil-informasi"> 
@@ -563,9 +481,6 @@
                 </div>
             </div>
         </div>
-        <!-- /PERSIAPAN -->
-
-        <!-- PERSIAPAN -->
         <!-- /PERSIAPAN -->
         <!-- /IBU HAMIL -->
 

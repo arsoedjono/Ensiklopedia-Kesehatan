@@ -9,7 +9,11 @@
 - Febryan Yeremi Sianipar (5112 100 166)
 
 ## Perkembangan Versi Aplikasi
-####v1.0.1
+####v2.0.2
+> - Perbaikan UI
+> - Menambahkan penyakit Hipertensi untuk rekomendasi nutrisi ibu hamil
+
+#####v2.0.1
 > - Refaktorisasi kode sumber
 > - Penambahan menu utama untuk memilih kategori subjek panduan ibu hamil
 > - Penambahan fitur panduan nutrisi untuk ibu hamil
