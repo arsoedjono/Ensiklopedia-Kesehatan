@@ -9,7 +9,16 @@
 - Febryan Yeremi Sianipar (5112 100 166)
 
 ## Perkembangan Versi Aplikasi
-####v2.0.3
+####v2.0.4
+> - Perbaikan bug
+> - Tersedia informasi perkembangan janin per minggu
+> - Tersedia informasi olahraga saat masa kehamilan
+> - Tersedia informasi pemeriksaan rutin saat masa kehamilan
+> - Tersedia informasi tips yang berguna saat masa kehamilan
+> - Tersedia informasi persiapan kehamilan dan tips persiapan kehamilan
+> - Tersedia jawaban atas pertanyaan yang sering ditanyakan (FAQ)
+
+#####v2.0.3
 > - Perbaikan bug
 > - Pengelompokan kategori balita dan ibu hamil
 > - Penambahan UI: informasi kehamilan, tips, persiapan persalinan, dan FAQ

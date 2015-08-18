@@ -59,7 +59,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#ibuhamil-informasi">
+                        <a href="#ibuhamil-infoPersiapan">
                             <img src="img/balita-perkembangan.jpg" class="ui-li-thumb">
                             <h3>Informasi Kehamilan</h3>            
                         </a>
@@ -92,7 +92,7 @@
                 <fieldset data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false">
                     <legend>Pencarian</legend>
                     <label><b>Usia kehamilan:</b></label>
-                    <select name="slctUmurBM" id="slctUsiaBM" data-mini="true">
+                    <select name="ibuHamilSlctUmurHamil" id="ibuHamilSlctUsiaHamil" data-mini="true">
                         <option value="1">1 bulan</option>
                         <option value="2">2 bulan</option>
                         <option value="3">3 bulan</option>
@@ -105,34 +105,34 @@
                     </select>
                     <label><b>Pola hidup:</b></label>
                     <div data-role="controlgroup" data-mini="true">
-                        <input type="checkbox" name="aVegetarian" id="aVegetarian">
-                        <label for="aVegetarian" style="white-space: normal">Vegetarian</label>
+                        <input type="checkbox" name="ibuHamilAVegetarian" id="ibuHamilAVegetarian">
+                        <label for="ibuHamilAVegetarian" style="white-space: normal">Vegetarian</label>
                     </div>
                     <label><b>Penyakit:</b></label>
                     <div data-role="controlgroup" data-mini="true">
-                        <input type="checkbox" name="hasDiabetes" id="hasDiabetes">
-                        <label for="hasDiabetes" style="white-space: normal">Diabetes</label>
-                        <input type="checkbox" name="hasHipertensi" id="hasHipertensi">
-                        <label for="hasHipertensi" style="white-space: normal">Hipertensi</label>
+                        <input type="checkbox" name="ibuHamilHasDiabetes" id="ibuHamilHasDiabetes">
+                        <label for="ibuHamilHasDiabetes" style="white-space: normal">Diabetes</label>
+                        <input type="checkbox" name="ibuHamilHasHipertensi" id="ibuHamilHasHipertensi">
+                        <label for="ibuHamilHasHipertensi" style="white-space: normal">Hipertensi</label>
                     </div>
                     <label><b>Makanan yang harus dihindari:</b></label>
                     <div data-role="controlgroup" data-mini="true">
-                        <input type="checkbox" name="noFish" id="noFish">
-                        <label for="noFish" style="white-space: normal">Ikan</label>
-                        <input type="checkbox" name="noEgg" id="noEgg">
-                        <label for="noEgg" style="white-space: normal">Telur</label>
+                        <input type="checkbox" name="ibuHamilNoFish" id="ibuHamilNoFish">
+                        <label for="ibuHamilNoFish" style="white-space: normal">Ikan</label>
+                        <input type="checkbox" name="ibuHamilNoEgg" id="ibuHamilNoEgg">
+                        <label for="ibuHamilNoEgg" style="white-space: normal">Telur</label>
                     </div>
-                    <button data-mini="true" onclick="IbuHamil_Rekomendasi()">Cari...</button>
+                    <button data-mini="true" onclick="ibu_rekomendasi()">Cari...</button>
                 </fieldset>
                 <div data-role="collapsibleset">
                     <div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false" >
                         <h4>Bahan Makanan</h4>
-                        <ul data-role="listview" data-inset="false" id="listviewBahanMakananIbu">  
+                        <ul data-role="listview" data-inset="false" id="ibuHamilListviewBahanMakanan">  
                         </ul>
                     </div>
                     <div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
                         <h4>Resep</h4>
-                        <ul data-role="listview" data-inset="false" id="listviewResepIbu">  
+                        <ul data-role="listview" data-inset="false" id="ibuHamilListviewResepIbu">  
                         </ul>
                     </div>
                 </div>                
@@ -141,429 +141,100 @@
         <!-- /REKOMENDASI -->
 
         <!-- INFORMASI KEHAMILAN -->
-        <div data-role="page" id="ibuhamil-informasi" data-url="ibuhamil-informasi"> 
+        <div data-role="page" id="ibuhamil-infoPersiapan" data-url="ibuhamil-infoPersiapan"> 
             <div class="ui-header"  data-role="header" data-position="fixed">       
                 <h1 class="ui-title" role="heading">Informasi</h1>    
                 <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
                 <div data-role="navbar">
                     <ul>
                         <li><a href="#" class="ui-btn-active">Perkembangan janin</a></li>
-                        <li><a href="#ibuhamil-olahraga">Olahraga</a></li>
-                        <li><a href="#ibuhamil-pemeriksaan">Pemeriksaan</a></li>
-                        <li><a href="#ibuhamil-tips">Tips</a></li>
+                        <li><a href="#ibuhamil-infoOlahraga">Olahraga</a></li>
+                        <li><a href="#ibuhamil-infoPemeriksaan">Pemeriksaan</a></li>
+                        <li><a href="#ibuhamil-infoTips">Tips</a></li>
                     </ul>
                 </div>
             </div>
             <div data-role="content">
-                <p>Source: <a href="http://perkembanganjanin.blogspot.com/2008/10/perkembangan-janin-dari-minggu-ke.html">click here</a></p>
                 <form>
-                    <input data-type="search" id="cariInformasiPerkembanganJanin" placeholder="Cari..."> 
+                    <input data-type="search" id="ibuHamilCariInformasiPerkembanganJanin" placeholder="Cari...">
                 </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariInformasiPerkembanganJanin">
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-1</h4>
-                        <ul data-role="listview" data-inset="false" >
-                            <li >                                
-                                Keterampilan Utama
-                                <p style="white-space: normal">Menunjukkan perilaku pemicu kasih sayang, menangis, meringkuk, mendekut</p>
-                            </li>
-                            <li>
-                                Keterampilan Motorik Kasar
-                                <p style="white-space: normal">Terbaring seperti ketika masih di dalam rahim</p>
-                                <p>Ototnya seperti pegas</p>
-                                <p>Kepala sedikit diangkat</p>
-                                <p style="white-space: normal">Otot terkadang kejang kaki tidak merasakan berat</p>
-                            </li>
-                            <li style="white-space: normal">
-                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
-                                <p style="white-space: normal">Tangan terkepal erat</p>
-                                <p style="white-space: normal">Tidak dapat menggenggam giring-giring</p>
-                            </li>
-                            <li>
-                                Keterampilan Berbahasa dan Sosial
-                                <p style="white-space: normal">Menangis karena meminta sesuatu</p>
-                                <p style="white-space: normal">Mendengkur dengan suara tenggorokan</p>
-                                <p style="white-space: normal">Tersenyum-senyum</p>
-                                <p style="white-space: normal">Menangis disaat tidur</p>
-                                <p style="white-space: normal">Mengenali orang tuanya sebagai "si suara asing"</p>
-                                <p style="white-space: normal">Penglihatan paling baik berjarak 8-10 inci dan masih buram</p>
-                                <p style="white-space: normal">Tidur, bangun, makan secara tidak menentu</p>
-                            </li>
-                            <li>
-                                Keterampilan Kognitif (Berpikir)
-                                <p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p>
-                                <p style="white-space: normal">Tingkah lakunya lebih sering dilakukan secara refleks (otomatis) dibandingkan dengan berpikir dulu</p>
-                                <p style="white-space: normal">Mengantisipasi bahwa dengan hilangnya stres akan diikuti dengan kenyamanan</p>
-                                <p style="white-space: normal">Mulai belajar mempercayai</p>
-                            </li>
-                            <li>
-                                Tips
-                                <p style="white-space: normal"><b>Kiat untuk mempertahankan perhatian visual bayi:</b></p>
-                                <p style="white-space: normal">Dudukkan atau pegang tubuh bayi dalam posisi tegak, tunggu bayi hingga dalam keadaan diam, pegang objek atau wajah dalam jarak dalam jarak sekitar 25cm dari wajah bayi, gunakan gerakan wajah yang lucu (mulut dan mata terbuka lebar) sambil berbicara perlahan, berirama, serta nada yang dilebih-lebihkan</p>
-                                <p style="white-space: normal">*bayi yang baru lahir suka melihat wajah, terutama yang ia kenal.</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-2</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-3</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-4</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-5</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-6</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-7</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-8</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-9</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-10</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-11</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-12</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-13</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-14</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-15</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-16</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-17</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-18</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-19</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-20</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-21</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-22</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-23</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-24</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-25</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-26</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-27</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-28</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-29</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-30</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-31</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-32</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-33</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-34</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-35</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-36</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-37</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Minggu ke-38 hingga 40</h4>
-                    </div>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#ibuHamilCariInformasiPerkembanganJanin" id="ibuHamilTabelInfoPerkembanganJanin">
+                    <!-- ibu_insert_infoPerkembanganJanin() @ projectEnsiklopedia.js -->
                 </div>
             </div>
         </div>
         <!-- /INFORMASI KEHAMILAN -->
 
         <!-- OLAHRAGA -->
-        <div data-role="page" id="ibuhamil-olahraga" data-url="ibuhamil-olahraga"> 
-            <div class="ui-header"  data-role="header" data-position="fixed">       
+        <div data-role="page" id="ibuhamil-infoOlahraga" data-url="ibuhamil-infoOlahraga">
+            <div class="ui-header"  data-role="header" data-position="fixed">
                 <h1 class="ui-title" role="heading">Informasi</h1>    
                 <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#ibuhamil-informasi">Perkembangan janin</a></li>
+                        <li><a href="#ibuhamil-infoPersiapan">Perkembangan janin</a></li>
                         <li><a href="#" class="ui-btn-active">Olahraga</a></li>
-                        <li><a href="#ibuhamil-pemeriksaan">Pemeriksaan</a></li>
-                        <li><a href="#ibuhamil-tips">Tips</a></li>
+                        <li><a href="#ibuhamil-infoPemeriksaan">Pemeriksaan</a></li>
+                        <li><a href="#ibuhamil-infoTips">Tips</a></li>
                     </ul>
                 </div>
             </div>
             <div data-role="content">
-                <p>Source: <a href="http://bidanku.com/jenis-jenis-dan-manfaat-olahraga-untuk-ibu-hamil">click here</a></p>
                 <form>
-                    <input data-type="search" id="cariInformasiOlahraga" placeholder="Cari..."> 
+                    <input data-type="search" id="ibuHamilCariInformasiOlahraga" placeholder="Cari..."> 
                 </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariInformasiOlahraga">
-                    <div data-role="collapsible">
-                        <h4>Jalan Kaki</h4>
-                        <ul data-role="listview" data-inset="false" >
-                            <li >                                
-                                Keterampilan Utama
-                                <p style="white-space: normal">Menunjukkan perilaku pemicu kasih sayang, menangis, meringkuk, mendekut</p>
-                            </li>
-                            <li>
-                                Keterampilan Motorik Kasar
-                                <p style="white-space: normal">Terbaring seperti ketika masih di dalam rahim</p>
-                                <p>Ototnya seperti pegas</p>
-                                <p>Kepala sedikit diangkat</p>
-                                <p style="white-space: normal">Otot terkadang kejang kaki tidak merasakan berat</p>
-                            </li>
-                            <li style="white-space: normal">
-                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
-                                <p style="white-space: normal">Tangan terkepal erat</p>
-                                <p style="white-space: normal">Tidak dapat menggenggam giring-giring</p>
-                            </li>
-                            <li>
-                                Keterampilan Berbahasa dan Sosial
-                                <p style="white-space: normal">Menangis karena meminta sesuatu</p>
-                                <p style="white-space: normal">Mendengkur dengan suara tenggorokan</p>
-                                <p style="white-space: normal">Tersenyum-senyum</p>
-                                <p style="white-space: normal">Menangis disaat tidur</p>
-                                <p style="white-space: normal">Mengenali orang tuanya sebagai "si suara asing"</p>
-                                <p style="white-space: normal">Penglihatan paling baik berjarak 8-10 inci dan masih buram</p>
-                                <p style="white-space: normal">Tidur, bangun, makan secara tidak menentu</p>
-                            </li>
-                            <li>
-                                Keterampilan Kognitif (Berpikir)
-                                <p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p>
-                                <p style="white-space: normal">Tingkah lakunya lebih sering dilakukan secara refleks (otomatis) dibandingkan dengan berpikir dulu</p>
-                                <p style="white-space: normal">Mengantisipasi bahwa dengan hilangnya stres akan diikuti dengan kenyamanan</p>
-                                <p style="white-space: normal">Mulai belajar mempercayai</p>
-                            </li>
-                            <li>
-                                Tips
-                                <p style="white-space: normal"><b>Kiat untuk mempertahankan perhatian visual bayi:</b></p>
-                                <p style="white-space: normal">Dudukkan atau pegang tubuh bayi dalam posisi tegak, tunggu bayi hingga dalam keadaan diam, pegang objek atau wajah dalam jarak dalam jarak sekitar 25cm dari wajah bayi, gunakan gerakan wajah yang lucu (mulut dan mata terbuka lebar) sambil berbicara perlahan, berirama, serta nada yang dilebih-lebihkan</p>
-                                <p style="white-space: normal">*bayi yang baru lahir suka melihat wajah, terutama yang ia kenal.</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Berenang</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Senam Hamil</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Yoga</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Latihan Beban</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Peregangan</h4>
-                    </div>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#ibuHamilCariInformasiOlahraga" id="ibuHamilTabelInfoOlahraga">
+                    <!-- ibu_insert_infoOlahraga() -->
                 </div>
             </div>
         </div>
         <!-- /OLAHRAGA -->
 
         <!-- PEMERIKSAAN -->
-        <div data-role="page" id="ibuhamil-pemeriksaan" data-url="ibuhamil-pemeriksaan"> 
+        <div data-role="page" id="ibuhamil-infoPemeriksaan" data-url="ibuhamil-infoPemeriksaan"> 
             <div class="ui-header"  data-role="header" data-position="fixed">
                 <h1 class="ui-title" role="heading">Informasi</h1>    
                 <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#ibuhamil-informasi">Perkembangan janin</a></li>
-                        <li><a href="#ibuhamil-olahraga">Olahraga</a></li>
+                        <li><a href="#ibuhamil-infoPersiapan">Perkembangan janin</a></li>
+                        <li><a href="#ibuhamil-infoOlahraga">Olahraga</a></li>
                         <li><a href="#" class="ui-btn-active">Pemeriksaan</a></li>
-                        <li><a href="#ibuhamil-tips">Tips</a></li>
+                        <li><a href="#ibuhamil-infoTips">Tips</a></li>
                     </ul>
                 </div>
             </div>
             <div data-role="content">
                 <form>
-                    <input data-type="search" id="cariInformasiOlahraga" placeholder="Cari..."> 
+                    <input data-type="search" id="ibuHamilCariInformasiPemeriksaan" placeholder="Cari..."> 
                 </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariInformasiOlahraga">
-                    <div data-role="collapsible">
-                        <h4>Pemeriksaan Darah</h4>
-                        <ul data-role="listview" data-inset="false" >
-                            <li >                                
-                                Keterampilan Utama
-                                <p style="white-space: normal">Menunjukkan perilaku pemicu kasih sayang, menangis, meringkuk, mendekut</p>
-                            </li>
-                            <li>
-                                Keterampilan Motorik Kasar
-                                <p style="white-space: normal">Terbaring seperti ketika masih di dalam rahim</p>
-                                <p>Ototnya seperti pegas</p>
-                                <p>Kepala sedikit diangkat</p>
-                                <p style="white-space: normal">Otot terkadang kejang kaki tidak merasakan berat</p>
-                            </li>
-                            <li style="white-space: normal">
-                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
-                                <p style="white-space: normal">Tangan terkepal erat</p>
-                                <p style="white-space: normal">Tidak dapat menggenggam giring-giring</p>
-                            </li>
-                            <li>
-                                Keterampilan Berbahasa dan Sosial
-                                <p style="white-space: normal">Menangis karena meminta sesuatu</p>
-                                <p style="white-space: normal">Mendengkur dengan suara tenggorokan</p>
-                                <p style="white-space: normal">Tersenyum-senyum</p>
-                                <p style="white-space: normal">Menangis disaat tidur</p>
-                                <p style="white-space: normal">Mengenali orang tuanya sebagai "si suara asing"</p>
-                                <p style="white-space: normal">Penglihatan paling baik berjarak 8-10 inci dan masih buram</p>
-                                <p style="white-space: normal">Tidur, bangun, makan secara tidak menentu</p>
-                            </li>
-                            <li>
-                                Keterampilan Kognitif (Berpikir)
-                                <p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p>
-                                <p style="white-space: normal">Tingkah lakunya lebih sering dilakukan secara refleks (otomatis) dibandingkan dengan berpikir dulu</p>
-                                <p style="white-space: normal">Mengantisipasi bahwa dengan hilangnya stres akan diikuti dengan kenyamanan</p>
-                                <p style="white-space: normal">Mulai belajar mempercayai</p>
-                            </li>
-                            <li>
-                                Tips
-                                <p style="white-space: normal"><b>Kiat untuk mempertahankan perhatian visual bayi:</b></p>
-                                <p style="white-space: normal">Dudukkan atau pegang tubuh bayi dalam posisi tegak, tunggu bayi hingga dalam keadaan diam, pegang objek atau wajah dalam jarak dalam jarak sekitar 25cm dari wajah bayi, gunakan gerakan wajah yang lucu (mulut dan mata terbuka lebar) sambil berbicara perlahan, berirama, serta nada yang dilebih-lebihkan</p>
-                                <p style="white-space: normal">*bayi yang baru lahir suka melihat wajah, terutama yang ia kenal.</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Pemeriksaan Urine dan Gula Darah</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Pemeriksaan Berat Badan</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Pemeriksaan Perut</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Pemeriksaan Tinggi Badan</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Pemeriksaan Dalam</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Pemeriksaan Kaki</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Pemeriksaan Detak Jantung</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Uji TORCH</h4>
-                    </div>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#ibuHamilCariInformasiPemeriksaan" id="ibuHamilTabelInfoPemeriksaan">
+                    <!-- ibu_insert_infoPemeriksaan() -->
                 </div>
             </div>
         </div>
         <!-- /PEMERIKSAAN -->
 
         <!-- TIPS -->
-        <div data-role="page" id="ibuhamil-tips" data-url="ibuhamil-tips"> 
+        <div data-role="page" id="ibuhamil-infoTips" data-url="ibuhamil-infoTips"> 
             <div class="ui-header"  data-role="header" data-position="fixed">       
                 <h1 class="ui-title" role="heading">Informasi</h1>    
                 <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#ibuhamil-informasi">Perkembangan janin</a></li>
-                        <li><a href="#ibuhamil-olahraga">Olahraga</a></li>
-                        <li><a href="#ibuhamil-pemeriksaan">Pemeriksaan</a></li>
+                        <li><a href="#ibuhamil-infoPersiapan">Perkembangan janin</a></li>
+                        <li><a href="#ibuhamil-infoOlahraga">Olahraga</a></li>
+                        <li><a href="#ibuhamil-infoPemeriksaan">Pemeriksaan</a></li>
                         <li><a href="#" class="ui-btn-active">Tips</a></li>
                     </ul>
                 </div>
             </div>
             <div data-role="content">
-                <p>Source mual: <a href="http://hamil.co.id/masalah-kehamilan/mual/20-cara-mengatasi-mual-saat-hamil-muda-tanpa-obat">click here</a></p>
-                <p>Source kaki: <a href="http://bidanku.com/mengatasi-kaki-bengkak-saat-hamil">click here</a></p>
                 <form>
-                    <input data-type="search" id="cariInformasiOlahraga" placeholder="Cari..."> 
+                    <input data-type="search" id="ibuHamilCariInformasiTips" placeholder="Cari..."> 
                 </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariInformasiOlahraga">
-                    <div data-role="collapsible">
-                        <h4>Mengatasi mual saat hamil</h4>
-                        <ul data-role="listview" data-inset="false" >
-                            <li >                                
-                                Keterampilan Utama
-                                <p style="white-space: normal">Menunjukkan perilaku pemicu kasih sayang, menangis, meringkuk, mendekut</p>
-                            </li>
-                            <li>
-                                Keterampilan Motorik Kasar
-                                <p style="white-space: normal">Terbaring seperti ketika masih di dalam rahim</p>
-                                <p>Ototnya seperti pegas</p>
-                                <p>Kepala sedikit diangkat</p>
-                                <p style="white-space: normal">Otot terkadang kejang kaki tidak merasakan berat</p>
-                            </li>
-                            <li style="white-space: normal">
-                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
-                                <p style="white-space: normal">Tangan terkepal erat</p>
-                                <p style="white-space: normal">Tidak dapat menggenggam giring-giring</p>
-                            </li>
-                            <li>
-                                Keterampilan Berbahasa dan Sosial
-                                <p style="white-space: normal">Menangis karena meminta sesuatu</p>
-                                <p style="white-space: normal">Mendengkur dengan suara tenggorokan</p>
-                                <p style="white-space: normal">Tersenyum-senyum</p>
-                                <p style="white-space: normal">Menangis disaat tidur</p>
-                                <p style="white-space: normal">Mengenali orang tuanya sebagai "si suara asing"</p>
-                                <p style="white-space: normal">Penglihatan paling baik berjarak 8-10 inci dan masih buram</p>
-                                <p style="white-space: normal">Tidur, bangun, makan secara tidak menentu</p>
-                            </li>
-                            <li>
-                                Keterampilan Kognitif (Berpikir)
-                                <p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p>
-                                <p style="white-space: normal">Tingkah lakunya lebih sering dilakukan secara refleks (otomatis) dibandingkan dengan berpikir dulu</p>
-                                <p style="white-space: normal">Mengantisipasi bahwa dengan hilangnya stres akan diikuti dengan kenyamanan</p>
-                                <p style="white-space: normal">Mulai belajar mempercayai</p>
-                            </li>
-                            <li>
-                                Tips
-                                <p style="white-space: normal"><b>Kiat untuk mempertahankan perhatian visual bayi:</b></p>
-                                <p style="white-space: normal">Dudukkan atau pegang tubuh bayi dalam posisi tegak, tunggu bayi hingga dalam keadaan diam, pegang objek atau wajah dalam jarak dalam jarak sekitar 25cm dari wajah bayi, gunakan gerakan wajah yang lucu (mulut dan mata terbuka lebar) sambil berbicara perlahan, berirama, serta nada yang dilebih-lebihkan</p>
-                                <p style="white-space: normal">*bayi yang baru lahir suka melihat wajah, terutama yang ia kenal.</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Mengatasi kaki bengkak saat hamil</h4>
-                    </div>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#ibuHamilCariInformasiTips" id="ibuHamilTabelInfoTips">
+                    <!-- ibu_insert_infoTips() -->
                 </div>
             </div>
         </div>
@@ -574,43 +245,46 @@
             <div class="ui-header"  data-role="header" data-position="fixed">       
                 <h1 class="ui-title" role="heading">Persiapan</h1>    
                 <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#" class="ui-btn-active">Persiapan Kehamilan</a></li>
+                        <li><a href="#ibuhamil-persiapanTips">Tips</a></li>
+                    </ul>
+                </div>
             </div>
             <div data-role="content">
-                <p>Source tanda: <a href="http://bidanku.com/tanda-tanda-akan-melahirkan">click here</a></p>
-                <p>Source persalinan: <a href="http://bidanku.com/persiapan-persalinan">click here</a></p>
-                <p>Source tahapan: <a href="http://bidanku.com/tahapan-proses-persalinan">click here</a></p>
-                <p>Source tips nyeri: <a href="http://bidanku.com/tips-mengatasi-nyeri-waktu-bersalin">click here</a></p>
-                <p>Source teknik napas: <a href="http://bidanku.com/teknik-pernafasan-selama-persalinan">click here</a></p>
                 <form>
-                    <input data-type="search" id="cariInformasiPersiapan" placeholder="Cari..."> 
+                    <input data-type="search" id="ibuHamilCariPersiapan" placeholder="Cari..."> 
                 </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariInformasiPersiapan">
-                    <div data-role="collapsible">
-                        <h4>Tanda-tanda kelahiran</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Persiapan persalinan</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Tahapan proses persalinan</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Tips persalinan</h4>
-                        <ul data-role="listview" data-inset="false" >
-                            <li >                                
-                                Mengatasi nyeri bersalin
-                                <p style="white-space: normal">http://bidanku.com/tips-mengatasi-nyeri-waktu-bersalin</p>
-                            </li>
-                            <li>
-                                Teknik pernapasan saat persalinan
-                                <p style="white-space: normal">http://bidanku.com/teknik-pernafasan-selama-persalinan</p>
-                            </li>
-                        </ul>
-                    </div>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#ibuHamilCariPersiapan" id="ibuHamilTabelPersiapan">
+                    <!-- ibu_insert_persiapan() -->
                 </div>
             </div>
         </div>
         <!-- /PERSIAPAN -->
+
+        <!-- TIPS PERSIAPAN -->
+        <div data-role="page" id="ibuhamil-persiapanTips" data-url="ibuhamil-persiapanTips"> 
+            <div class="ui-header"  data-role="header" data-position="fixed">       
+                <h1 class="ui-title" role="heading">Persiapan</h1>    
+                <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#ibuhamil-persiapan">Persiapan Kehamilan</a></li>
+                        <li><a href="#" class="ui-btn-active">Tips</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div data-role="content">
+                <form>
+                    <input data-type="search" id="ibuHamilCariPersiapanTips" placeholder="Cari..."> 
+                </form>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#ibuHamilCariPersiapanTips" id="ibuHamilTabelPersiapanTips">
+                    <!-- ibu_insert_persiapanTips() -->
+                </div>
+            </div>
+        </div>
+        <!-- /TIPS PERSIAPAN -->
 
         <!-- FAQ -->
         <div data-role="page" id="ibuhamil-faq" data-url="ibuhamil-faq"> 
@@ -620,49 +294,10 @@
             </div>
             <div data-role="content">
                 <form>
-                    <input data-type="search" id="cariInformasiFAQ" placeholder="Cari..."> 
+                    <input data-type="search" id="ibuHamilCariFAQ" placeholder="Cari..."> 
                 </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariInformasiFAQ">
-                    <div data-role="collapsible">
-                        <h4>Apakah ibu hamil tetap bisa berolahraga?</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Apakah aman bagi ibu hamil untuk melakukan perjalanan?</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Apakah ibu hamil tetap boleh menyusui?</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Apakah berhubungan intim diperbolehkan untuk ibu hamil?</h4>
-                        <ul data-role="listview" data-inset="false" >
-                            <li >                                
-                                Mengatasi nyeri bersalin
-                                <p style="white-space: normal">http://bidanku.com/tips-mengatasi-nyeri-waktu-bersalin</p>
-                            </li>
-                            <li>
-                                Teknik pernapasan saat persalinan
-                                <p style="white-space: normal">http://bidanku.com/teknik-pernafasan-selama-persalinan</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Apakah aman untuk mengkonsumsi obat saat hamil?</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Apakah Ibu Hamil Boleh Makan Sushi?</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Mengapa ibu hamil sering buang air?</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Mengapa saat hamil menjadi mudah lapar?</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Mengapa ibu hamil sering merasa kembung?</h4>
-                    </div>
-                    <div data-role="collapsible">
-                        <h4>Apakah benar bahwa “sekali caesar, pasti selalu bedah caesar lagi”?</h4>
-                    </div>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#ibuHamilCariFAQ" id="ibuHamilTabelFAQ">
+                    <!-- ibu_insert_FAQ() -->
                 </div>
             </div>
         </div>
@@ -719,7 +354,7 @@
                 <fieldset data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false">
                     <legend>Pilih Usia dan Jenis Alergi</legend>
                     <label><b>Usia:</b></label>
-                    <select name="slctUmurBM" id="slctUsiaBM" data-mini="true">
+                    <select name="balitaSlctUmurBM" id="balitaSlctUsiaBM" data-mini="true">
                         <option value="1">0-6 bulan</option>
                         <option value="2">6 bulan</option>
                         <option value="3">7-9 bulan</option>
@@ -729,26 +364,26 @@
                     </select>
                     <label><b>Alergi:</b></label>
                     <div data-role="controlgroup" data-mini="true">
-                        <input type="checkbox" name="chkLaktosa" id="chkLaktosa">
-                        <label for="chkLaktosa" style="white-space: normal">Laktosa Intoleran</label>
-                        <input type="checkbox" name="chkCasein" id="chkCasein">
-                        <label for="chkCasein" style="white-space: normal">Casein Susu Sapi</label>
-                        <input type="checkbox" name="chkTelur" id="chkTelur">
-                        <label for="chkTelur" style="white-space: normal">Telur</label>
-                        <input type="checkbox" name="chkIkan" id="chkIkan">
-                        <label for="chkIkan" style="white-space: normal">Ikan Laut</label>
+                        <input type="checkbox" name="balitaChkLaktosa" id="balitaChkLaktosa">
+                        <label for="balitaChkLaktosa" style="white-space: normal">Laktosa Intoleran</label>
+                        <input type="checkbox" name="balitaChkCasein" id="balitaChkCasein">
+                        <label for="balitaChkCasein" style="white-space: normal">Casein Susu Sapi</label>
+                        <input type="checkbox" name="balitaChkTelur" id="balitaChkTelur">
+                        <label for="balitaChkTelur" style="white-space: normal">Telur</label>
+                        <input type="checkbox" name="balitaChkIkan" id="balitaChkIkan">
+                        <label for="balitaChkIkan" style="white-space: normal">Ikan Laut</label>
                     </div>
-                    <button data-mini="true" onclick="Balita_Rekomendasi()">Cari...</button>
+                    <button data-mini="true" onclick="balita_rekomendasi()">Cari...</button>
                 </fieldset>
                 <div data-role="collapsibleset">
                     <div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false" >
                         <h4>Bahan Makanan</h4>
-                        <ul data-role="listview" data-inset="false" id="listviewBahanMakananBalita">  
+                        <ul data-role="listview" data-inset="false" id="balitaListviewBahanMakanan">  
                         </ul>
                     </div>
                     <div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
                         <h4>Resep</h4>
-                        <ul data-role="listview" data-inset="false" id="listviewResepBalita">  
+                        <ul data-role="listview" data-inset="false" id="balitaListviewResep">  
                         </ul>
                     </div>
                 </div>                
@@ -773,7 +408,7 @@
                 <fieldset data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false">
                     <legend>Masukkan data yang ditanyakan...</legend>
                     <label><b>Usia:</b></label>
-                    <select name="slctUmurBK" id="slctUmurBK" data-mini="true">
+                    <select name="balitaSlctUmurBK" id="balitaSlctUmurBK" data-mini="true">
                         <option value="1">0-6 bulan</option>
                         <option value="2">6 bulan</option>
                         <option value="3">7-9 bulan</option>
@@ -783,17 +418,17 @@
                     </select>
                     <label><b>Alergi:</b></label>
                     <div data-role="controlgroup" data-mini="true">
-                        <input type="checkbox" name="chkLaktosaBK" id="chkLaktosaBK">
-                        <label for="chkLaktosaBK" style="white-space: normal">Laktosa Intoleran</label>
-                        <input type="checkbox" name="chkCaseinBK" id="chkCaseinBK">
-                        <label for="chkCaseinBK" style="white-space: normal">Casein Susu Sapi</label>
-                        <input type="checkbox" name="chkTelurBK" id="chkTelurBK">
-                        <label for="chkTelurBK" style="white-space: normal">Telur</label>
-                        <input type="checkbox" name="chkIkanBK" id="chkIkanBK">
-                        <label for="chkIkanBK" style="white-space: normal">Ikan Laut</label>
+                        <input type="checkbox" name="balitaChkLaktosaBK" id="balitaChkLaktosaBK">
+                        <label for="balitaChkLaktosaBK" style="white-space: normal">Laktosa Intoleran</label>
+                        <input type="checkbox" name="balitaChkCaseinBK" id="balitaChkCaseinBK">
+                        <label for="balitaChkCaseinBK" style="white-space: normal">Casein Susu Sapi</label>
+                        <input type="checkbox" name="balitaChkTelurBK" id="balitaChkTelurBK">
+                        <label for="balitaChkTelurBK" style="white-space: normal">Telur</label>
+                        <input type="checkbox" name="balitaChkIkanBK" id="balitaChkIkanBK">
+                        <label for="balitaChkIkanBK" style="white-space: normal">Ikan Laut</label>
                     </div>
                     <label><b>Bahan Makanan:</b></label>
-                    <select id="slctBahanBK" data-native-menu="false" data-mini="true">
+                    <select id="balitaSlctBahanBK" data-native-menu="false" data-mini="true">
                         <option value="ASI">ASI</option>
                         <option value="Susu Formula">Susu Formula</option>
                         <option value="Susu Formula Bebas Laktosa">Susu Formula Bebas Laktosa</option>
@@ -856,10 +491,10 @@
                         <option value="Puding Bergizi">Puding Bergizi</option> 
                         <option value="Madu">Madu</option>
                     </select>
-                    <button data-mini="true" onclick="Balita_Bolehkah()">Bolehkah?</button>
+                    <button data-mini="true" onclick="balita_bolehkah()">Bolehkah?</button>
                     <br>
                     <label><b>Hasil:</b></label> 
-                    <label id="jawabanBK" style="color: red; font-style: italic"></label>
+                    <label id="balitaJawabanBK" style="color: red; font-style: italic"></label>
                 </fieldset>               
             </div>            
         </div>
@@ -1308,9 +943,9 @@
             </div>
             <div data-role="content">
                 <form>
-                    <input data-type="search" id="cariPerkembangan" placeholder="Cari..."> 
+                    <input data-type="search" id="balitaCariPerkembangan" placeholder="Cari..."> 
                 </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan">
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#balitaCariPerkembangan">
                     <div data-role="collapsible">
                         <h4>1 Bulan</h4>
                         <ul data-role="listview" data-inset="false" >
