@@ -38,7 +38,7 @@ $.mobile.document.on( "listviewcreate", "#slctBahanBK-menu", function( e ) {
             .prependTo( destination );
     });
 
-$( document ).on( "pageshow", "#main-menu", function()
+$( function()
     {
         if (!window.openDatabase) {
         alert('Databases are not supported in this browser.');
@@ -67,8 +67,12 @@ function refreshListView()
 function createSemuaTabel()
 {
     db.transaction(function(tx){
-        //tx.executeSql( 'DROP TABLE BalitaBahanMakanan',nullHandler,nullHandler);
-        //tx.executeSql( 'DROP TABLE BalitaResep',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE BalitaNutrisiBahanMakanan',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE BalitaNutrisiResep',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE BalitaNutrisiInfo',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE BalitaNutrisiInfoGizi',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE BalitaPerkembangan',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE BalitaP3K',nullHandler,nullHandler);
         //tx.executeSql( 'DROP TABLE IbuInfoPerkembanganJanin',nullHandler,nullHandler);
         //tx.executeSql( 'DROP TABLE IbuInfoOlahraga',nullHandler,nullHandler);
         //tx.executeSql( 'DROP TABLE IbuInfoPemeriksaan',nullHandler,nullHandler);
@@ -76,8 +80,12 @@ function createSemuaTabel()
         //tx.executeSql( 'DROP TABLE IbuPersiapan',nullHandler,nullHandler);
         //tx.executeSql( 'DROP TABLE IbuPersiapanTips',nullHandler,nullHandler);
         //tx.executeSql( 'DROP TABLE IbuFAQ',nullHandler,nullHandler);
-        tx.executeSql( 'CREATE TABLE IF NOT EXISTS BalitaBahanMakanan(IdBahanMakanan INTEGER NOT NULL PRIMARY KEY, NamaBM TEXT, UsiaBM INTEGER, A_Laktosa TEXT, A_Casein TEXT, A_Telur TEXT, A_IkanLaut TEXT, A_Kacang TEXT, GambarBM TEXT)',[], nullHandler, errorHandler);
-        tx.executeSql( 'CREATE TABLE IF NOT EXISTS BalitaResep(IdResep INTEGER NOT NULL PRIMARY KEY, Resep TEXT, UsiaResep INTEGER, Rsp_Laktosa TEXT, Rsp_Casein TEXT, Rsp_Telur TEXT, Rsp_IkanLaut TEXT)',[], nullHandler, errorHandler);    
+        tx.executeSql( 'CREATE TABLE IF NOT EXISTS BalitaNutrisiBahanMakanan(IdBahanMakanan INTEGER NOT NULL PRIMARY KEY, NamaBM TEXT, UsiaBM INTEGER, A_Laktosa TEXT, A_Casein TEXT, A_Telur TEXT, A_IkanLaut TEXT, A_Kacang TEXT, GambarBM TEXT)',[], nullHandler, errorHandler);
+        tx.executeSql( 'CREATE TABLE IF NOT EXISTS BalitaNutrisiResep(IdResep INTEGER NOT NULL PRIMARY KEY, Resep TEXT, UsiaResep INTEGER, Rsp_Laktosa TEXT, Rsp_Casein TEXT, Rsp_Telur TEXT, Rsp_IkanLaut TEXT)',[], nullHandler, errorHandler);    
+        tx.executeSql( 'CREATE TABLE IF NOT EXISTS BalitaNutrisiInfo(IdInfo INTEGER NOT NULL PRIMARY KEY, Judul TEXT, Konten TEXT)',[], nullHandler, errorHandler);
+        tx.executeSql( 'CREATE TABLE IF NOT EXISTS BalitaNutrisiInfoGizi(IdGizi INTEGER NOT NULL PRIMARY KEY, NamaGizi TEXT, Keterangan TEXT, SumberMakanan TEXT)',[], nullHandler, errorHandler);
+        tx.executeSql( 'CREATE TABLE IF NOT EXISTS BalitaPerkembangan(IdWaktu INTEGER NOT NULL PRIMARY KEY, Waktu TEXT, Konten TEXT)',[], nullHandler, errorHandler);
+        tx.executeSql( 'CREATE TABLE IF NOT EXISTS BalitaP3K(IdKecelakaan INTEGER NOT NULL PRIMARY KEY, Jenis TEXT, Konten TEXT)',[], nullHandler, errorHandler);
         tx.executeSql( 'CREATE TABLE IF NOT EXISTS IbuInfoPerkembanganJanin(IdMinggu INTEGER NOT NULL PRIMARY KEY, Konten TEXT)',[], nullHandler, errorHandler);
         tx.executeSql( 'CREATE TABLE IF NOT EXISTS IbuInfoOlahraga(IdOlahraga INTEGER NOT NULL PRIMARY KEY, Jenis TEXT, Keterangan TEXT)',[], nullHandler, errorHandler);
         tx.executeSql( 'CREATE TABLE IF NOT EXISTS IbuInfoPemeriksaan(IdPemeriksaan INTEGER NOT NULL PRIMARY KEY, Nama TEXT, Keterangan TEXT)',[], nullHandler, errorHandler);
@@ -92,6 +100,9 @@ function insertSemuaDataTabel()
 {
     balita_insert_dataBahanMakanan();
     balita_insert_resep();
+    balita_insert_nutrisiInformasi();
+    balita_insert_perkembangan();
+    balita_insert_p3k();
     ibu_insert_infoPerkembanganJanin();
     ibu_insert_infoOlahraga();
     ibu_insert_infoPemeriksaan();
@@ -105,78 +116,78 @@ function balita_insert_dataBahanMakanan()
 { 
     db.transaction(function(tx) 
     {  
-        tx.executeSql('SELECT * FROM BalitaBahanMakanan', [], function(transaction, result) 
+        tx.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan', [], function(transaction, result) 
         {
             if (result.rows.length === 0)
             {
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("ASI","0","T","T","T","T","T","img/nutrisi/asi.jpg")',[], nullHandler,errorHandler);                                          
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Es Krim","12","T","Y","T","T","T","img/nutrisi/eskrim.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Keju","12","T","Y","T","T","T","img/nutrisi/keju.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Minuman Kocok","18","T","Y","T","T","T","img/nutrisi/minuman kocok.jpg")',[], nullHandler,errorHandler);
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Susu Formula","0","Y","Y","T","T","T","img/nutrisi/susu formula.jpg")',[], nullHandler,errorHandler);                                    
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Susu Formula Anti Alergen","0","Y","T","T","T","T","img/nutrisi/susu formula anti alergen.jpg")',[], nullHandler,errorHandler);                  
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Susu Formula Bebas Laktosa","0","T","Y","T","T","T","img/nutrisi/susu formula bebas laktosa.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Susu Kedelai","6","T","T","T","T","T","img/nutrisi/susu kedelai.jpg")',[], nullHandler,errorHandler);                          
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Susu Murni","12","T","Y","T","T","T","img/nutrisi/susu murni.jpg")',[], nullHandler,errorHandler);                          
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Saus Krim","18","T","Y","T","T","T","img/nutrisi/saus krim.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Yoghurt","9","T","Y","T","T","T","img/nutrisi/yogurht.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("ASI","0","T","T","T","T","T","img/nutrisi/asi.jpg")',[], nullHandler,errorHandler);                                          
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Es Krim","12","T","Y","T","T","T","img/nutrisi/eskrim.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Keju","12","T","Y","T","T","T","img/nutrisi/keju.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Minuman Kocok","18","T","Y","T","T","T","img/nutrisi/minuman kocok.jpg")',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Susu Formula","0","Y","Y","T","T","T","img/nutrisi/susu formula.jpg")',[], nullHandler,errorHandler);                                    
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Susu Formula Anti Alergen","0","Y","T","T","T","T","img/nutrisi/susu formula anti alergen.jpg")',[], nullHandler,errorHandler);                  
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Susu Formula Bebas Laktosa","0","T","Y","T","T","T","img/nutrisi/susu formula bebas laktosa.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Susu Kedelai","6","T","T","T","T","T","img/nutrisi/susu kedelai.jpg")',[], nullHandler,errorHandler);                          
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Susu Murni","12","T","Y","T","T","T","img/nutrisi/susu murni.jpg")',[], nullHandler,errorHandler);                          
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Saus Krim","18","T","Y","T","T","T","img/nutrisi/saus krim.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Yoghurt","9","T","Y","T","T","T","img/nutrisi/yogurht.jpg")',[], nullHandler,errorHandler);                           
                            
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Alpukat","7","T","T","T","T","T","img/nutrisi/alpukat.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Apel","6","T","T","T","T","T","img/nutrisi/apel.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Aprikot","12","T","T","T","T","T","img/nutrisi/aprikot.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Jeruk","6","T","T","T","T","T","img/nutrisi/jeruk.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Kiwi","12","T","T","T","T","T","img/nutrisi/kiwi.jpg")',[], nullHandler,errorHandler);                            
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Lemon","7","T","T","T","T","T","img/nutrisi/lemon.jpg")',[], nullHandler,errorHandler);                             
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Mangga","12","T","T","T","T","T","img/nutrisi/mangga.jpg")',[], nullHandler,errorHandler);                         
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Melon","12","T","T","T","T","T","img/nutrisi/melon.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Peach","7","T","T","T","T","T","img/nutrisi/peach.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Pepaya","6","T","T","T","T","T","img/nutrisi/pepaya.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Pir","6","T","T","T","T","T","img/nutrisi/pir.jpg")',[], nullHandler,errorHandler); 
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Pisang","6","T","T","T","T","T","img/nutrisi/pisang.jpg")',[], nullHandler,errorHandler);                          
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Prun","7","T","T","T","T","T","img/nutrisi/prun.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Stroberi","12","T","T","T","T","T","img/nutrisi/stroberi.jpg")',[], nullHandler,errorHandler);                          
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Alpukat","7","T","T","T","T","T","img/nutrisi/alpukat.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Apel","6","T","T","T","T","T","img/nutrisi/apel.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Aprikot","12","T","T","T","T","T","img/nutrisi/aprikot.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Jeruk","6","T","T","T","T","T","img/nutrisi/jeruk.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Kiwi","12","T","T","T","T","T","img/nutrisi/kiwi.jpg")',[], nullHandler,errorHandler);                            
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Lemon","7","T","T","T","T","T","img/nutrisi/lemon.jpg")',[], nullHandler,errorHandler);                             
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Mangga","12","T","T","T","T","T","img/nutrisi/mangga.jpg")',[], nullHandler,errorHandler);                         
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Melon","12","T","T","T","T","T","img/nutrisi/melon.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Peach","7","T","T","T","T","T","img/nutrisi/peach.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Pepaya","6","T","T","T","T","T","img/nutrisi/pepaya.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Pir","6","T","T","T","T","T","img/nutrisi/pir.jpg")',[], nullHandler,errorHandler); 
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Pisang","6","T","T","T","T","T","img/nutrisi/pisang.jpg")',[], nullHandler,errorHandler);                          
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Prun","7","T","T","T","T","T","img/nutrisi/prun.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Stroberi","12","T","T","T","T","T","img/nutrisi/stroberi.jpg")',[], nullHandler,errorHandler);                          
                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Bayam","9","T","T","T","T","T","img/nutrisi/bayam.jpg")',[], nullHandler,errorHandler);                               
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Buncis","9","T","T","T","T","T","img/nutrisi/buncis.jpg")',[], nullHandler,errorHandler);                        
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Bunga Kol","12","T","T","T","T","T","img/nutrisi/bunga kol.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Brokoli","12","T","T","T","T","T","img/nutrisi/brokoli.jpg")',[], nullHandler,errorHandler);                         
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Kacang Polong","9","T","T","T","T","T","img/nutrisi/kacang polong.jpg")',[], nullHandler,errorHandler);                            
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Kentang","7","T","T","T","T","T","img/nutrisi/kentang lumat.jpg")',[], nullHandler,errorHandler);                             
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Labu","7","T","T","T","T","T","img/nutrisi/labu.jpg")',[], nullHandler,errorHandler);                        
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Tomat","12","T","T","T","T","T","img/nutrisi/tomat.jpg")',[], nullHandler,errorHandler);                             
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Ubi Jalar","7","T","T","T","T","T","img/nutrisi/ubi jalar.jpg")',[], nullHandler,errorHandler);
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Wortel","7","T","T","T","T","T","img/nutrisi/wortel.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Bayam","9","T","T","T","T","T","img/nutrisi/bayam.jpg")',[], nullHandler,errorHandler);                               
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Buncis","9","T","T","T","T","T","img/nutrisi/buncis.jpg")',[], nullHandler,errorHandler);                        
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Bunga Kol","12","T","T","T","T","T","img/nutrisi/bunga kol.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Brokoli","12","T","T","T","T","T","img/nutrisi/brokoli.jpg")',[], nullHandler,errorHandler);                         
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Kacang Polong","9","T","T","T","T","T","img/nutrisi/kacang polong.jpg")',[], nullHandler,errorHandler);                            
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Kentang","7","T","T","T","T","T","img/nutrisi/kentang lumat.jpg")',[], nullHandler,errorHandler);                             
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Labu","7","T","T","T","T","T","img/nutrisi/labu.jpg")',[], nullHandler,errorHandler);                        
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Tomat","12","T","T","T","T","T","img/nutrisi/tomat.jpg")',[], nullHandler,errorHandler);                             
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Ubi Jalar","7","T","T","T","T","T","img/nutrisi/ubi jalar.jpg")',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Wortel","7","T","T","T","T","T","img/nutrisi/wortel.jpg")',[], nullHandler,errorHandler);                           
 
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Kuning Telur","9","T","T","Y","T","T","img/nutrisi/kuning telur.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Tahu","9","T","T","T","T","T","img/nutrisi/tahu.jpg")',[], nullHandler,errorHandler);                            
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Telur","12","T","T","Y","T","T","img/nutrisi/telur.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Kuning Telur","9","T","T","Y","T","T","img/nutrisi/kuning telur.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Tahu","9","T","T","T","T","T","img/nutrisi/tahu.jpg")',[], nullHandler,errorHandler);                            
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Telur","12","T","T","Y","T","T","img/nutrisi/telur.jpg")',[], nullHandler,errorHandler);                           
                            
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Daging Anak Sapi","9","T","T","T","T","T","img/nutrisi/daging anak sapi.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Daging Ayam","9","T","T","T","T","T","img/nutrisi/daging ayam.jpg")',[], nullHandler,errorHandler);  
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Daging Kambing","9","T","T","T","T","T","img/nutrisi/daging kambing.jpg")',[], nullHandler,errorHandler);                         
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Daging Sapi","12","T","T","T","T","T","img/nutrisi/daging sapi.jpg")',[], nullHandler,errorHandler);                            
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Hati","9","T","T","T","T","T","img/nutrisi/hati.jpg")',[], nullHandler,errorHandler);                          
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Daging Anak Sapi","9","T","T","T","T","T","img/nutrisi/daging anak sapi.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Daging Ayam","9","T","T","T","T","T","img/nutrisi/daging ayam.jpg")',[], nullHandler,errorHandler);  
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Daging Kambing","9","T","T","T","T","T","img/nutrisi/daging kambing.jpg")',[], nullHandler,errorHandler);                         
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Daging Sapi","12","T","T","T","T","T","img/nutrisi/daging sapi.jpg")',[], nullHandler,errorHandler);                            
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Hati","9","T","T","T","T","T","img/nutrisi/hati.jpg")',[], nullHandler,errorHandler);                          
 
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Ikan Salmon","12","T","T","T","Y","T","img/nutrisi/ikan salmon.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Ikan Tuna","12","T","T","T","Y","T","img/nutrisi/ikan tuna.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Kerang","18","T","T","T","Y","T","img/nutrisi/kerang.jpg")',[], nullHandler,errorHandler);                            
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Makarel","12","T","T","T","Y","T","img/nutrisi/makarel.jpg")',[], nullHandler,errorHandler);                         
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Sarden","12","T","T","T","Y","T","img/nutrisi/sarden.jpg")',[], nullHandler,errorHandler);                            
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Udang","18","T","T","T","Y","T","img/nutrisi/udang.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Ikan Salmon","12","T","T","T","Y","T","img/nutrisi/ikan salmon.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Ikan Tuna","12","T","T","T","Y","T","img/nutrisi/ikan tuna.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Kerang","18","T","T","T","Y","T","img/nutrisi/kerang.jpg")',[], nullHandler,errorHandler);                            
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Makarel","12","T","T","T","Y","T","img/nutrisi/makarel.jpg")',[], nullHandler,errorHandler);                         
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Sarden","12","T","T","T","Y","T","img/nutrisi/sarden.jpg")',[], nullHandler,errorHandler);                            
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Udang","18","T","T","T","Y","T","img/nutrisi/udang.jpg")',[], nullHandler,errorHandler);                           
                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Kedelai","9","T","T","T","T","T","img/nutrisi/kedelai.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Maizena","7","T","T","T","T","T","img/nutrisi/maizena.jpg")',[], nullHandler,errorHandler);                             
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Pasta","12","T","T","T","T","T","img/nutrisi/pasta.jpg")',[], nullHandler,errorHandler);
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Sereal dari Beras","6","T","T","T","T","T","img/nutrisi/sereal beras.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Sereal Gandum","7","T","T","T","T","T","img/nutrisi/sereal gandum.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Terigu","7","T","T","T","T","T","img/nutrisi/terigu.jpg")',[], nullHandler,errorHandler);                          
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Kedelai","9","T","T","T","T","T","img/nutrisi/kedelai.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Maizena","7","T","T","T","T","T","img/nutrisi/maizena.jpg")',[], nullHandler,errorHandler);                             
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Pasta","12","T","T","T","T","T","img/nutrisi/pasta.jpg")',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Sereal dari Beras","6","T","T","T","T","T","img/nutrisi/sereal beras.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Sereal Gandum","7","T","T","T","T","T","img/nutrisi/sereal gandum.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Terigu","7","T","T","T","T","T","img/nutrisi/terigu.jpg")',[], nullHandler,errorHandler);                          
 
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Biskuit","7","T","T","T","T","T","img/nutrisi/biskuit.jpg")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Kue Beras","9","T","T","T","T","T","img/nutrisi/kraker.jpg")',[], nullHandler,errorHandler);                             
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Madu","12","T","T","T","T","T","img/nutrisi/madu.jpg")',[], nullHandler,errorHandler);                          
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Pancake","12","T","T","T","T","T","img/nutrisi/pancakes.jpg")',[], nullHandler,errorHandler);                                       
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Puding Bergizi","18","T","T","T","T","T","img/nutrisi/puding.jpg")',[], nullHandler,errorHandler);   
-                tx.executeSql('INSERT INTO BalitaBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Roti Lapis","18","T","T","T","T","T","img/nutrisi/sandwich.jpg")',[], nullHandler,errorHandler);                            
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Biskuit","7","T","T","T","T","T","img/nutrisi/biskuit.jpg")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Kue Beras","9","T","T","T","T","T","img/nutrisi/kraker.jpg")',[], nullHandler,errorHandler);                             
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Madu","12","T","T","T","T","T","img/nutrisi/madu.jpg")',[], nullHandler,errorHandler);                          
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Pancake","12","T","T","T","T","T","img/nutrisi/pancakes.jpg")',[], nullHandler,errorHandler);                                       
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Puding Bergizi","18","T","T","T","T","T","img/nutrisi/puding.jpg")',[], nullHandler,errorHandler);   
+                tx.executeSql('INSERT INTO BalitaNutrisiBahanMakanan(NamaBM, UsiaBM, A_Laktosa, A_Casein, A_Telur, A_IkanLaut, A_Kacang, GambarBM) VALUES ("Roti Lapis","18","T","T","T","T","T","img/nutrisi/sandwich.jpg")',[], nullHandler,errorHandler);                            
             }
         }   
      );
@@ -187,52 +198,180 @@ function balita_insert_resep()
 {
     db.transaction(function(tx) 
     {  
-        tx.executeSql('SELECT * FROM BalitaResep', [], function(transaction, result) 
+        tx.executeSql('SELECT * FROM BalitaNutrisiResep', [], function(transaction, result) 
         {
             if (result.rows.length === 0)
             {
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Pure Apel + Pir</big><br><br></b><b>Bahan:</b><br>• 25 gr apel, buang kulitnya.<br>• 50 gr pir.<br>• 3 sdm cairan.<br><br><b>Cara membuat:</b><br>Campur kemudian blender atau dihaluskan kemudian disaring.</li>","6","T","T","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><big><b>Bubur Beras Merah dan Pepaya</b></big><br><br><b>Bahan:</b><br>• 50 gram tepung beras merah, siap pakai.<br>• 200 cc air matang hangat.<br>• 200 cc susu formula.<br>• 50 gram pepaya.<br>• 1 sendok makan air jeruk manis.<br><br><b>Cara membuat:</b><br>1. Campur tepung dengan air hangat, aduk.<br>2. Tambahkan susu hangat , aduk rata kembali. Sajikan dengan pepaya.<br>3. Haluskan pepaya dengan garpu, saringan kawat  atau blender. Campur dengan air jeruk, aduk rata.<br></li>","6","Y","Y","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><big><b>Pure Pepaya Pisang</b></big><br><br><b>Bahan:</b><br>• 50 gram pepaya<br>• 1 buah pisang<br>• 100 ml ASI<br>• 50 gram susu formula<br>• 75 ml air matang<br><br><b>Cara membuat:</b><br>1. Blender 50 gram pepaya dan ½ buah avokad secara bersamaan.<br>2. Tambahkan 1 buah pisang dan 100 ml asip atau 50 gram susu formula yang sudah dicairkan dengan 75 ml air matang.<br></li>","6","Y","Y","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><big><b>Pure Pepaya Jeruk</b></big><br><br><b>Bahan:</b><br>• 100 gram pepaya, kupas.<br>• 150 ml air jeruk manis.<br><br><b>Cara membuat:</b><br>1. Potong kecil pepaya, masukkan ke dalam blender.<br>2. Tambahkan air jeruk, haluskan. Tuang ke dalam mangkuk kecil, sajikan.<br></li>","6","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Pure Apel + Pir</big><br><br></b><b>Bahan:</b><br>• 25 gr apel, buang kulitnya.<br>• 50 gr pir.<br>• 3 sdm cairan.<br><br><b>Cara membuat:</b><br>Campur kemudian blender atau dihaluskan kemudian disaring.</li>","6","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><big><b>Bubur Beras Merah dan Pepaya</b></big><br><br><b>Bahan:</b><br>• 50 gram tepung beras merah, siap pakai.<br>• 200 cc air matang hangat.<br>• 200 cc susu formula.<br>• 50 gram pepaya.<br>• 1 sendok makan air jeruk manis.<br><br><b>Cara membuat:</b><br>1. Campur tepung dengan air hangat, aduk.<br>2. Tambahkan susu hangat , aduk rata kembali. Sajikan dengan pepaya.<br>3. Haluskan pepaya dengan garpu, saringan kawat  atau blender. Campur dengan air jeruk, aduk rata.<br></li>","6","Y","Y","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><big><b>Pure Pepaya Pisang</b></big><br><br><b>Bahan:</b><br>• 50 gram pepaya<br>• 1 buah pisang<br>• 100 ml ASI<br>• 50 gram susu formula<br>• 75 ml air matang<br><br><b>Cara membuat:</b><br>1. Blender 50 gram pepaya dan ½ buah avokad secara bersamaan.<br>2. Tambahkan 1 buah pisang dan 100 ml asip atau 50 gram susu formula yang sudah dicairkan dengan 75 ml air matang.<br></li>","6","Y","Y","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><big><b>Pure Pepaya Jeruk</b></big><br><br><b>Bahan:</b><br>• 100 gram pepaya, kupas.<br>• 150 ml air jeruk manis.<br><br><b>Cara membuat:</b><br>1. Potong kecil pepaya, masukkan ke dalam blender.<br>2. Tambahkan air jeruk, haluskan. Tuang ke dalam mangkuk kecil, sajikan.<br></li>","6","T","T","T","T")',[], nullHandler,errorHandler);                           
                 
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Kuning Manis</big></b><br><br><b>Bahan:</b><br>• 100 gram labu kuning potong dadu.<br>• 75 gram apel, kupas dan buang bagian tengahnya cincang halus.<br>• 100 cc air.<br>• 150 cc susu formula.<br>• ½ sendok teh kayu manis bubuk.<br><br><b>Cara membuat:</b><br>2. Tuang ke dalam mangkuk kecil, tambahkan susu formula, aduk rata sambil diatur kekentalannya. Bubuhi kayu manis bubuk dan sajikan segera.<br></li>","7","Y","Y","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Sari Alpukat</big></b><br><br><b>Bahan:</b><br>• 500 g daging buah alpukat.<br>• 250 ml susu formula cair.<br><br><b>Cara membuat:</b><br>Campur buah alpukat dengan susu cair. Haluskan dengan blender. Tuang ke dalam gelas bayi.<br></li>","7","Y","Y","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Susu Crackers Sari Alpukat</big></b><br><br><b>Bahan:</b><br>• 40 gram crackers manis, hancurkan.<br>• 300 ml air panas.<br>• 4 sendok takar susu formula bubuk.<br>• Sari Avocad.<br>• 100 gram daging avocad tua, potong kecil.<br>• 100 ml air jeruk manis.<br><br><b>Cara membuat:</b><br>• Sari alpukat: Masukkan buah alpukat dan sari jeruk manis ke dalam blender, haluskan. <br><i><small>(Kiat memilih alpukat matang: jika buah alpukat digoyang, biji di dalamnya menimbulkan suara)</small></i><br>• Bubur susu: Masukkan crackers dalam mangkuk kecil, beri air hangat, aduk rata.<br>• Bubuhi susu formula, aduk rata kembali. Siram dengan sari alpukat. Suapkan segera pada balita Anda.<br></li>","7","Y","Y","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Puree Wortel Segar</big></b><br><br><b>Bahan:</b><br>• 100 gram wortel, potong-potong.<br>• 50 cc air jeruk manis.<br><br><b>Cara membuat:</b><br>Haluskan wortel dan air jeruk manis dengan blender hingga lembut. Tuang ke mangkuk kecil, sajikan segera. Untuk 2 porsi.</li>","7","T","T","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Sereal Susu Avokad</big></b><br><br><b>Bahan:</b><br>• 200 gram sereal.<br>• 200 gram avokad matang, haluskan bersama 50 cc air matang.<br>• 100 cc susu formula cair.<br>• 150 cc air.<br><br><b>Cara membuat:</b><br>1. Jerang air dalam panci kecil, masukkan sereal lalu masak sambil diaduk hingga mengental. Angkat dari api.<br>2. Masukkan susu cair ke dalam sereal, aduk rata kembali. Tuang dalam mangkuk kecil, tambahkan avokad, sajikan.<br></li>","7","Y","Y","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Marie Saus Wortel</big></b><br><br><b>Bahan:</b><br>• 8 keping biskuit marie.<br>• 150 cc ASI atau susu formula cair.<br><br><b>Saus:</b><br>50 gram wortel. Bersihkan dan rebus sebentar dalam air, lalu haluskan dengan blender.<br><br><b>Cara membuat:</b><br>1. Campur biskuit dan susu dalam mangkuk.<br>2. Aduk hingga biskuit lumat.<br>3. Siram saus wortel pada bubur biskuit, aduk. Sajikan.<br></li>","7","T","T","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Smoothie Peach</big></b><br><br><b>Bahan:</b><br>• 100 gram buah peach.<br>• 250 cc ASI atau susu formula cair.<br>• ½ sendok teh gula pasir.<br><br><b>Cara membuat:</b><br>Campur peach, susu dan gula pasir, haluskan. Tuang ke dalam gelas kecil, sajikan.<br></li>","7","Y","Y","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Kuning Manis</big></b><br><br><b>Bahan:</b><br>• 100 gram labu kuning potong dadu.<br>• 75 gram apel, kupas dan buang bagian tengahnya cincang halus.<br>• 100 cc air.<br>• 150 cc susu formula.<br>• ½ sendok teh kayu manis bubuk.<br><br><b>Cara membuat:</b><br>2. Tuang ke dalam mangkuk kecil, tambahkan susu formula, aduk rata sambil diatur kekentalannya. Bubuhi kayu manis bubuk dan sajikan segera.<br></li>","7","Y","Y","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Sari Alpukat</big></b><br><br><b>Bahan:</b><br>• 500 g daging buah alpukat.<br>• 250 ml susu formula cair.<br><br><b>Cara membuat:</b><br>Campur buah alpukat dengan susu cair. Haluskan dengan blender. Tuang ke dalam gelas bayi.<br></li>","7","Y","Y","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Susu Crackers Sari Alpukat</big></b><br><br><b>Bahan:</b><br>• 40 gram crackers manis, hancurkan.<br>• 300 ml air panas.<br>• 4 sendok takar susu formula bubuk.<br>• Sari Avocad.<br>• 100 gram daging avocad tua, potong kecil.<br>• 100 ml air jeruk manis.<br><br><b>Cara membuat:</b><br>• Sari alpukat: Masukkan buah alpukat dan sari jeruk manis ke dalam blender, haluskan. <br><i><small>(Kiat memilih alpukat matang: jika buah alpukat digoyang, biji di dalamnya menimbulkan suara)</small></i><br>• Bubur susu: Masukkan crackers dalam mangkuk kecil, beri air hangat, aduk rata.<br>• Bubuhi susu formula, aduk rata kembali. Siram dengan sari alpukat. Suapkan segera pada balita Anda.<br></li>","7","Y","Y","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Puree Wortel Segar</big></b><br><br><b>Bahan:</b><br>• 100 gram wortel, potong-potong.<br>• 50 cc air jeruk manis.<br><br><b>Cara membuat:</b><br>Haluskan wortel dan air jeruk manis dengan blender hingga lembut. Tuang ke mangkuk kecil, sajikan segera. Untuk 2 porsi.</li>","7","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Sereal Susu Avokad</big></b><br><br><b>Bahan:</b><br>• 200 gram sereal.<br>• 200 gram avokad matang, haluskan bersama 50 cc air matang.<br>• 100 cc susu formula cair.<br>• 150 cc air.<br><br><b>Cara membuat:</b><br>1. Jerang air dalam panci kecil, masukkan sereal lalu masak sambil diaduk hingga mengental. Angkat dari api.<br>2. Masukkan susu cair ke dalam sereal, aduk rata kembali. Tuang dalam mangkuk kecil, tambahkan avokad, sajikan.<br></li>","7","Y","Y","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Marie Saus Wortel</big></b><br><br><b>Bahan:</b><br>• 8 keping biskuit marie.<br>• 150 cc ASI atau susu formula cair.<br><br><b>Saus:</b><br>50 gram wortel. Bersihkan dan rebus sebentar dalam air, lalu haluskan dengan blender.<br><br><b>Cara membuat:</b><br>1. Campur biskuit dan susu dalam mangkuk.<br>2. Aduk hingga biskuit lumat.<br>3. Siram saus wortel pada bubur biskuit, aduk. Sajikan.<br></li>","7","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Smoothie Peach</big></b><br><br><b>Bahan:</b><br>• 100 gram buah peach.<br>• 250 cc ASI atau susu formula cair.<br>• ½ sendok teh gula pasir.<br><br><b>Cara membuat:</b><br>Campur peach, susu dan gula pasir, haluskan. Tuang ke dalam gelas kecil, sajikan.<br></li>","7","Y","Y","T","T")',[], nullHandler,errorHandler);                           
                 
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Puree Bayam Labu Kuning</big></b><br><br><b>Bahan:</b><br>• 50 gram bayam, iris halus.<br>• 100 gram labu kuning, kupas, potong dadu kecil.<br>• 50 gram daging ayam, buang lemak, cuci, cincang.<br>• 250 ml air.<br>• 100 ml ASI atau 2 sendok takar susu formula dilarutkan dalam 100 ml air matang.<br><br><b>Cara membuat:</b><br>1. Rebus potongan labu kuning dan ayam cincang hingga matang.<br>2. Masukkan bayam, kemudian rebus lagi selama 3 menit hingga bayam lunak. Angkat, tiriskan.<br>3. Haluskan, tuang ke mangkuk saji, tambahkan susu. Aduk rata.<br></li>","9","Y","Y","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Pot Ayam</big></b><br><br><b>Bahan:</b><br>• 50 gram dada ayam, cincang.<br>• 30 gram wortel, kupas, potong kecil.<br>• 30 gram kentang, kupas, potong kecil.<br>• 1 sendok makan mentega.<br>• 250 ml kaldu ayam.<br><br><b>Cara membuat:</b><br>1. Panaskan mentega, lalu tumis daging ayam hingga berubah warna.<br>2. Tambahkan sayuran dan masukkan kaldu ayam. Masak hingga bahan matang. Angkat, haluskan.<br></li>","9","T","T","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Pure Apel Buncis</big></b><br><br><b>Bahan:</b><br>• 50  gram buncis, buang seratnya, iris.<br>• 50  gram apel, kupas, buang bagian tengahnya, potong kecil.<br>• 100 ml ASI atau 2 sendok takar peres susu formula yang dilarutkan dalam 100 ml air matang.<br>• 250 ml air untuk merebus.<br><br><b>Cara membuat:</b><br>1. Rebus buncis dan apel secara terpisah hingga lunak. Angkat.<br>2. Setelah agak dingin, haluskan buncis dan apel bersama susu.<br>3. Sajikan dalam mangkuk. Untuk 2 porsi, berikan pada bayi 6-9 bulan.<br></li>","9","T","T","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Beras Merah Wortel Daging</big></b><br><br><b>Bahan:</b><br>• 25 bungkus agar-agar bubuk.<br>• 400 cc air kaldu.<br>• 1/2 sendok teh garam.<br>• 75 gram daging giling, rebus.<br>• 100 gram labu kuning, iris dadu kecil, rebus.<br>• 100 gram wortel, iris bentuk bintang, rebus.<br><b>Cara membuat:</b><br>1. Rebus beras merah bersama air kaldu dan garam. Aduk perlahan hingga menjadi bubur.<br>2. Masukkan daging giling dan wortel, aduk sebentar hingga semua bahan tercampur rata.<br>3. Angkat dari api. Suapkan pada bayi dalam keadaan hangat.<br></li>","9","T","T","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Jus Buah Yoghurt</big></b><br><br><b>Bahan:</b><br>• 50 gram pisang.<br>• 50 gram apel.<br>• 1 sendok makan yoghurt tawar.<br><br><b>Cara membuat:</b><br>Haluskan pisang dan apel, campur dengan yoghurt. Aduk rata. Tuang ke mangkuk kecil, sajikan segar.<br></li>","9","Y","Y","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Nasi Tofu</big></b><br><br><b>Bahan:</b><br>• 25 gram beras.<br>• 650 cc kaldu.<br>• 25 gram daging ayam, cincang halus.<br>• 30 gram tofu, potong kecil.<br>• 30 gram wortel, parut halus.<br>• 2 sendok makan margarin.<br><br><b>Cara membuat:</b><br>1. Campur beras dengan kaldu, masak sambil sesekali diaduk hingga menjadi bubur.<br>2. Masukkan ayam, masak hingga ayam matang. Masukkan tofu dan wortel, masak hingga wortel lunak. Tambahkan margarin, aduk terus. Angkat. Sajikan hangat.<br></li>","9","T","T","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Tofu Kuah Wortel</big></b><br><br><b>Bahan:</b><br>• 50 gram tofu, potong dadu 1x1 cm.<br>• 50 gram ayam cincang.<br>• 50 gram wortel , kupas, cuci, haluskan.<br>• 1 sendok makan margarin.<br>• ½ sendok teh garam.<br>• 250 cc air.<br><br><b>Cara membuat:</b><br>1. Panaskan margarin, masukkan ayam cincang dan tofu. Masak sambil diaduk-aduk hingga matang.<br>2. Tuangi air, masukkan garam dan wortel, aduk dan masak mendidih. Angkat.<br></li>","9","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Puree Bayam Labu Kuning</big></b><br><br><b>Bahan:</b><br>• 50 gram bayam, iris halus.<br>• 100 gram labu kuning, kupas, potong dadu kecil.<br>• 50 gram daging ayam, buang lemak, cuci, cincang.<br>• 250 ml air.<br>• 100 ml ASI atau 2 sendok takar susu formula dilarutkan dalam 100 ml air matang.<br><br><b>Cara membuat:</b><br>1. Rebus potongan labu kuning dan ayam cincang hingga matang.<br>2. Masukkan bayam, kemudian rebus lagi selama 3 menit hingga bayam lunak. Angkat, tiriskan.<br>3. Haluskan, tuang ke mangkuk saji, tambahkan susu. Aduk rata.<br></li>","9","Y","Y","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Pot Ayam</big></b><br><br><b>Bahan:</b><br>• 50 gram dada ayam, cincang.<br>• 30 gram wortel, kupas, potong kecil.<br>• 30 gram kentang, kupas, potong kecil.<br>• 1 sendok makan mentega.<br>• 250 ml kaldu ayam.<br><br><b>Cara membuat:</b><br>1. Panaskan mentega, lalu tumis daging ayam hingga berubah warna.<br>2. Tambahkan sayuran dan masukkan kaldu ayam. Masak hingga bahan matang. Angkat, haluskan.<br></li>","9","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Pure Apel Buncis</big></b><br><br><b>Bahan:</b><br>• 50  gram buncis, buang seratnya, iris.<br>• 50  gram apel, kupas, buang bagian tengahnya, potong kecil.<br>• 100 ml ASI atau 2 sendok takar peres susu formula yang dilarutkan dalam 100 ml air matang.<br>• 250 ml air untuk merebus.<br><br><b>Cara membuat:</b><br>1. Rebus buncis dan apel secara terpisah hingga lunak. Angkat.<br>2. Setelah agak dingin, haluskan buncis dan apel bersama susu.<br>3. Sajikan dalam mangkuk. Untuk 2 porsi, berikan pada bayi 6-9 bulan.<br></li>","9","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Beras Merah Wortel Daging</big></b><br><br><b>Bahan:</b><br>• 25 bungkus agar-agar bubuk.<br>• 400 cc air kaldu.<br>• 1/2 sendok teh garam.<br>• 75 gram daging giling, rebus.<br>• 100 gram labu kuning, iris dadu kecil, rebus.<br>• 100 gram wortel, iris bentuk bintang, rebus.<br><b>Cara membuat:</b><br>1. Rebus beras merah bersama air kaldu dan garam. Aduk perlahan hingga menjadi bubur.<br>2. Masukkan daging giling dan wortel, aduk sebentar hingga semua bahan tercampur rata.<br>3. Angkat dari api. Suapkan pada bayi dalam keadaan hangat.<br></li>","9","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Jus Buah Yoghurt</big></b><br><br><b>Bahan:</b><br>• 50 gram pisang.<br>• 50 gram apel.<br>• 1 sendok makan yoghurt tawar.<br><br><b>Cara membuat:</b><br>Haluskan pisang dan apel, campur dengan yoghurt. Aduk rata. Tuang ke mangkuk kecil, sajikan segar.<br></li>","9","Y","Y","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Nasi Tofu</big></b><br><br><b>Bahan:</b><br>• 25 gram beras.<br>• 650 cc kaldu.<br>• 25 gram daging ayam, cincang halus.<br>• 30 gram tofu, potong kecil.<br>• 30 gram wortel, parut halus.<br>• 2 sendok makan margarin.<br><br><b>Cara membuat:</b><br>1. Campur beras dengan kaldu, masak sambil sesekali diaduk hingga menjadi bubur.<br>2. Masukkan ayam, masak hingga ayam matang. Masukkan tofu dan wortel, masak hingga wortel lunak. Tambahkan margarin, aduk terus. Angkat. Sajikan hangat.<br></li>","9","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Tofu Kuah Wortel</big></b><br><br><b>Bahan:</b><br>• 50 gram tofu, potong dadu 1x1 cm.<br>• 50 gram ayam cincang.<br>• 50 gram wortel , kupas, cuci, haluskan.<br>• 1 sendok makan margarin.<br>• ½ sendok teh garam.<br>• 250 cc air.<br><br><b>Cara membuat:</b><br>1. Panaskan margarin, masukkan ayam cincang dan tofu. Masak sambil diaduk-aduk hingga matang.<br>2. Tuangi air, masukkan garam dan wortel, aduk dan masak mendidih. Angkat.<br></li>","9","T","T","T","T")',[], nullHandler,errorHandler);                           
                 
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Sereal Kiwi</big></b><br><br><b>Bahan:</b><br>• 30 gram sereal instan.<br>• 1 buah kiwi, kupas, potong kecil.<br>• 100 ml ASI atau 2 sendok takar susu formula dilarutkan dalam 100 ml air matang.<br><br><b>Cara membuat:</b><br>1. Campur sereal instan dengan air panas sambil diaduk hingga kental. Sisihkan.<br>2. Haluskan kiwi bersama susu dalam blender. Tuang ke dalam sereal, aduk rata. Sajikan hangat dalam mangkuk kecil.<br></li>","12","T","T","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Labu Brokoli</big></b><br><br><b>Bahan:</b><br>• 50 gram labu kuning, buang biji, potong kecil.<br>• 30 gram brokoli, potong sesuai kuntum.<br>• 100 ml ASI atau 2 sendok takar peres susu formula dilarutkan dalam 100 ml air matang.<br><br><b>Cara membuat:</b><br>1. Kukus labu kuning dan brokoli hingga matang. Angkat.<br>2. Haluskan dengan blender.<br>3. Pindahkan ke dalam mangkuk kecil, tambahkan susu, aduk rata. Sajikan segera.<br></li>","12","T","T","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Kentang Kukus Daging Cincang</big></b><br><br><b>Bahan:</b><br>• 50 gram kentang, kupas, potong dadu kecil.<br>• 50 gram daging cincang.<br>• 30 gram buncis, buang serat, iris halus.<br>• 1 sendok makan margarin.<br>• 30 ml air.<br><br><b>Cara membuat:</b><br>1. Masukkan kentang, daging dan buncis dalam mangkuk tahan panas.Tambahkan margarin dan air, aduk rata.<br>2. Panaskan dandang berisi air, kukus campuran kentang hingga matang. Angkat, sajikan setelah dingin.<br></li>","12","T","T","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Sereal Melon</big></b><br><br><b>Bahan:</b><br>• 2 sendok makan oat.<br>• 150 ml air.<br>• 100 gram melon, potong kecil.<br>• 100 ml ASI atau 2 sendok takar peres susu formula dilarutkan dalam 100 ml air matang.<br><br><b>Cara membuat:</b><br>1. Rebus sereal dengan 100 ml air hingga mendidih dan kental. Angkat.<br>2. Campur  melon dan susu, haluskan dengan blender.<br>3. Tuang campuran melon susu ke dalam sereal, aduk rata. Sajikan.<br></li>","12","T","T","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Ayam Brokoli</big></b><br><br><b>Bahan:</b><br>• 60 gram beras, cuci bersih.<br>• 25 gram ayam, dicincang halus.<br>• 50 gram brokoli, cuci bersih<br>• 500 cc air untuk dimasak.<br><br><b>Cara membuat:</b><br>1. Masak beras dengan air dan daging ayam cincang, aduk-aduk hingga beras menjadi bubur. Angkat.<br>2. Rebus brokoli kurang dari 5 menit, angkat. Selanjutnya haluskan dengan blender dan campur rata dengan bubur dan ayam.<br>3. Hidangkan segera selagi hangat.<br></li>","12","T","T","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Makaroni Sayur Panggang</big></b><br><br><b>Bahan:</b><br>• 100 gram makaroni rebus.<br>• 50 gram wortel, parut.<br>• 50 gram bayam, cincang halus.<br>• 100 gram daging cincang.<br>• 75 cc susu cair.<br>• 1 butir telur, kocok.<br>• 2 sendok makan margarin, lelehkan.<br>• 100 gram keju cheddar parut.<br>• 50 gram keju cheddar parut untuk taburan.<br>• 200  cc kaldu.<br><br><b>Cara membuat:</b><br>1. Panaskan oven 180°C, olesi loyang persegi kecil dengan margarin.<br>2. Campur dalam mangkuk, makaroni, wortel, bayam, daging cincang, margarin dan keju. Aduk rata.<br>3. Masukkan telur kocok, dan tuangi susu sedikit demi sedikit sambil diaduk rata.<br>4. Tuang adonan ke dalam loyang, taburi keju lalu panggang 75 menit hingga matang lalu angkat.<br>5. Setelah dingin, potong-potong lalu sajikan.<br></li>","12","Y","Y","Y","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Tim Kentang Salmon</big></b><br><br><b>Bahan:</b><br>• 80 gram kentang, kupas, potong dadu kecil.<br>• 50 gram ikan salmon, cincang.<br>• 50 gram brokoli, cincang.<br>• 1 sendok makan margarin.<br>• 200 cc air untuk merebus.<br><br><b>Cara membuat:</b><br>1. Rebus kentang dalam 200 cc air hingga lunak.<br>2. Masukkan ikan salmon cincang, masak sambil diaduk hingga matang.<br>3. Masukkan brokoli dan margarin, masak sebentar hingga brokoli matang, angkat.<br>4. Setelah agak dingin, haluskan. Sajikan dalam mangkuk kecil.<br></li>","12","T","T","T","Y")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Sayur Telur</big></b><br><br><b>Bahan:</b><br>• 20 g daging ayam.<br>• 250 ml air kaldu.<br>• 20 g kentang, kupas, potong kecil.<br>• 20 g wortel parut.<br>• 20 g tomat, buang bijinya, cincang.<br>• 1 kuning telur.<br>• 2 sdm tepung maizena.<br>• 1 sdt margarin.<br>• 20 g daun bayam, iris.<br><br><b>Cara membuat:</b><br>1. Rebus daging ayam hingga lunak. Tambahkan kentang, woret parut, tomat cincang. Aduk hingga setengah matang.<br>2. Bubuhi kuning telur, tepung maizena dan margarin. Aduk pula hingga matang dan mengental.<br>3. Bagi dua adonan. Satu bagian sisihkan untuk makan malam dan beri bagian sisanya dengan 10 gram irisan daun bayam. Aduk pula hingga sayuran matang, angkat.<br>4. Tuang ke dalam blender dan haluskan. Atau saring dengan saringan kawat khusus untuk makanan bayi.<br>5. Masukkan ke dalam mangkuk bayi dan suapkan dengan sendok plastik kecil.<br></li>","12","T","T","Y","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Sereal Kiwi</big></b><br><br><b>Bahan:</b><br>• 30 gram sereal instan.<br>• 1 buah kiwi, kupas, potong kecil.<br>• 100 ml ASI atau 2 sendok takar susu formula dilarutkan dalam 100 ml air matang.<br><br><b>Cara membuat:</b><br>1. Campur sereal instan dengan air panas sambil diaduk hingga kental. Sisihkan.<br>2. Haluskan kiwi bersama susu dalam blender. Tuang ke dalam sereal, aduk rata. Sajikan hangat dalam mangkuk kecil.<br></li>","12","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Labu Brokoli</big></b><br><br><b>Bahan:</b><br>• 50 gram labu kuning, buang biji, potong kecil.<br>• 30 gram brokoli, potong sesuai kuntum.<br>• 100 ml ASI atau 2 sendok takar peres susu formula dilarutkan dalam 100 ml air matang.<br><br><b>Cara membuat:</b><br>1. Kukus labu kuning dan brokoli hingga matang. Angkat.<br>2. Haluskan dengan blender.<br>3. Pindahkan ke dalam mangkuk kecil, tambahkan susu, aduk rata. Sajikan segera.<br></li>","12","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Kentang Kukus Daging Cincang</big></b><br><br><b>Bahan:</b><br>• 50 gram kentang, kupas, potong dadu kecil.<br>• 50 gram daging cincang.<br>• 30 gram buncis, buang serat, iris halus.<br>• 1 sendok makan margarin.<br>• 30 ml air.<br><br><b>Cara membuat:</b><br>1. Masukkan kentang, daging dan buncis dalam mangkuk tahan panas.Tambahkan margarin dan air, aduk rata.<br>2. Panaskan dandang berisi air, kukus campuran kentang hingga matang. Angkat, sajikan setelah dingin.<br></li>","12","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Sereal Melon</big></b><br><br><b>Bahan:</b><br>• 2 sendok makan oat.<br>• 150 ml air.<br>• 100 gram melon, potong kecil.<br>• 100 ml ASI atau 2 sendok takar peres susu formula dilarutkan dalam 100 ml air matang.<br><br><b>Cara membuat:</b><br>1. Rebus sereal dengan 100 ml air hingga mendidih dan kental. Angkat.<br>2. Campur  melon dan susu, haluskan dengan blender.<br>3. Tuang campuran melon susu ke dalam sereal, aduk rata. Sajikan.<br></li>","12","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Ayam Brokoli</big></b><br><br><b>Bahan:</b><br>• 60 gram beras, cuci bersih.<br>• 25 gram ayam, dicincang halus.<br>• 50 gram brokoli, cuci bersih<br>• 500 cc air untuk dimasak.<br><br><b>Cara membuat:</b><br>1. Masak beras dengan air dan daging ayam cincang, aduk-aduk hingga beras menjadi bubur. Angkat.<br>2. Rebus brokoli kurang dari 5 menit, angkat. Selanjutnya haluskan dengan blender dan campur rata dengan bubur dan ayam.<br>3. Hidangkan segera selagi hangat.<br></li>","12","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Makaroni Sayur Panggang</big></b><br><br><b>Bahan:</b><br>• 100 gram makaroni rebus.<br>• 50 gram wortel, parut.<br>• 50 gram bayam, cincang halus.<br>• 100 gram daging cincang.<br>• 75 cc susu cair.<br>• 1 butir telur, kocok.<br>• 2 sendok makan margarin, lelehkan.<br>• 100 gram keju cheddar parut.<br>• 50 gram keju cheddar parut untuk taburan.<br>• 200  cc kaldu.<br><br><b>Cara membuat:</b><br>1. Panaskan oven 180°C, olesi loyang persegi kecil dengan margarin.<br>2. Campur dalam mangkuk, makaroni, wortel, bayam, daging cincang, margarin dan keju. Aduk rata.<br>3. Masukkan telur kocok, dan tuangi susu sedikit demi sedikit sambil diaduk rata.<br>4. Tuang adonan ke dalam loyang, taburi keju lalu panggang 75 menit hingga matang lalu angkat.<br>5. Setelah dingin, potong-potong lalu sajikan.<br></li>","12","Y","Y","Y","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Tim Kentang Salmon</big></b><br><br><b>Bahan:</b><br>• 80 gram kentang, kupas, potong dadu kecil.<br>• 50 gram ikan salmon, cincang.<br>• 50 gram brokoli, cincang.<br>• 1 sendok makan margarin.<br>• 200 cc air untuk merebus.<br><br><b>Cara membuat:</b><br>1. Rebus kentang dalam 200 cc air hingga lunak.<br>2. Masukkan ikan salmon cincang, masak sambil diaduk hingga matang.<br>3. Masukkan brokoli dan margarin, masak sebentar hingga brokoli matang, angkat.<br>4. Setelah agak dingin, haluskan. Sajikan dalam mangkuk kecil.<br></li>","12","T","T","T","Y")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bubur Sayur Telur</big></b><br><br><b>Bahan:</b><br>• 20 g daging ayam.<br>• 250 ml air kaldu.<br>• 20 g kentang, kupas, potong kecil.<br>• 20 g wortel parut.<br>• 20 g tomat, buang bijinya, cincang.<br>• 1 kuning telur.<br>• 2 sdm tepung maizena.<br>• 1 sdt margarin.<br>• 20 g daun bayam, iris.<br><br><b>Cara membuat:</b><br>1. Rebus daging ayam hingga lunak. Tambahkan kentang, woret parut, tomat cincang. Aduk hingga setengah matang.<br>2. Bubuhi kuning telur, tepung maizena dan margarin. Aduk pula hingga matang dan mengental.<br>3. Bagi dua adonan. Satu bagian sisihkan untuk makan malam dan beri bagian sisanya dengan 10 gram irisan daun bayam. Aduk pula hingga sayuran matang, angkat.<br>4. Tuang ke dalam blender dan haluskan. Atau saring dengan saringan kawat khusus untuk makanan bayi.<br>5. Masukkan ke dalam mangkuk bayi dan suapkan dengan sendok plastik kecil.<br></li>","12","T","T","Y","T")',[], nullHandler,errorHandler);                           
                 
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Pepes Tahu</big></b><br><br><b>Bahan:</b><br>• 2 siung bawang merah.<br>• 1 siung bawang putih.<br>• 1 butir kemiri sangrai.<br>• 100 gram tahu putih.<br>• 100 gram salmon.<br>• Labu siam, daun kemangi dan tomat secukupnya.<br><br><b>Cara membuat:</b><br>1. Haluskan 2 siung bawang merah, 1 siung bawang putih dan 1 butir kemiri sangrai.<br>2. Campurkan dengan 100 gram tahu putih dan 100 gram salmon tanpa tulang yang sudah dikukus dan dihaluskan.<br>3. Tata di atas daun pisang: 2 sendok makan tahu, 1 lembar daun kemangi,  tomat dan labu siam yang dipotong memanjang. Kukus selama 15 menit.<br></li>","18","T","T","T","Y")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bola Kentang Kacang Polong</big></b><br><br><b>Bahan:</b><br>• 1 siung bawang putih.<br>• ½ sendok makan mentega tawar.<br>• 1 buah kentang.<br>• 50 gram kacang polong.<br>• 2 sendok teh tepung terigu.<br>• 100 ml ASIP atau 3 sendok takar susu formula.<br>• 100 ml air matang.<br>• 25 gram keju parut.<br><br><b>Cara membuat:</b><br>1. Tumis 1 siung bawang putih dengan ½ sendok makan mentega tawar.<br>2. Masukkan 1 buah kentang yang sudah dihaluskan dan 50 gram kacang polong yang sudah direbus dan dicincang kasar. Aduk rata.<br>3. Tambahkan 2 sendok teh tepung terigu dan 100 ml ASIP atau 3 sendok takar susu formula, seduh dalam 100 ml air matang.<br>4. Aduk rata dan taburi dengan 25 gram keju parut. Buat bulatan, panggang sebentar.<br></li>","18","Y","Y","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Makaroni Saus Keju</big></b><br><br><b>Bahan:</b><br>• 1 siung bawang putih.<br>• 50 gram daging sapi cincang.<br>• 100 ml kaldu.<br>• 25 gram wortel parut.<br>• 25 gram keju parut.<br>• 2 sendok makan makaroni.<br>• 1 butir kuning telur.<br>• 25 gram brokoli.<br>• 2 sendok makan makaroni rebus.<br><br><b>Cara membuat:</b><br>1. Tumis 1 siung bawang putih yang sudah dicincang halus.<br>2. Masukkan 50 gram daging sapi cincang. Aduk hingga matang.<br>3. Masukkan 100 ml kaldu, 25 gram wortel parut dan 25 gram keju parut. Masak hingga matang.<br>4. Masukkan 1 butir kuning telur yang sudah dikocok, aduk rata. Tambahkan 25 gram brokoli yang dicincang halus.<br>5. Tuang saus di atas 2 sendok makan makaroni yang sudah direbus.<br></li>","18","T","T","Y","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Tim Jagung Daging</big></b><br><br><b>Bahan:</b><br>• 1 siung bawang putih.<br>• 1 sendok teh mentega tawar.<br>• 50 gram daging giling.<br>• 50 gram jagung serut.<br>• 25 gram wortel parut.<br>• 25 gram sawi hijau.<br>• 75 gram nasi tim.<br><br><b>Cara membuat:</b><br>1. Tumis 1 siung bawang putih yang sudah dihaluskan menggunakan 1 sendok teh mentega tawar.<br>2. Masukkan 50 gram daging giling, 50 gram jagung serut, dan 25 gram wortel diparut kasar. Masak hingga lunak dan matang. <br>3. Tambahkan 25 gram sawi hijau yang diiris halus. Cetak 75 gram nasi tim, tambahkan tumisan daging di atasnya.<br></li>","18","T","T","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Kembang Kol Kentang Panggang</big></b><br><br><b>Bahan:</b><br>• 100 gram kentang.<br>• 100 gram kembang kol.<br>• 1 siung bawang putih.<br>• ½ sendok teh mentega tawar.<br>• 25 gram keju parut.<br>• daging ayam secukupnya.<br><br><b>Cara membuat:</b><br>1. Kukus 100 gram kentang dan 100 gram kembang kol. Haluskan keduanya.<br>2. Tumis 1 siung bawang putih, menggunakan ½ sendok teh mentega tawar.<br>3. Masukkan ayam, masak hingga matang.<br>4. Campurkan dengan kentang, taburi 25 gram keju parut. Panggang hingga matang.<br></li>","18","Y","Y","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Puding Yoghurt Avokad</big></b><br><br><b>Bahan:</b><br>• ½ bungkus agar-agar putih.<br>• 50 gram yoghurt tawar.<br>• 20 gram avokad, potong dadu kecil.<br>• 100 ml air.<br><br><b>Saus:</b><br>• 100 ml susu.<br> • 50 ml jus jeruk.<br>• ½ sendok teh tepung maizena, cairkan.<br><br><b>Cara membuat:</b><br>1. Masak agar-agar hingga mendidih. Angkat, masukkan yoghurt, aduk rata.<br>2. Sisihkan 1/3 adonan, lalu campur dengan avokad, aduk rata.<br>3. Cetak adonan dengan menuangkan adonan agar-agar avokad terlebih dahulu. Tunggu sebentar, lalu tuang sisanya.<br>4. Saus: Masak jus jeruk, susu dan tepung maizena hingga mengental.<br>5. Sajikan puding dengan sausnya.<br></li>","18","Y","Y","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Pasta Sayur</big></b><br><br><b>Bahan:</b><br>• 50 gram pasta keong.<br>• 50 gram daging cincang.<br>• 1 sendok teh bawang bombay cincang.<br>• 30 gram kacang polong, cincang.<br>• 50 gram wortel, kupas, parut.<br>• 30 gram tomat, cincang.<br>• 250 ml kaldu.<br><br><b>Cara membuat:</b><br>1. Rebus daging cincang bersama kaldu hingga daging matang.<br>2. Tambahkan bawang bombay, kacang polong,  wortel, dan tomat, tutup dan masak di atas api kecil  hingga bahan matang.<br>3. Masukkan pasta, masak hingga lunak.  Angkat dan haluskan. Sajikan dalam mangkuk kecil.<br></li>","18","T","T","T","T")',[], nullHandler,errorHandler);                           
-                tx.executeSql('INSERT INTO BalitaResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Agar-agar Buah Saus Susu</big></b><br><br><b>Bahan:</b><br>• ½ bungkus agar-agar bubuk warna putih.<br>• 30 gram pure Heinz  mango-apple.<br>• 25 gram mangga arumanis, kupas dan haluskan.<br>• 650 ml air matang.<br><br><b>Saus:</b><br>• 20 gram tepung maizena.<br>• 100 ml ASI atau 2 sendok takar susu formula, cairkan dalam 100 ml air matang.<br>• 100 ml air matang.<br><br><b>Cara membuat:</b><br>1. Campur bubuk agar-agar dan air, lalu aduk rata kemudian masak hingga mendidih. Angkat.<br>2. Tambahkan pure instan dan buah mangga segar yang telah dihaluskan.  Aduk rata,  tuang ke dalam cetakan. Diamkan hingga dingin dan padat, lalu sisihkan.<br>3. Buat saus susu: Campur tepung maizena dengan air, aduk rata. Panaskan sambil diaduk terus hingga mendidih dan kental. Angkat, tambahkan susu, aduk rata.<br>4. Keluarkan agar-agar dari cetakan, letakkan di piring saji untuk bayi,  lalu siram dengan saus susu. Sajikan.<br></li>","18","Y","Y","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Pepes Tahu</big></b><br><br><b>Bahan:</b><br>• 2 siung bawang merah.<br>• 1 siung bawang putih.<br>• 1 butir kemiri sangrai.<br>• 100 gram tahu putih.<br>• 100 gram salmon.<br>• Labu siam, daun kemangi dan tomat secukupnya.<br><br><b>Cara membuat:</b><br>1. Haluskan 2 siung bawang merah, 1 siung bawang putih dan 1 butir kemiri sangrai.<br>2. Campurkan dengan 100 gram tahu putih dan 100 gram salmon tanpa tulang yang sudah dikukus dan dihaluskan.<br>3. Tata di atas daun pisang: 2 sendok makan tahu, 1 lembar daun kemangi,  tomat dan labu siam yang dipotong memanjang. Kukus selama 15 menit.<br></li>","18","T","T","T","Y")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Bola Kentang Kacang Polong</big></b><br><br><b>Bahan:</b><br>• 1 siung bawang putih.<br>• ½ sendok makan mentega tawar.<br>• 1 buah kentang.<br>• 50 gram kacang polong.<br>• 2 sendok teh tepung terigu.<br>• 100 ml ASIP atau 3 sendok takar susu formula.<br>• 100 ml air matang.<br>• 25 gram keju parut.<br><br><b>Cara membuat:</b><br>1. Tumis 1 siung bawang putih dengan ½ sendok makan mentega tawar.<br>2. Masukkan 1 buah kentang yang sudah dihaluskan dan 50 gram kacang polong yang sudah direbus dan dicincang kasar. Aduk rata.<br>3. Tambahkan 2 sendok teh tepung terigu dan 100 ml ASIP atau 3 sendok takar susu formula, seduh dalam 100 ml air matang.<br>4. Aduk rata dan taburi dengan 25 gram keju parut. Buat bulatan, panggang sebentar.<br></li>","18","Y","Y","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Makaroni Saus Keju</big></b><br><br><b>Bahan:</b><br>• 1 siung bawang putih.<br>• 50 gram daging sapi cincang.<br>• 100 ml kaldu.<br>• 25 gram wortel parut.<br>• 25 gram keju parut.<br>• 2 sendok makan makaroni.<br>• 1 butir kuning telur.<br>• 25 gram brokoli.<br>• 2 sendok makan makaroni rebus.<br><br><b>Cara membuat:</b><br>1. Tumis 1 siung bawang putih yang sudah dicincang halus.<br>2. Masukkan 50 gram daging sapi cincang. Aduk hingga matang.<br>3. Masukkan 100 ml kaldu, 25 gram wortel parut dan 25 gram keju parut. Masak hingga matang.<br>4. Masukkan 1 butir kuning telur yang sudah dikocok, aduk rata. Tambahkan 25 gram brokoli yang dicincang halus.<br>5. Tuang saus di atas 2 sendok makan makaroni yang sudah direbus.<br></li>","18","T","T","Y","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Tim Jagung Daging</big></b><br><br><b>Bahan:</b><br>• 1 siung bawang putih.<br>• 1 sendok teh mentega tawar.<br>• 50 gram daging giling.<br>• 50 gram jagung serut.<br>• 25 gram wortel parut.<br>• 25 gram sawi hijau.<br>• 75 gram nasi tim.<br><br><b>Cara membuat:</b><br>1. Tumis 1 siung bawang putih yang sudah dihaluskan menggunakan 1 sendok teh mentega tawar.<br>2. Masukkan 50 gram daging giling, 50 gram jagung serut, dan 25 gram wortel diparut kasar. Masak hingga lunak dan matang. <br>3. Tambahkan 25 gram sawi hijau yang diiris halus. Cetak 75 gram nasi tim, tambahkan tumisan daging di atasnya.<br></li>","18","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Kembang Kol Kentang Panggang</big></b><br><br><b>Bahan:</b><br>• 100 gram kentang.<br>• 100 gram kembang kol.<br>• 1 siung bawang putih.<br>• ½ sendok teh mentega tawar.<br>• 25 gram keju parut.<br>• daging ayam secukupnya.<br><br><b>Cara membuat:</b><br>1. Kukus 100 gram kentang dan 100 gram kembang kol. Haluskan keduanya.<br>2. Tumis 1 siung bawang putih, menggunakan ½ sendok teh mentega tawar.<br>3. Masukkan ayam, masak hingga matang.<br>4. Campurkan dengan kentang, taburi 25 gram keju parut. Panggang hingga matang.<br></li>","18","Y","Y","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Puding Yoghurt Avokad</big></b><br><br><b>Bahan:</b><br>• ½ bungkus agar-agar putih.<br>• 50 gram yoghurt tawar.<br>• 20 gram avokad, potong dadu kecil.<br>• 100 ml air.<br><br><b>Saus:</b><br>• 100 ml susu.<br> • 50 ml jus jeruk.<br>• ½ sendok teh tepung maizena, cairkan.<br><br><b>Cara membuat:</b><br>1. Masak agar-agar hingga mendidih. Angkat, masukkan yoghurt, aduk rata.<br>2. Sisihkan 1/3 adonan, lalu campur dengan avokad, aduk rata.<br>3. Cetak adonan dengan menuangkan adonan agar-agar avokad terlebih dahulu. Tunggu sebentar, lalu tuang sisanya.<br>4. Saus: Masak jus jeruk, susu dan tepung maizena hingga mengental.<br>5. Sajikan puding dengan sausnya.<br></li>","18","Y","Y","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Pasta Sayur</big></b><br><br><b>Bahan:</b><br>• 50 gram pasta keong.<br>• 50 gram daging cincang.<br>• 1 sendok teh bawang bombay cincang.<br>• 30 gram kacang polong, cincang.<br>• 50 gram wortel, kupas, parut.<br>• 30 gram tomat, cincang.<br>• 250 ml kaldu.<br><br><b>Cara membuat:</b><br>1. Rebus daging cincang bersama kaldu hingga daging matang.<br>2. Tambahkan bawang bombay, kacang polong,  wortel, dan tomat, tutup dan masak di atas api kecil  hingga bahan matang.<br>3. Masukkan pasta, masak hingga lunak.  Angkat dan haluskan. Sajikan dalam mangkuk kecil.<br></li>","18","T","T","T","T")',[], nullHandler,errorHandler);                           
+                tx.executeSql('INSERT INTO BalitaNutrisiResep(Resep, UsiaResep, Rsp_Laktosa, Rsp_Casein, Rsp_Telur, Rsp_IkanLaut) VALUES ("<li><b><big>Agar-agar Buah Saus Susu</big></b><br><br><b>Bahan:</b><br>• ½ bungkus agar-agar bubuk warna putih.<br>• 30 gram pure Heinz  mango-apple.<br>• 25 gram mangga arumanis, kupas dan haluskan.<br>• 650 ml air matang.<br><br><b>Saus:</b><br>• 20 gram tepung maizena.<br>• 100 ml ASI atau 2 sendok takar susu formula, cairkan dalam 100 ml air matang.<br>• 100 ml air matang.<br><br><b>Cara membuat:</b><br>1. Campur bubuk agar-agar dan air, lalu aduk rata kemudian masak hingga mendidih. Angkat.<br>2. Tambahkan pure instan dan buah mangga segar yang telah dihaluskan.  Aduk rata,  tuang ke dalam cetakan. Diamkan hingga dingin dan padat, lalu sisihkan.<br>3. Buat saus susu: Campur tepung maizena dengan air, aduk rata. Panaskan sambil diaduk terus hingga mendidih dan kental. Angkat, tambahkan susu, aduk rata.<br>4. Keluarkan agar-agar dari cetakan, letakkan di piring saji untuk bayi,  lalu siram dengan saus susu. Sajikan.<br></li>","18","Y","Y","T","T")',[], nullHandler,errorHandler);                           
              }
         }   
      );
     },errorHandler,nullHandler);
+}
+
+function balita_insert_nutrisiInformasi()
+{
+    db.transaction(function(tx) 
+    {  
+        tx.executeSql('SELECT * FROM BalitaNutrisiInfo', [], function(transaction, result) 
+        {
+            if (result.rows.length === 0)
+            {
+                tx.executeSql('INSERT INTO BalitaNutrisiInfo(Judul, Konten) VALUES (\'Alergi\', \'<li data-role="list-divider" style="white-space: normal"><b><big>Laktosa Intoleran</big></b></li><li style="white-space: normal">Alergi laktosa intoleran tidaklah murni sebuah alergi. Hal ini merupakan suatu keadaan dimana laktosa (gula yang terkandung dalam susu) tidak dapat dicerna karena kurang atau tidak adanya enzim laktose. Biasanya pengidap alergi ini adalah keturunan. Umumnya hal ini dapat terjadi seumur hidup.<br><br><b>Gejala:</b><br> mual, kram, diare, kembung perut, dan muka bengkak. Biasanya muncul setelah 30 menit mengonsumsi susu.<br><br><b>Cara mengatasi:</b><br> berikan susu bebas laktose, dapat juga diberikan susu kedelai tetapi untuk bayi berumur 6 bulan keatas.</li><li data-role="list-divider" style="white-space: normal"><b><big>Casein Susu Sapi</big></b></li><li style="white-space: normal">Alergi ini merupakan kondisi dimana bayi alergi terhadap protein susu sapi yang disebut casein. Apabila hal ini terjadi, segera konsultasikan dengan dokter dan hati-hati sebelum memutuskan untuk memberikan susu formula pada bayi.<br><br><b>Cara mengatasi:</b><br>Apabila bayi menampakkan alergi terhadap casein, dianjurkan agar si ibu juga harus membatasi konsumsi susu sapi atau produk olahannya agar tidak mempengaruhi kualitas ASI. Biasanya dokter akan memberikan nasihat untuk mengganti susu formula biasa dengan formula hidrolisa (rendah alergen).</li><li data-role="list-divider" style="white-space: normal"><b><big>Telur</big></b></li><li style="white-space: normal">Telur yang sering mengandung bakteri Salmonella yg dapat menyebabkan gejala alergi bahkan keracunan adalah telur bebek/itik. Hal ini banyak disebabkan oleh konsumsi telur bebek atau telur yang direbusnya tidak matang.<br><br><b>Gejala:</b><br>Dimulai dengan sakit perut, mual, muntah, panas tubuh meningkat, dan terkadang disertai diare.<br><br><b>Cara mengatasi:</b><br>Agar tidak terjadi risiko alergi terhadap telur, maka sebaiknya bayi baru boleh diberi telur setelah melewati usia 6 bulan. Telur yg diberikan harus matang, baik putih maupun kuningnya. Telur setengah matang baru boleh diberikan setelah bayi berumur 1 tahun.</li><li data-role="list-divider" style="white-space: normal"><b><big>Kacang-kacangan</big></b></li><li style="white-space: normal">Kacang-kacangan, terutama kacang tanah dan hasil olahannya dapat menyebabkan reaksi alergi yang berbahaya yang disebut <i>shock anaphylactic</i> (kejang-kejang), bahkan dapat menyebabkan kematian.<br><br><b>Cara mengatasi:</b><br>bagi mereka yang mempunyai sejarah alergi seperti eksim dan asma, sangat dianjurkan untuk menghindari kacang tanah dan produk olahannya, sampai bayi/anak minimal berusia 3 tahun. Mintalah nasihat dokter terlebih dahulu sebelum memperbolehkan bayi/anak mengonsumsi kacang tanah dalam menu makanannya.</li><li data-role="list-divider" style="white-space: normal"><b><big>Tomat dan Stroberi</big></b></li><li style="white-space: normal">Buah tomat yang mengandung laktin bisa mengakibatkan alergi pada bayi. Selain tomat, sebagian anak juga ada yang alergi terhadap buah stroberi.<br><br><b>Gejala:</b><br>Timbul ruam kulit seperti eksim.<br><br><b>Cara mengatasi:</b><br>Jangan memberikan makanan yang berbahan tomat mentah atau olahan seperti saus tomat, pasta tomat ataupun tomat kemasan. Jika, anak sudah memiliki riwayat alergi tomat, tunda dulu memberikan tomat pada bayi hingga usia 9 bulan.<br><br>Untuk anak yang alergi stroberi, sebaiknya ibu tidak memberikan buah jeruk segar yang berasa masam atau kecut, yogurt buah, labu, dan permen jeruk. Lebih baik memberikan buah pepaya, pisang, alpukat, atau jus apel yang lebih aman untuk tubuh bayi.</li><li data-role="list-divider" style="white-space: normal"><b><big>Ikan Laut</big></b></li><li style="white-space: normal">Ikan adalah makanan yang kaya akan protein yang bisa membentuk kecerdasan pada anak. Tapi sayangnya banyak kasus anak alergi terhadap ikan, khususnya ikan laut, seperti salmon dan jenis makanan laut lainya, misal tuna, salmon, cumi, udang dan kepiting.<br><br><b>Gejala:</b><br>Anak yang alergi makanan laut akan muncul rasa gatal dan bintik kemerahan di kulit.<br><br><b>Cara mengatasi:</b><br>Anda sebaiknya jangan dulu memberi ikan pada bayi sebelum usianya mencapai 6 bulan karena masih dalam masa pemberian ASI eksklusif. Setelah usia bayi Ibu mencapai 8 atau 12 bulan, ikan bisa menjadi bagian dari menu yang seimbang. Alergi makanan karena ikan laut paling mudah terdeteksi karena gejala yang ditimbulkan relatif cepat. Biasanya kurang dari 8 jam keluhan alergi sudah bisa dikenali.</li>\')',[], nullHandler,errorHandler);
+            }
+        }   
+     );
+        tx.executeSql('SELECT * FROM BalitaNutrisiInfoGizi', [], function(transaction, result) 
+        {
+            if (result.rows.length === 0)
+            {
+                tx.executeSql('INSERT INTO BalitaNutrisiInfoGizi(IdGizi, NamaGizi, Keterangan, SumberMakanan) VALUES (1, \'Karbohidrat\', \'Karbohidrat berfungsi sebagai sumber energi, satu gram karbohidrat setara dengan 4 kkal.\', \'<div data-role="collapsible"><h4>Karbohidrat baik</h4><ul data-role="listview" data-inset="false"><li style="white-space: normal">Buah/sayuran tertentu yang berasa manis madu</li><li>Gandum kasar</li><li>Beras merah</li><li>Beras tumbuk</li><li>Kentang</li><li>Pisang</li><li>Jagung</li><li>Sagu, dan lain-lain</li></ul></div><div data-role="collapsible"><h4>Karbohidrat jahat</h4><ul data-role="listview" data-inset="false"><li>Gula pasir</li><li>Gula merah</li><li>Soft drink</li><li>Permen</li><li>Biskuit</li><li>Kue</li><li>Terigu</li><li>Pasta</li><li>Beras putih</li><li>Tepung beras</li><li>Maizena</li><li>Roti</li><li>Mie</li><li>Bihun, dan lain-lain</li></ul></div>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaNutrisiInfoGizi(IdGizi, NamaGizi, Keterangan, SumberMakanan) VALUES (2, \'Lemak\', \'Lemak berfungsi untuk komponen sel-sel syaraf, membran seluler, senyawa menyerupai hormon; pengangkut vitamin A, D, E,K; sumber energi; menjaga kesehatan kulit; melindungi organ-organ  vital tubuh; melindungi tubuh dari kehilangan panas yang berlebihan.\', \'<div data-role="collapsible"><h4>Asam lemak tidak jenuh</h4><ul data-role="listview" data-inset="false"><li>Minyak zaitun</li><li>Minyak jagung</li><li>Minyak bunga matahari</li><li style="white-space: normal">Biji-bijian (baru boleh diberikan pada anak usia di atas 12 bulan)</li></ul></div><div data-role="collapsible"><h4>Asam lemak omega 3/DHA</h4><ul data-role="listview" data-inset="false" ><li>Ikan salmon</li><li>Tuna</li><li>Sarden</li><li>Makarel</li><li>Telur organik</li><li>Wijen</li><li style="white-space: normal">Biji bunga matahari/minyak</li><li style="white-space: normal">Kedelai dan produk olahannya</li></ul></div><div data-role="collapsible"><h4>Asam lemak omega 6/AA/ARA</h4><ul data-role="listview" data-inset="false"><li>Almond</li><li>Kenari</li><li>Alpukat</li><li style="white-space: normal">Kedelai dan produk olahannya</li></ul></div><div data-role="collapsible"><h4>Asam lemak jenuh</h4><ul data-role="listview" data-inset="false"><li style="white-space: normal">Minyak kelapa dan minyak kelapa sawit</li><li>Mentega</li><li style="white-space: normal">Susu <i>whole fat</i> atau produk susu beserta olahannya termasuk keju.</li><li style="white-space: normal">Daging merah</li></ul></div>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaNutrisiInfoGizi(IdGizi, NamaGizi, Keterangan, SumberMakanan) VALUES (3, \'Protein\', \'Fungsi utama protein adalah sebagai bahan dasar pembentukan sel-sel dan jaringan tubuh. Fungsi lainnya yaitu berperan dalam proses pertumbuhan, pemeliharaan, dan perbaikan jaringan tubuh yang rusak, membantu proses pembuatan sel darah merah, serta membantu membentuk anti bodi untuk melawan penyakit dan infeksi.\', \'<div data-role="collapsible"><h4>Protein hewani</h4><ul data-role="listview" data-inset="false"><li style="white-space: normal">Daging sapi</li><li>Daging kambing</li><li>Daging kambing</li><li>Daging domba</li><li>Ikan</li><li>Udang</li><li>Telur</li><li style="white-space: normal">Susu dan produk olahannya</li></ul></div><div data-role="collapsible"><h4>Protein nabati</h4><ul data-role="listview" data-inset="false"><li style="white-space: normal">Kacang kedelai dan produk olahannya</li><li>Kacang almond</li><li>Kacang polong</li><li>Gandum</li></ul></div>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaNutrisiInfoGizi(IdGizi, NamaGizi, Keterangan, SumberMakanan) VALUES (4, \'Vitamin\', \'Vitamin adalah zat-zat organik kompleks yang dibutuhkan dalam jumlah yang relatif kecil dan pada umumnya tidak dapat dibentuk atau disintesis oleh tubuh.\', \'<div data-role="collapsible"><h4>Vitamin A</h4><ul data-role="listview" data-inset="false"><li>Hati</li><li>Kuning Telur</li><li>Minyak ikan</li><li>Wortel</li><li>Brokoli</li><li>Labu kuning</li><li>Kentang</li><li>Mangga</li><li>Pepaya</li><li>Jeruk</li><li>Lemon</li><li>Tomat</li><li>Aprikot</li><li>Peach</li><li>Telur</li><li>Selada air</li><li>Mentega</li><li>Margarin</li><li>Susu penuh</li><li style="white-space: normal"><small>Berperan untuk pertumbuhan tulang, kulit, rambut, dan mata. Serta meningkatkan daya tahan tubuh terhadap infeksi, melindungi tubuh dari serangan jenis kanker tertentu.</small></li></ul></div><div data-role="collapsible"><h4>Vitamin B kompleks</h4><ul data-role="listview" data-inset="false"><li>Biji-bijian</li><li>Kacang-kacangan</li><li>Sayuran hijau</li><li style="white-space: normal">Susu dan produk olahannya</li><li>Telur</li><li>Ikan berlemak</li><li>Daging merah</li><li style="white-space: normal"><small>Terdiri dari vitamin B1 (thiamin), vitamin B2 (riboflavin), vitamin B3 (niacin), vitamin B5 (asam pantotenat), vitamin B6 (piridoksin), vitamin B12 (cianocabalamin), asam folat, dan biotin. Berfungsi untuk mengubah makanan menjadi energi, membantu proses pertumbuhan, menjaga kesehatan sistem saraf, menjaga lambung dan usus tetap sehat, dan menghindari infeksi.</small></li></ul></div><div data-role="collapsible"><h4>Vitamin C</h4><ul data-role="listview" data-inset="false"><li style="white-space: normal">Pada umumnya ditemukan pada sayuran dan buah-buahan.</li><li>Brokoli</li><li>Kol</li><li>Taoge</li><li>Cabai</li><li>Jeruk</li><li>bluberi</li><li>Melon</li><li>Pepaya</li><li>Stroberi</li><li>Tomat</li><li style="white-space: normal"><small>Diperlukan untuk pertumbuhan, kesehatan jaringan tubuh, dan penyembuhan luka serta membantu dalam proses penyerapan zat besi. Selain itu penting untuk mengatur laju basal metabolisme dan menjaga suhu tubuh, membantu pembuluh darah agar tetap elastis dan kuat sehingga mencegah luka memar pada tubuh.</small></li></ul></div><div data-role="collapsible"><h4>Vitamin D</h4><ul data-role="listview" data-inset="false"><li>Minyak ikan</li><li>Ikan berlemak, misal: tuna</li><li>Hati</li><li>Minyak</li><li>Telur</li><li>Margarin</li><li>Susu olahan</li><li style="white-space: normal">Dapat dibuat melalui kulit dengan bantuan sinar ultraviolet/matahari</li><li style="white-space: normal"><small>Bersama dengan kalsium vitamin D berguna dalam pembentukan dan menjaga kesehatan tulang dan gigi.</small></li></ul></div><div data-role="collapsible"><h4>Vitamin E</h4><ul data-role="listview" data-inset="false"><li>Telur</li><li>Minyak</li><li>Sayuran</li><li>Margarin</li><li>Tepung gandum</li><li>Kentang</li><li>Sayuran hijau daun</li><li>Alpukat</li><li>Kacang-kacangan</li><li style="white-space: normal"><small>Penting untuk proses metabolisme, menjaga kesehatan kulit dan otot, melindungi lemak dan zat-zat yang terkandung di dalamnya dari kerusakan dan komposisi struktur sel. Selain itu, membantu membuat dan memelihara sel darah merah.</small></li></ul></div><div data-role="collapsible"><h4>Vitamin K</h4><ul data-role="listview" data-inset="false"><li>Sayuran hijau</li><li>Kol</li><li>Kacang polong</li><li>Kentang</li><li>Hati</li><li>Tomat</li><li>Yoghurt</li><li>Daging</li><li>Telur</li><li>Susu</li><li>Kacang-kacangan</li><li style="white-space: normal"><small>Berguna untuk pembentukan darah dan pertumbuhan tulang, membantu proses penyerapan di dalam usus, menghindari penyakit jantung dan menghentikan pendarahan.</small></li></ul></div>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaNutrisiInfoGizi(IdGizi, NamaGizi, Keterangan, SumberMakanan) VALUES (5, \'Mineral\', \'Mineral merupakan bagian yang memegang peranan penting dalam pemeliharaan fungsi tubuh, baik pada tingkat sel, jaringan, organ maupun fungsi tubuh secara keseluruhan. Disamping itu mineral berperan dalam berbagai tahap proses metabolisme, terutama sebagai kofaktor dalam aktifitas enzim-enzim.\', \'<div data-role="collapsible"><h4>Kalsium (Ca)</h4><ul data-role="listview" data-inset="false"><li style="white-space: normal">Susu dan produk olahannya</li><li>Ikan</li><li>Buah Kering</li><li>Roti dan tepung</li><li>Brokoli</li><li>Kacang polong</li><li style="white-space: normal"><small>Kalsium diperlukan gar tulang dan gigi menjadi kuat, menjaga keseimbangan cairan tubuh, membantu proses pembekuan darah, membantu penyerapan vitamin B12, serta penting untuk perkembangan sel-sel saraf dan otak.</small></li></ul></div><div data-role="collapsible"><h4>Zat besi (Fe)</h4><ul data-role="listview" data-inset="false"><li>Hati</li><li>Ginjal</li><li>Daging merah</li><li>Minyak ikan</li><li>Kuning telur</li><li>Sereal gandum utuh</li><li>Kacang polong</li><li>Sayuran berdaun hijau</li><li>Cokelat</li><li style="white-space: normal"><small>Diperlukan untuk pembentukan sel darah merah, kesehatan darah dan otot, serta penting untuk mencegah infeksi.</small></li></ul></div><div data-role="collapsible"><h4>Seng (Zn)</h4><ul data-role="listview" data-inset="false"><li>Kacang-kacangan</li><li>Daging merah</li><li>Ikan</li><li>Telur</li><li>Gandum</li><li>Bawang</li><li style="white-space: normal"><small>Diperlukan untuk pembentukan enzim maupun protein. Serta diperlukan untuk memperlancar peredaran vitamin A dan cadangannya dari hati ke aliran darah.</small></li></ul></div><div data-role="collapsible"><h4>Fosfor (P)</h4><ul data-role="listview" data-inset="false"><li style="white-space: normal">Kacang-kacangan dan olahannya</li><li>Daging merah</li><li>Ikan</li><li>Telur</li><li>Gandum</li><li>Ayam</li><li style="white-space: normal">Susu dan olahannya</li><li>Serealia</li><li style="white-space: normal"><small>Berperan dalam mengatur pengalihan energi, keseimbangan asam-basa, absorpsi dan transportasi zat gizi, serta membantu proses pengerasan tulang dan gigi.</small></li></ul></div><div data-role="collapsible"><h4>Magnesium (MG)</h4><ul data-role="listview" data-inset="false"><li>Daging merah</li><li>Kacang-kacangan</li><li>Biji-bijian</li><li>Sayuran hijau</li><li style="white-space: normal">Susu dan olahannya</li><li>Serealia tumbuk</li><li style="white-space: normal"><small>Berperan dalam mencegah kerusakan gigi, membantu dalam proses metabolisme tubuh, transmisi syaraf, kontraksi otot dan pembekuan darah.</small></li></ul></div><div data-role="collapsible"><h4>Iodium (I)</h4><ul data-role="listview" data-inset="false"><li style="white-space: normal">Pada umunya terdapat pada makanan laut</li><li>Ikan</li><li>Udang</li><li>Kerang</li><li>Ganggang laut</li><li style="white-space: normal"><small>Berperan dalam mengatur pertumbuhan dan perkembangan, membantu mengatur suhu tubuh, pembentukan sel darah merah, membantu dalam proses sintesis protein, absorpsi karbohidrat dan sintesis kolesterol darah.</small></li></ul></div><div data-role="collapsible"><h4>Selenium (SE)</h4><ul data-role="listview" data-inset="false"><li>Makanan laut</li><li>Hati</li><li>Ginjal</li><li>Daging merah</li><li>Ayam</li><li>Serealia</li><li>Biji-bijian</li><li>Kacang-kacangan</li><li style="white-space: normal"><small>Berperan sebagai antioksidan yang dapat melindungi membran sel dari kerusakan oksidatif sehingga berpontensi untuk mencegah penyakit kanker (antikanker) dan penyakit degeneratif lainnya.</small></li></ul></div>\')',[], nullHandler,errorHandler);
+            }
+        }
+     );
+    },errorHandler, function() {
+        var content = "";
+        $( '#balitaTabelNutrisiInfo' ).html( "" );
+        db.transaction( function( tx ) {
+            tx.executeSql('SELECT * FROM BalitaNutrisiInfo', [], function(transaction, result) {
+                for ( var i = 0; i < result.rows.length; i++ ) {
+                    var row = result.rows.item( i );
+                    content += '<div data-role="collapsible"><h4>' + row.Judul + '</h4><ul data-role="listview" data-inset="false">' + row.Konten + '</ul></div>';
+                }
+                $( '#balitaTabelNutrisiInfo' ).append( content );
+            }, errorHandler );
+        }, errorHandler, function() {
+            var content2 = '<div data-role="collapsible"><h4>Zat Gizi</h4><ul data-role="listview" data-inset="false">';
+            db.transaction( function( tx ) {
+                tx.executeSql('SELECT * FROM BalitaNutrisiInfoGizi', [], function(transaction, result) {
+                    for ( var i = 0; i < result.rows.length; i++ ) {
+                        var row = result.rows.item( i );
+                        content2 += '<li><a href="#balita-' + row.NamaGizi.toLowerCase() + '">' + row.NamaGizi + '</a></li>';
+                        $( '#balitaKonten' + row.NamaGizi ).html( '<b>' + row.NamaGizi + '</b><p>' + row.Keterangan + '</p><b>Sumber makanan:</b><div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan" id="balitaTabelNutrisi' + row.NamaGizi + '">' + row.SumberMakanan + '</div>' );
+                    }
+                    $( '#balitaTabelNutrisiInfo' ).append( content2 + '</ul></div>' );
+                }, errorHandler );
+            }, errorHandler, nullHandler );
+        } );
+    } );
+}
+
+function balita_insert_perkembangan()
+{
+    db.transaction(function(tx) 
+    {  
+        tx.executeSql('SELECT * FROM BalitaPerkembangan', [], function(transaction, result) 
+        {
+            if (result.rows.length === 0)
+            {
+                tx.executeSql('INSERT INTO BalitaPerkembangan(Waktu, Konten) VALUES (\'1\', \'<li>Keterampilan Utama<p style="white-space: normal">Menunjukkan perilaku pemicu kasih sayang, menangis, meringkuk, mendekut</p></li><li>Keterampilan Motorik Kasar<p style="white-space: normal">Terbaring seperti ketika masih di dalam rahim</p><p>Ototnya seperti pegas</p><p>Kepala sedikit diangkat</p><p style="white-space: normal">Otot terkadang kejang kaki tidak merasakan berat</p></li><li style="white-space: normal">Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri<p style="white-space: normal">Tangan terkepal erat</p><p style="white-space: normal">Tidak dapat menggenggam giring-giring</p></li><li>Keterampilan Berbahasa dan Sosial<p style="white-space: normal">Menangis karena meminta sesuatu</p><p style="white-space: normal">Mendengkur dengan suara tenggorokan</p><p style="white-space: normal">Tersenyum-senyum</p><p style="white-space: normal">Menangis disaat tidur</p><p style="white-space: normal">Mengenali orang tuanya sebagai "si suara asing"</p><p style="white-space: normal">Penglihatan paling baik berjarak 8-10 inci dan masih buram</p><p style="white-space: normal">Tidur, bangun, makan secara tidak menentu</p></li><li>Keterampilan Kognitif (Berpikir)<p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p><p style="white-space: normal">Tingkah lakunya lebih sering dilakukan secara refleks (otomatis) dibandingkan dengan berpikir dulu</p><p style="white-space: normal">Mengantisipasi bahwa dengan hilangnya stres akan diikuti dengan kenyamanan</p><p style="white-space: normal">Mulai belajar mempercayai</p></li><li>Tips<p style="white-space: normal"><b>Kiat untuk mempertahankan perhatian visual bayi:</b></p><p style="white-space: normal">Dudukkan atau pegang tubuh bayi dalam posisi tegak, tunggu bayi hingga dalam keadaan diam, pegang objek atau wajah dalam jarak dalam jarak sekitar 25cm dari wajah bayi, gunakan gerakan wajah yang lucu (mulut dan mata terbuka lebar) sambil berbicara perlahan, berirama, serta nada yang dilebih-lebihkan</p><p style="white-space: normal">*bayi yang baru lahir suka melihat wajah, terutama yang ia kenal.</p></li>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaPerkembangan(Waktu, Konten) VALUES (\'2\', \'<li>Keterampilan Utama<p style="white-space: normal">Terhubung secara visual dengan orang tua</p></li><li>Keterampilan Motorik Kasar<p style="white-space: normal">Lengan dan kaki rilaks direnggangkan ke luar</p><p style="white-space: normal">Kepala diangkat setinggi 45 derajat</p><p style="white-space: normal">Kepala masih terhuyung bila digendong dalam keadaan duduk</p><p style="white-space: normal">Kekejangan otot berkurang</p></li><li style="white-space: normal">Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri<p style="white-space: normal">Sebagian jari tangan mulai membuka</p><p style="white-space: normal">Pukulan dilayangkan tanpa arah</p><p style="white-space: normal">Mulai dapat menggenggam giring-giring</p></li><li>Keterampilan Berbahasa dan Sosial<p style="white-space: normal">Mendekut, menjerit, mendenguk</p><p style="white-space: normal">Membuat suara seperti sedang minum, dada berbunyi</p><p style="white-space: normal">Tersenyum dengan responsif</p><p style="white-space: normal">Menunjukkan emosi: kesenangan, tidak adanya tekanan</p><p style="white-space: normal">Membaca suasana hati: sedih bila orangtua tidak memiliki suasana hati yang bagus</p><p style="white-space: normal">Menyibukkan diri sendiri dengan ibu jari</p><p style="white-space: normal">Mengadakan kontak mata, mengamati wajah</p><p style="white-space: normal">Samar-samar meniru mimik wajah</p><p style="white-space: normal">Memerhatikan orang yang bergerak</p><p style="white-space: normal">Menangis bila diturunkan dari gendongan</p></li><li>Keterampilan Kognitif (Berpikir)<p style="white-space: normal">Menunjukkan perangai untuk mengajak: senang berkomunikasi, protes bila kebutuhannya tidak terpenuhi</p><p style="white-space: normal">Memberi isyarat, melihat tanggapan, memercayai keduanya</p><p style="white-space: normal">Membuat asosiasi: tangisan-digendong atau diberi makan</p></li><li>Tips<p style="white-space: normal"><b>Apa yang suka dilihat oleh bayi:</b></p><p style="white-space: normal">Wajah anda (selalu menjadi favoritnya), kekontrasan (terutama hitam dan putih), siluet, sesuatu yang bergerak khususnya dengan desain yang kontras hitan dan putih, kipas dan kayu di langit-langit.</p><p style="white-space: normal"><b>Kiat untuk berbicara dengan bayi anda:</b></p><p style="white-space: normal">1. Pandanglah mata bayi anda sebelum memulai percakapan.</p><p style="white-space: normal">2. Panggil bayi anda dengan menggunakan namanya.</p><p style="white-space: normal">3. Perjelas huruf vokal, contoh "baaaayi caaantik".</p><p style="white-space: normal">4. Gunakan "mama" dan "papa" untuk menyebutkan diri anda.</p><p style="white-space: normal">5. Asosiasikan ucapan dengan sikap tubuh.</p><p style="white-space: normal">6. Bicarakan hal yang sedang anda lakukan, misalnya saat sedang memandikan bayi anda "sekarang mama buka dulu ya bajunya ... sekarang pakai sabun ...".</p><p style="white-space: normal">7. Setelah berbicara berikan bayi anda waktu untuk meresponsnya, perhatikan pula sinyal yang diberikan oleh bayi anda apakah anda harus melanjutkannya atau berhenti.</p></li>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaPerkembangan(Waktu, Konten) VALUES (\'3\', \'<li>Keterampilan Utama<p style="white-space: normal">Memainkan tangan</p></li><li>Keterampilan Motorik Kasar<p style="white-space: normal">Lengan dan kaki digerakkan secara sempurna; dapat membuat gerakan bebas dan memutar</p><p style="white-space: normal">Kepala diangkat lebih tinggi daripada punggung, seperti mencari sesuatu</p><p style="white-space: normal">Mulai merasakan beban pada kaki</p><p style="white-space: normal">Kepala bisa diangkat hingga tegak saat digendong</p><p style="white-space: normal">Dari posisi telentang berguling ke samping</p></li><li style="white-space: normal">Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri<p style="white-space: normal">Tangan terbuka seperti mengajak</p><p style="white-space: normal">Dapat membuat gerakan-gerakan seperti memukul, lebih banyak meleset daripada mengenai sasaran</p><p style="white-space: normal">Sudah dapat menggenggam dan menggoyangkan giring-giring lebih lama</p><p style="white-space: normal">Dapat menghisap ibu jari dan meninjuk</p><p style="white-space: normal">Bermain dengan tangan, tepuk tangan</p></li><li>Keterampilan Berbahasa dan Sosial<p style="white-space: normal">Membuat suara-suara: "aah, eee, oooh"</p><p style="white-space: normal">Membuat suara yang lebih keras, memekik</p><p style="white-space: normal">Tangisannya berbeda untuk kebutuhan yang berbeda, membuat jeda disela-sela tangisan</p><p style="white-space: normal">Mulai tertawa</p></li><li>Keterampilan Kognitif (Berpikir)<p style="white-space: normal">Mempelajari sebab dan akibat: mendorong mobil-mobilan dan bergerak!</p><p style="white-space: normal">Mempelajari kompetensi: bisa menyebabkan orang bereaksi dengan senyum, tangisan, bahasa tubuh</p></li><li>Tips<p style="white-space: normal"><b>Kiat untuk memilih mainan untuk bayi anda:</b></p><p style="white-space: normal">1. Ringan dan mudah digenggam.</p><p style="white-space: normal">2. Hitam dan putih atau warna yang kontras.</p><p style="white-space: normal">3. Berbahan plastik.</p><p style="white-space: normal">4. Mainan yang tidak dapat ditelan dan tidak memiliki bagian yang tajam atau bagian yang dapat dilepaskan.</p><p style="white-space: normal"><b>Kiat sikap tubuh bayi untuk merangsang permainan tangan:</b></p><p style="white-space: normal">Bayi harus berada pada posisi semi tegak pada gendongan anda atau pada kursi bayi. Pada saat mengangkat bayi anda pada posisi tersebut pastikan bahwa wajahnya akan menghadap ke depan. Sikap badan yang semi-tegak mendorong lengan dan tangan untuk bergerak bersama-sama, sehingga merangsang bayi untuk bermain dengan tangannya atau dengan mainan yang ada dihadapannya. Hal tersebut akan membantu bayi untuk melatih keseimbangannya.</p></li>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaPerkembangan(Waktu, Konten) VALUES (\'4\', \'<li>Keterampilan Utama<p style="white-space: normal">Menunjukkan pengamatan visual yang akurat</p></li><li>Keterampilan Motorik Kasar<p style="white-space: normal">Berdiri dengan berpegangan</p><p style="white-space: normal">Duduk bertumpu pada lengan</p><p style="white-space: normal">Kepala diangkat hingga 90 derajat, dan dapat menengokkan kepala hingga 180 derajat</p><p style="white-space: normal">Bersandar pada siku</p><p style="white-space: normal">Dari posisi telungkup berguling ke samping</p></li><li style="white-space: normal">Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri<p style="white-space: normal">Bisa memeluk dengan dua tangan</p><p style="white-space: normal">Dapat menjangkau secara tepat mainan yang memiliki benang atau sesuatu yang menjuntai</p><p style="white-space: normal">Mengamati pakaian, memegang dada ibu</p><p style="white-space: normal">Menggenggam seperti menggunakan sarung tangan</p></li><li>Keterampilan Berbahasa dan Sosial<p style="white-space: normal">Mengubah bentuk mulut untuk membuat suara: "ah-oh"</p><p style="white-space: normal">Meniup gelembung, bercakap dengan lantang, tertawa geli kalau dikelitiki</p><p style="white-space: normal">Sikap sosial: mengangkat lengan sebagai isyarat "gendonglah aku"</p><p style="white-space: normal">Penglihatan binokular berkembang: presepsi yang lebih baik, melihat dengan sungguh-sungguh, mengamati dengan akurat</p></li><li>Keterampilan Kognitif (Berpikir)<p style="white-space: normal">Membentuk gambaran mental tentang hal yang ia harapkan apabila memberi isyarat (contohnya disusui)</p><p style="white-space: normal">Tahu bahwa orang dan benda itu memiliki nama</p></li><li>Tips<p style="white-space: normal"><b>Melatih keterampilan visual:</b></p><p style="white-space: normal">Permainan saling menatap; ketika bayi sedang diam, tangkaplah perhatiannya dengan menempatkan posisi pandangan. Miringkan kepala anda secara perlahan. Amati bahwa bayi anda akan memiringkan kepalanya juga. Putarlah tubuhnya, dan lihatlah bahwa ia akan memutar kepalanya untuk tetap dapat melihat wajah anda.</p></li>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaPerkembangan(Waktu, Konten) VALUES (\'5\', \'<li>Keterampilan Utama<p style="white-space: normal">Meraih sesuatu dengan tepat</p></li><li>Keterampilan Motorik Kasar<p style="white-space: normal">Duduk bertumpu pada lantai dan bantal di atas kursi bayi</p><p style="white-space: normal">Berdiri, berpegangan hanya untuk menjaga keseimbangan</p><p style="white-space: normal">Berguling ke belakang</p><p style="white-space: normal">Perut digerak-gerakkan: seperti pesawat terbang</p><p style="white-space: normal">Seperti posisi push-up: dada dan sebagian perut diangkat dari lantai</p><p style="white-space: normal">Bergoyang maju sejauh beberapa meter</p><p style="white-space: normal">Leher dijulurkan ke depan untuk melihat benda</p><p style="white-space: normal">Jari kaki dapat dijangkau</p></li><li style="white-space: normal">Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri<p style="white-space: normal">Dapat meraih dengan satu tangan-sudah cukup pandai melakukannya</p><p style="white-space: normal">Mainan dapat dipindahkan dengan muda dari tangan yang satu ke tangan yang lain dan ke mulut</p><p style="white-space: normal">Mulai bermain dengan balok-balok</p></li><li>Keterampilan Berbahasa dan Sosial<p style="white-space: normal">Mengumumkan "ba-ba-ba" untuk mendapatkan perhatian</p><p style="white-space: normal">Menengok ke arah orang yang berbicara</p><p style="white-space: normal">Berusaha meniru suara, infleksi, dan sikap tubuh</p><p style="white-space: normal">Memerhatikan gerakan mulut menyuarakan bunyi yang berbeda untuk kebutuhan yang berbeda</p><p style="white-space: normal">Menunjukkan minat dini terhadap makanan padat</p><p style="white-space: normal">Menunjukkan ketertarikan pada warna</p></li><li>Keterampilan Kognitif (Berpikir)<p style="white-space: normal">Mempelajari suara dan mimik wajah yang akan ditanggapi orang</p><p style="white-space: normal">Menunjukkan ekspresi pengambilan keputusan sewaktu bermain-main dengan tangannya</p><p style="white-space: normal">Mencari tahu objek dan mengubah bentuk tangan untuk mengakomodasi bentuk objek sebelum melakukan kontak</p><p style="white-space: normal">Menggunakan tangan untuk mendorong lengan anda apabila anda memberinya obat</p></li>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaPerkembangan(Waktu, Konten) VALUES (\'6\', \'<li>Keterampilan Utama<p style="white-space: normal">Duduk</p></li><li>Keterampilan Motorik Kasar<p style="white-space: normal">Duduk sendiri dengan sempurna, menggunakan lengan agar seimbang dan tidak jatuh, dapat merosot ke depan</p><p style="white-space: normal">Duduk di kursi bayi</p><p style="white-space: normal">Berdiri dengan berpegangan</p><p style="white-space: normal">Berguling-guling</p><p style="white-space: normal">Jari kaki dan tangan digunakan untuk menggerakkan mainan</p></li><li style="white-space: normal">Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri<p style="white-space: normal">Meraih dengan tepat</p><p style="white-space: normal">Menunjuk mainan</p><p style="white-space: normal">Memanipulasi permainan menggunakan balok-balok</p><p style="white-space: normal">Menggunakan seluruh tangan untuk mengait dan mengambil benda kecil dengan cara dijumput</p></li><li>Keterampilan Berbahasa dan Sosial<p style="white-space: normal">Menjulurkan tangan lebih panjang dengan suara yang lebih bervariasi</p><p style="white-space: normal">Bereksperimen dengan pola tangga nada dan volume suara yang baru serta memerhatikan reaksi yang terjadi</p><p style="white-space: normal">Senang akan suara dan bahasa tubuh: berteriak, tertawa perut, menepuk lengan, mendengkur, menggeram, bermuka sedih</p><p style="white-space: normal">Meniru sikap wajah dengan lebih baik</p></li><li>Keterampilan Kognitif (Berpikir)<p style="white-space: normal">Menunjukkan "ketertarikan" yang lebih tinggi selama bermain: mencoba mencari tahu cara mengambil balok ketiga dengan kedua tangan yang telah penuh dengan balok</p><p style="white-space: normal">Menghabiskan waktu lebih lama untuk mempelajari mainan dan memahami tindakan yang harus dilakukan dengan mereka</p></li><li>Tips<p style="white-space: normal"><b>Tips untuk membatu bayi yang baru bisa duduk:</b></p><p style="white-space: normal">Letakkan bantal di sekeliling bayi untuk menjaga agar bayi tidak jatuh ke samping atau ke belakang. Gunakan interaksi dengan mainan untuk melatih keseimbangan bayi. Bayi akan menggunakan tangannya untuk meraih mainan sehingga bayi yang baru bisa duduk "lupa" untuk menggunakan tangannya sebagai penjaga keseimbangan.</p></li>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaPerkembangan(Waktu, Konten) VALUES (\'6-9\', \'<li>Keterampilan Utama<p style="white-space: normal">Merangkak, menjumput dengan jari-jarinya</p></li><li>Keterampilan Motorik Kasar<p style="white-space: normal">Duduk tegak tanpa ditopang</p><p style="white-space: normal">Badan condong ke depan untuk meraih mainan</p><p style="white-space: normal">Merangkak dengan tangan dan lutut</p><p style="white-space: normal">Berputar pada sumbu</p><p style="white-space: normal">Mendorong badan ke atas sampai berdiri</p><p style="white-space: normal">Berdiri berpegangan  pada perabotan</p></li><li style="white-space: normal">Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri<p style="white-space: normal">Mengambil objek kecil dengan ibu jari dan telunjuk</p><p style="white-space: normal">Makan sendiri (berantakan)</p><p style="white-space: normal">Menyambar mainan yang bergerak, menjatuhkan dan memerhatikan jatuhnya mainan</p><p style="white-space: normal">Minum dari gelas</p></li><li>Keterampilan Berbahasa dan Sosial<p style="white-space: normal">Menggumamkan kombinasi acak vokal dan konsonan ("ah, da, ma, ba, di, mu") serta mengocehkan suara-suara tersebut secara bersamaan</p><p style="white-space: normal">Menambah gerakan lidah untuk mengubah suara: "ah-da"</p><p style="white-space: normal">Terus merespons bila namanya disebut</p><p style="white-space: normal">Gerakan sosial: menggunakan lengan untuk mengajak pengasuh bermain, mengangkat lengan sebagai tanda, "gendonglah aku"</p></li><li>Keterampilan Kognitif (Berpikir)<p style="white-space: normal">Memberikan label: mengasosiasikan gambaran dalam otak dengan bahasa dan gambar (contohnya: "kucing")</p><p style="white-space: normal">Mengembangkan konsep "masuk" dan "keluar" - memerhatikan bagaimana wadah yang lebih kecil bisa masuk ke yang lebih besar</p><p style="white-space: normal">Menunjukkan keinginan yang aneh</p></li><li>Tips<p style="white-space: normal"><b>Permainan untuk merangsang keterampilan merangkak dan mengambil sesuatu dengan jari telunjuk</b></p><p style="white-space: normal">1. Bermain bola</p><p style="white-space: normal">Gunakan bola yang cukup besar untuk dipegang dengan menggunakan kedua tangan, lebih baik yang berbahan busa atau kain sehingga bayi dapat memegangnya dengan satu tangan.</p><p style="white-space: normal">2. Bermain dengan cermin</p><p style="white-space: normal">Dudukkan bayi di depan cermin sehingga bayi dapat memegang bayangannya. Perhatikan bayi yang mencoba menyesuaikan tangan dan wajahnya dengan bayangan di cermin.</p><p style="white-space: normal">3. Permainan berguling</p><p style="white-space: normal">Tengkurapkan bayi anda diatas guling, lalu taruh mainan pada jarak yang dapat dijangkaunya. Perhatikan tumpuan yang dilakukan bayi untuk mendorong dan menggulingkan tubuhnya ke depan dalam usahanya menjangkau mainan.</p></li>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaPerkembangan(Waktu, Konten) VALUES (\'9-12\', \'<li>Keterampilan Utama<p style="white-space: normal">Merangkak, tidak hanya diam ditempat</p></li><li>Keterampilan Motorik Kasar<p style="white-space: normal">Semakin pandai merangkak</p><p style="white-space: normal">Dapat mengubah posisi dari duduk menjadi merangkak</p><p style="white-space: normal">Merambat dan memanjat perabotan</p><p style="white-space: normal">Merangkak menaiki tangga, belum bisa menuruninya</p><p style="white-space: normal">Berkeliling disekitar perabotan</p><p style="white-space: normal">Berdiri tanpa berpegangan</p><p style="white-space: normal">Berjalan dengan dipegangi si penuntun</p><p style="white-space: normal">Langkah pertama masih kaku, belum tegap, lebar-lebar, kadang terjatuh</p></li><li style="white-space: normal">Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri<p style="white-space: normal">Menggenggam erat</p><p style="white-space: normal">Menunjuk dan mencongkel dengan jari telunjuk</p><p style="white-space: normal">Mengubah bentuk tangan untuk menyesuaikan bentuk objek</p><p style="white-space: normal">Menumpuk dan menjatuhkan balok-balok</p><p style="white-space: normal">Menunjukkan dominasi tangan</p></li><li>Keterampilan Berbahasa dan Sosial<p style="white-space: normal">Membuat suara dua suku kata ("ma-ma, da-da") dan mengasosiasikannya dengan orang yang tepat</p><p style="white-space: normal">Mengerti kata "tidak"</p><p style="white-space: normal">Membuat suara-suara tiruan: batuk, menjentikkan lidah</p><p style="white-space: normal">Mengerti sikap tubuh: lambaian perpisahan</p></li><li>Keterampilan Kognitif (Berpikir)<p style="white-space: normal">Menunjukkan ingatannya akan kejadian yang baru berlalu</p><p style="white-space: normal">Kata-kata isyarat memicu gambaran mental dari kegiatan yang ia harapkan: "pergi ..."-melihat ke arah pintu</p><p style="white-space: normal">Ingat letak mainannya ketika tertutupi</p><p style="white-space: normal">"Mama datang" memicu gambaran mental tentang mama-berhenti menangis</p>  <p style="white-space: normal">Menunjukkan kegelisahan akibat perpisahan</p>  </li><li>Tips<p style="white-space: normal"><b>Membantu bayi belajar berjalan</b></p><p style="white-space: normal">Pegang kedua tangan bayi, asosiasikan bayi diantara kaki anda atau disamping. Secara bertahap, lepaskan salah satu tangannya lalu yang lainnya juga. Setelah bayi berdiri sendiri berdirilah sejauh satu kaki dihadapannya, ulurkan tangan anda seolah memanggilnya ke arah anda.</p><p style="white-space: normal"><b>Aktifitas untuk melatih kecakapan tangan bayi</b></p><p style="white-space: normal">1. Berikan gelas plastik atau kotak sepatu kepada bayi. Lalu berikan balok dan cermati cara bayi memperkenalkan balok dengan wadahnya. Tangan dan pikiran bekerja sama untuk mencari tahu bagaimana meletakkan balok ke dalam kotak dan mengeluarkannya. Setelah menguasainya bayi akan menggoyang wadah dan mendengarkan balok yang bergerak di dalam.</p><p style="white-space: normal">2. Berikan panci dan baskom. Bayi suka menaruh baskom kecil ke dalam baskom yang besar serta suara bantingan ketika terjatuh.</p><p style="white-space: normal">3. Mengisi dan menuang air. Air yang diambil dan ditumpahkan sehingga menghasilkan percikan merupakan permainan favorit bayi. </p></li>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaPerkembangan(Waktu, Konten) VALUES (\'12-15\', \'<li>Keterampilan Utama<p style="white-space: normal">Berjalan</p></li><li>Keterampilan Motorik Kasar<p style="white-space: normal">Belajar berjalan sendiri</p><p style="white-space: normal">Mencoba bermacam-macam gaya berjalan</p><p style="white-space: normal">Menaiki tangga dan turun</p><p style="white-space: normal">Mencoba memanjat kursi bayi</p><p style="white-space: normal">Melakukan gerakan bangun-dan-jalan: merangkak, berjongkok, berdiri, dan berjalan</p></li><li style="white-space: normal">Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri<p style="white-space: normal">Menggunakan peralatan: sikat gigi, sisir, telepon, membuka laci dan memindahkan isinya</p><p style="white-space: normal">Mencocokkan silinder dengan tutupnya</p><p style="white-space: normal">Melempar bola dengan tangan</p><p style="white-space: normal">Lebih mudah bila dipakaikan baju</p><p style="white-space: normal">Makan sendiri, memegang botol</p></li><li>Keterampilan Berbahasa dan Sosial<p style="white-space: normal">Mengucapkan empat hingga enam kata yang dapat dimengerti</p><p style="white-space: normal">Menggunakan kata yang mangandung huruf b, c, d, g</p><p style="white-space: normal">Mengucapkan kata secara terpisah: "cing" untuk "kucing"</p><p style="white-space: normal">Mengatakan dan membuat sikap tubuh: "tidak" dan menggelengkan kepala</p><p style="white-space: normal">Meminta bantuan dengan menunjuk dan membuat suara-suara</p><p style="white-space: normal">Mengenali nama dan menunjuk orang yang ia kenal</p><p style="white-space: normal">Mengerti dan mengikuti satu macam perintah: "lemparkan bolanya ke ayah"</p><p style="white-space: normal">Tertawa saat melihat gambar yang lucu</p></li><li>Keterampilan Kognitif (Berpikir)<p style="white-space: normal">Kosa kata bertambah dan berkembangnya pikiran membuat kenangan lebih mudah terbentuk</p><p style="white-space: normal">Mengasosiakan orang dan benda yang dikenal dengan kata-kata yang diucapkan untuk mereka</p><p style="white-space: normal">Memberikan impresi bahwa kata-kata dan sikap tubuh memicu pikiran-pikirannya</p><p style="white-space: normal">Mulai mempelajari cara mencocokkan sesuatu: mencoba untuk mencocokkan tutup suatu benda, menumpuk balok</p></li><li>Tips<p style="white-space: normal"><b>Melatih anak berjalan</b></p><p style="white-space: normal">Berdiri di hadapan anak anda, pegang bola di tangan anda dan biarkan anak juga memegang bola tersebut. Mulailah berjalan mundur, hal tersebut akan menyebabkan anak anda ikut berjalan.</p><p style="white-space: normal">berikan mainan yang dapat ditarik atau didorong, misal: kereta dorong.</p></li>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaPerkembangan(Waktu, Konten) VALUES (\'15-18\', \'<li>Keterampilan Utama<p style="white-space: normal">Mengerti bahasa yang sederhana</p></li><li>Keterampilan Motorik Kasar<p style="white-space: normal">Berjalan berbelok, mundur, berputar</p><p style="white-space: normal">Berjalan lebih cepat, berlari-lari kecil, melompat-lompat</p><p style="white-space: normal">Berhenti dan membungkuk untuk memungut mainan</p><p style="white-space: normal">Memanjat perabotan, mencoba untuk memanjat keluar dari ranjangnya</p><p style="white-space: normal">Mengendarai mainan beroda empat</p><p style="white-space: normal">Mencoba menendang bola, sering meleset</p><p style="white-space: normal">Mencari posisi sendiri diatas kursi</p></li><li style="white-space: normal">Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri<p style="white-space: normal">Menuliskan kalimat acak dan menggambar separuh lingkaran</p><p style="white-space: normal">Membuka laci</p><p style="white-space: normal">Menurut bila dipakaikan baju</p><p style="white-space: normal">Melempar bola dengan seluruh kekuatan lengannya</p><p style="white-space: normal">Mengonsumsi makanan berkuah</p></li><li>Keterampilan Berbahasa dan Sosial<p style="white-space: normal">Mengatakan 10-20 kata yang bisa dimengerti</p><p style="white-space: normal">Menggunakan kata yang lengkap: "cing" menjadi "kucing"</p><p style="white-space: normal">Menggabungkan dua kata bersama-sama</p><p style="white-space: normal">Membentuk kalimat pertama</p><p style="white-space: normal">Menanggapi permintaan verbal tanpa diikuti bahasa tubuh</p><p style="white-space: normal">Mengobrol dan meniru perkataan</p><p style="white-space: normal">Mengerti kata-kata: naik, turun, mati, panas</p><p style="white-space: normal">Menggunakan kata-kata untuk meminta: "num-num" atau "ba-ba"</p><p style="white-space: normal">Mengerti kata "yang lain"</p><p style="white-space: normal">Menggunakan isyarat "shhh" untuk "diam"</p></li><li>Keterampilan Kognitif (Berpikir)<p style="white-space: normal">Mengamati bermacam bentuk, menyusun gelang-gelang</p><p style="white-space: normal">Belajar dengan menjelajahi seisi rumah</p><p style="white-space: normal">Mengenali gambar yang dikenal pada buku: "cari seekor kucing"</p><p style="white-space: normal">Mencocokkan batang yang bundar dengan lubang yang bundar</p><p style="white-space: normal">Kegelisahan akan perpisahan berkurang: dapat membayangkan gambaran mental dari seseorang ketika mereka tidak terlihat</p></li>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaPerkembangan(Waktu, Konten) VALUES (\'18-24\', \'<li>Keterampilan Utama<p style="white-space: normal">Mencari tahu sebelum bertindak, mengerti bahasa sehari-hari</p></li><li>Keterampilan Motorik Kasar<p style="white-space: normal">Berlari, mencoba untuk melarikan diri dari si pengasuh</p><p style="white-space: normal">Melihat ke bawah untuk menghindari rintangan</p><p style="white-space: normal">Meloncat-loncat ditempat dan mundur</p><p style="white-space: normal">Mengayuh pedal sepeda pertamanya</p><p style="white-space: normal">Menendang bola tanpa terjatuh</p><p style="white-space: normal">Bisa memanjat keluar dari ranjangnya</p><p style="white-space: normal">Menaiki tangga tanpa bantuan, kedua kaki pada tiap anak tangga, bisa saja meminta tolong untuk turun</p><p style="white-space: normal">Membuka pintu</p></li><li style="white-space: normal">Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri<p style="white-space: normal">Membuka bungkusan</p><p style="white-space: normal">Melepaskan baju, mencuci tangan</p><p style="white-space: normal">Memasang tutup kotak sepatu</p><p style="white-space: normal">Membangun menara yang terdiri dari enam buah balok</p><p style="white-space: normal">Meremas kertas, menyelesaikan <i>puzzle</i> yang mudah</p><p style="white-space: normal">Melempar bola dengan ayunan tangan yang tinggi</p><p style="white-space: normal">Duduk dikursi tanpa bantuan</p></li><li>Keterampilan Berbahasa dan Sosial<p style="white-space: normal">Mengatakan 20-25 kata-kata yang bisa dimengerti</p><p style="white-space: normal">Mencoba kata-kata multi suku kata: "Ben-ben-ben" untuk "Benjamin"</p><p style="white-space: normal">Menjawab: "apa yang dikatakan anjing itu?"</p><p style="white-space: normal">Membuat kalimat yang terdiri dari tiga kata, seperti dalam telegram: "kami mau lagi"</p><p style="white-space: normal">Biasanya "becicara sedikit, tetapi mengerti semuanya"</p><p style="white-space: normal">Suka kata-kata yang menantang ("helikopter", "dinosaurus"), dengan sedikit acak-acakan</p><p style="white-space: normal">Dapat menyebutkan nama lengkapnya</p><p style="white-space: normal">Bersenandung dan bernyanyi</p><p style="white-space: normal">Tingkah laku normal: marah, merengek, menggigit, dan menjerit</p></li><li>Keterampilan Kognitif (Berpikir)<p style="white-space: normal">Mencari tahu segala sesuatu sebelum melakukannya</p><p style="white-space: normal">Menggambar lingkaran, membuat gambar garis</p><p style="white-space: normal">Menyusun <i>puzzle</i> yang mudah</p><p style="white-space: normal">Memperlihatkan suatu rangkaian pikiran: mentega kacang harus ada diatas jeli</p><p style="white-space: normal">Mengerti dan mengingat dua macam perintah sekaligus: "pergi ke dapur dan ambilkan kue kering untuk ayah!"</p></li>\')',[], nullHandler,errorHandler);
+            }
+        }   
+     );
+    },errorHandler, function() {
+        var content = "";
+        $( '#balitaTabelPerkembangan' ).html( "" );
+        db.transaction( function( tx ) {
+            tx.executeSql('SELECT * FROM BalitaPerkembangan', [], function(transaction, result) {
+                for ( var i = 0; i < result.rows.length; i++ ) {
+                    var row = result.rows.item( i );
+                    content += '<div data-role="collapsible"><h4>' + row.Waktu + ' Bulan</h4><ul data-role="listview" data-inset="false">' + row.Konten + '</ul></div>';
+                }
+                $( '#balitaTabelPerkembangan' ).append( content );
+            }, errorHandler );
+        }, errorHandler, nullHandler );
+    } );
+}
+
+function balita_insert_p3k()
+{
+    db.transaction(function(tx) 
+    {  
+        tx.executeSql('SELECT * FROM BalitaP3K', [], function(transaction, result) 
+        {
+            if (result.rows.length === 0)
+            {
+                tx.executeSql('INSERT INTO BalitaP3K(Jenis, Konten) VALUES (\'Tersedak\', \'<p style="white-space: normal">Tersedak bermakna bahwa anak sedang berusaha untuk mengeluarkan sesuatu dari saluran udara yang sebagian terhalang atau berupaya sekuat tenaga untuk mendapatkan udara. Ini adalah salah satu penyebab kematian yang paling umum pada anak-anak.</p><b>Ciri-ciri:</b><p style="white-space: normal">• Sulit bernafas atau wajah berubah biru.<br></p><p style="white-space: normal">• Pucat (dan anda curiga bahwa dia tersedak).<br></p><p style="white-space: normal">• Memperlihatkan ekspresi “aku sedang tersedak”: mata lebar, mulut terbuka, meneteskan air liur, wajah tampak panik.<br></p><b>Penanganan:</b><p style="white-space: normal">• Tengkurapkan anak di lengan bawah anda. Sangga leher dan dagunya dengan jari jari anda. Posisikan bayi sehingga kepala lebih rendah dari dadanya.<br></p><p style="white-space: normal">• Tepuklah punggungnya sebanyak 5 kali, tepatnya antara tulang belikat, dengan pangkal telapak tangan yang lain.<br></p><p style="white-space: normal">• Jika tidak ada benda yang keluar, telentangkan bayi anda dan letakkan di atas meja atau lantai.<br></p><p style="white-space: normal">• Tempatkan 2 jari anda ditengah tulang dadanya dan tekanlah cepat sebanyak 5 kali.<br></p><p style="white-space: normal">• Ulangi proses yaitu 5 tepukan dipunggung dan 5 tekanan dada sampai benda tersebut keluar atau anak kembali bernapas.<br></p><p style="white-space: normal">• Jika bayi pingsan, lakukan CPR (bantuan napas). Setiap memberi bantuan napas, carilah benda didalam mulutnya dan coba keluarkan. Jangan masukan jari jari anda kedalam tenggorokan, bisa bisa anda malah membuat benda itu semakin masuk kedalam.<br></p>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaP3K(Jenis, Konten) VALUES (\'Pendarahan\', \'<b>Pendarahan Besar</b><p style="white-space: normal">• Beri tekanan.</p><p style="white-space: normal"><small>Gunakan kain kasa atau selembar sapu tangan bersih untuk menekan lokasi yang berdarah selama dua menit. Kemudian bila memungkinkan cek kondisi luka dibawah air leding dingin yang mengalir. Lalu lakukan kembali tekanan dengan perban selama setidaknya 20 menit lagi.</small></p><p style="white-space: normal">• Tenangkan anak anda.</p><p style="white-space: normal">• Posisikan anak anda dengan tepat.</p><p style="white-space: normal"><small>Baringkan anak anda, dan angkatlah lokasi pendarahan sehingga lebih tinggi dari jantung. Misal: meniggikan tangan.</small></p><p style="white-space: normal">• Dapatkan bantuan medis.</p><b>Pendarahan Kecil</b><p style="white-space: normal">• Tetap tenang</p><p style="white-space: normal">• Cuci luka, gunakan air dingin yang mengalir untuk membersihkan luka.</p><p style="white-space: normal">• Berikan perban pada luka</p>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaP3K(Jenis, Konten) VALUES (\'Luka Bakar\', \'<b>Penanganan pertama:</b><p style="white-space: normal">• Langsung celupkan area yang terbakar ke air dingin, paling tidak selama 20 menit. Jangan gunakan es karena akan meningkatkan kerusakan jaringan. Jika luka terdapat pada wajah, usapkan handuk yang direndam air dingin, atau pegang pipi di bawah air leding yang mengalir. Jangan mengoleskan mentega, lemak, atau bedak diatas luka bakar.</p><p style="white-space: normal">• Nilailah kegawatan luka bakar. Jika hanya merah tetapi tidak menggelembung, rendamlah luka tersebut di dalam air dingin selama mungkin. Biarkan luka bakar tetap terbuka dan perhatikan perubahannya.</p><p style="white-space: normal">• Jika kulit menggelembung, berwarna putih, atau hangus, oleskan salep antiseptik dan tutup, jangan terlalu rapat, dengan kain bersih atau perban yang tidak melekat. Hubungi dokter.</p><p style="white-space: normal">• Selain merendam kulit yang terbakar di dalam air dingin, berikan asetaminofen kepada anak anda.</p>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaP3K(Jenis, Konten) VALUES (\'Sawan\', \'<p style="white-space: normal">Sawan disebaban oleh pelepasan aliran elektrik abnormal di dalam otak. Kegawatan sawan berkisar dari hentakan otot di beberapa bagian tubuh sampai guncangan seluruh badan, yang disebut <i>grand mal seizure</i> (tingkat sawan yang paling berbahaya), yang mungkin membuat si penderita jatuh dan menggeliat-geliat di tempat, bola matanya bergerak ke atas, mulutnya berbuih, lidahnya tergigit, dan si penderita kehilangan kesadaran untuk sementara waktu.</p><b>Penanganan</b><p style="white-space: normal">• Baringkan anak anda dengan aman di atas lantai, telungkupkan atau miringkan dia agar lidahnya dapat terjulur ke depan dan lendir bisa mengalir dari kerongkongan karena gaya berat.</p><p style="white-space: normal">• Jangan memberikan makanan atau minuman apa pun kepada anak anda selama atau segera setelah sawan terjadi; dan anda juga jangan mencoba untuk menahan anak anda dari goncangan</p><p style="white-space: normal">• Jika bibir anak anda tidak berwarna biru dan bayi bernapas secara normal, jangan cemas.</p><p style="white-space: normal">• Jika bibir anak anda berubah menjadi biru atau ia tidak bernapas, berikan pernapasan buatan mulut-ke-mulut.</p><p style="white-space: normal">• Agar anak yang menggeliat-geliat tidak menyentuh mebel, bersihkan area dengan segera.</p><p style="white-space: normal">• Kurangi suhu badan anak yang tinggi dengan mengusapkan handuk dingin. Hal ini berguna untuk mengurangi kejang-kejang pada anak.</p>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaP3K(Jenis, Konten) VALUES (\'Mimisan\', \'<b>Penanganan:</b><p style="white-space: normal">• Dudukkan anak di atas pangkuan anda, posisi anak bersandar agak condong ke depan.</p><p style="white-space: normal">• Lakukan penekanan dengan menyisipkan potongan lilitan kapas basah ke lubang hidung yang berdarah, dengan ukuran yang pas untuk mengisi sekitar setengah lubang hidung.</p><p style="white-space: normal">• Jika ini tidak menghentikan pendarahan, lakukan penekanan ke pembuluh darah utama yang mengalir ke hidung, yang letaknya tepat dibawah lubang hidung tempat bertemunya bibir bagian atas dengan gusi. Tempatkan sejumlah kapas basah di bagian dalam bibir atas dan tekanlah bagian bawah bibir dengan dua jari ke arah atas, ke arah lubang hidung, atau dengan menekan satu jari diatas bibir atas, tepat dibawah lubang hidung.</p><p style="white-space: normal">• Jaga posisi anak anda tetap tegak lurus supaya darah tidak menetes ke lehernya.</p><p style="white-space: normal">• Doronglah anak anda agar terus membuka mulutnya.</p><p style="white-space: normal">• Setelah pendarahan berhenti tinggalkan kapas dalam lubang hidung dalam beberapa jam untuk menyumbat pendarahan, agar pembekuan terjadi.</p><p style="white-space: normal">• Jika tindakan  ini tidak menghentikan mimisan, bawalah anak anda ke dokter atau UGD.</p>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaP3K(Jenis, Konten) VALUES (\'Demam\', \'<b>Penanganan:</b><p style="white-space: normal">• Amati dan pikirkan penyebabnya. Bila disusul dengan batuk pilek, Anda pun lega karena jelas penyebabnya adalah ISPA. </p><p style="white-space: normal">• Amati tanda kegawatdaruratan. Misalnya, penurunan kesadaran (perilaku anak  merupakan parameter kuat untuk menentukan ada tidaknya kegawa daruratan), dehidrasi, kejang, sesak napas, dan sakit kepala hebat (pada anak yang sudah bisa mengkomunikasikan keluhannya).</p><p style="white-space: normal">• Berikan cairan lebih sering dari biasanya, karena kebutuhan akan cairan akan meningkat saat demam. Demam akan meningkatkan risiko dehidrasi (kekurangan cairan tubuh), padahal dehidrasi akan membuat suhu tubuh lebih meningkat lagi. Ketika sakit, wajarlah jika selera makan anak menurun. Jadi, tawarkan makanan ringan, yang segar, rasanya enak, dan tampilannya menarik. Yang penting pada saat ini adalah asupan cairannya.</p><p style="white-space: normal">• Berikan obat demam, bila perlu. Obat demam tidak akan menormalkan suhu dan tidak menyembuhkan penyebab demam, melainkan agar anak merasa agak nyaman (karena efek pain killer-nya) dan untuk menurunkan 1 atau 2 derajat saja.  Obat demam diberikan saat anak sangat rewel karena merasa tak nyaman atau saat suhu tinggi (sedikitnya di atas 38,5°C). Dengan atau tanpa obat demam, suhu akan naik turun sesuai siklusnya.</p><p style="white-space: normal">• Kadang, bila suhu sangat tinggi, anak merasa sangat tidak nyaman. Anda bisa mencoba menurunkan suhu tubuh dengan menyeka tubuh anak atau mengompres dengan handuk yang sudah dibasahi air hangat. Kompres air dingin sejenak seolah menurunkan suhu tubuh, padahal selain membuat anak menggigil tak nyaman, kompres dingin justru akan meningkatkan suhu tubuh. Mengapa? Karena saat dikompres dingin, informasi yang diperoleh tubuh adalah di luar suhu dingin. Otomatis termostat pusat pengatur suhu tubuh di otak akan meningkatkan suhu tubuh agar tidak kedinginan.</p>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaP3K(Jenis, Konten) VALUES (\'Asma\', \'<b>Penyebab:</b><p style="white-space: normal">Alergi makanan atau lingkungan, infeksi paru-paru.</p><b>Tanda dan Gejala:</b><p style="white-space: normal">• Napasnya berbunyi.</p><p style="white-space: normal">• Saat menghembuskan napas terdengar suara berisik; serangan asma ditandai dengan adanya napas yang berbunyi, kesulitan bernapas, dan lekukan yang dalam di atas leher, tulang rusuk, serta bagian atas perut.</p><b>Penanganan:</b><p style="white-space: normal">• Istirahat, relaksasi.</p><p style="white-space: normal">• Tidur tegak bila mungkin.</p><p style="white-space: normal">• Perawatan dengan uap air di dalam kamar mandi.</p><p style="white-space: normal">• Tepuk-tepuklah dada untuk mendorong batuk.</p><p style="white-space: normal">• Untuk asma kronis, coba hindari makanan dan lingkungan yang menimbulkan alergi.</p><p style="white-space: normal">• untuk bayi yang sedang diberi ASI, hindari pemberian produk olahan berbahan susu dan sebagai makanan yang menimbulkan alergi pada pola makan ibu.</p>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaP3K(Jenis, Konten) VALUES (\'Bisul\', \'<b>Penyebab:</b><p style="white-space: normal">Bakteri, biasanya <i>Staohylococcus.</i></p><b>Tanda dan Gejala:</b><p style="white-space: normal">Kulit terangkat, berwarna merah, dan pembengkakan yang terasa hangat pada kulit</p><b>Penanganan:</b><p style="white-space: normal">• Gunakan kompres panas sepuluh kali setiap hari selama beberapa menit agar bisul menjadi matang.</p><p style="white-space: normal">• Lanjutkan beberapa hari setelah bisul pecah dan mengeluarkan cairan.</p><p style="white-space: normal">• Tetap ditutup sampai pengeluaran cairan berhenti.</p>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaP3K(Jenis, Konten) VALUES (\'Bronkiolitis\', \'<b>Penyebab:</b><p style="white-space: normal">Virus disebut <i>RSV</i></p><b>Tanda dan Gejala:</b><p style="white-space: normal">Seperti asma pada bayi, napas cepat, pendek-pendek, berbunyi dan tersengal-sengal, batuk berirama, pucat, lelah, ketakutan, gejala flu.</p><b>Penanganan:</b><p style="white-space: normal">• Berikan kenyamanan dan ketenangan pada bayi.</p> <p style="white-space: normal">• Bujuklah bayi untuk tidur dengan ditopang setinggi 45 derajat.</p> <p style="white-space: normal">• Pergunakan uap hangat.</p><p style="white-space: normal">• Belilah ekspekoran yang dijual bebas untuk mengendurkan dada yang sesak.</p><p style="white-space: normal">• Beri lebih banyak cairan, beri makanan dalam porsi kecil tapi sering</p> <p style="white-space: normal">• Cobalah penepukan dada.</p>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaP3K(Jenis, Konten) VALUES (\'Bronkitis\', \'<b>Penyebab:</b><p style="white-space: normal">Pada umumnya virus atau alergi, kadang-kadang bakteri.</p><b>Tanda dan Gejala:</b><p style="white-space: normal">• Gejala flu, demam rendah (38,3°C - 38,9°C) batuknya pendek-pendek dan bersuara dalam, lebih buruk pada malam hari, pucat, lelah.</p><p style="white-space: normal">• Anak-anak mungkin mengeluarkan napas yang berbunyi, seperti pada asma.</p><b>Penanganan:</b><p style="white-space: normal">• Istirahat, relaksasi.</p><p style="white-space: normal">• Tidur tegak bila mungkin; perawatan dengan uap air di dalam kamar mandi.</p><p style="white-space: normal">• Tepuk-tepuklah dada untuk mendorong batuk.</p><p style="white-space: normal">• Pemberian ekspektoran yang dijual bebas selama saing hari.</p><p style="white-space: normal">• Bila timbul banyak gejala, berikan obat batuk pada malam hari.</p>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaP3K(Jenis, Konten) VALUES (\'Cacar Air\', \'<b>Penyebab:</b><p style="white-space: normal">Virus (inkubasi 7-21 hari).</p><b>Tanda dan Gejala:</b><p style="white-space: normal">• Gejala mirip flu, demam 38,3°C.</p><p style="white-space: normal">• Ruam pada kulit yang semula seperti bekas gigitan segera melepuh dan menyebar pada tubuh, wajah, mulut, kemudian anggota badan.</p> <p style="white-space: normal">• Gatal.</p><p style="white-space: normal">• Noda baru muncul setiap hari selama beberapa hari.</p><b>Penanganan:</b><p style="white-space: normal">• Potong kuku jari tangan dan kenakan pakaian panjang untuk menghindari penggarukan.</p><p style="white-space: normal">• Bila timbul rasa gatal gunakan salep antibiotik untuk kulit yang terinfeksi.</p>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaP3K(Jenis, Konten) VALUES (\'Flu\', \'<b>Penyebab:</b><p style="white-space: normal">Virus (inkubasi satu sampai dengan tiga hari).</p><b>Tanda dan Gejala:</b><p style="white-space: normal">Demam, badan nyeri, muntah-muntah, diare, kerongkongan sakit, sakit kepala, batuk, hidung basah, mata merah.</p><b>Penanganan:</b><p style="white-space: normal">• Beri isapan cairan, kepingan es, larutan elektrolit secara oral.</p><p style="white-space: normal">• Pemberian makan dengan porsi kecil dengan frekuensi sering.</p><p style="white-space: normal">• Beri perawatan bila terjadi gejala yang paling mengganggu dengan pengobatan flu dan demam bla diperlukan.</p>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaP3K(Jenis, Konten) VALUES (\'Campak\', \'<b>Penyebab:</b><p style="white-space: normal">Virus (inkubasi 8-12 hari).</p><b>Tanda dan Gejala:</b><p style="white-space: normal">• Mulai seperti pilek, kemudian demam 40°C, batuk.</p><p style="white-space: normal">• Mata kemerah-merahan, sensitif terhadap cahaya.</p><p style="white-space: normal">• Sekitar empat hari timbul bintik-bintik (merah tua, berkumpul) mulai pada wajah, menyebar keseluruh badan.</p><p style="white-space: normal">• Anak merasa sakit ketika bintik-bintik muncul untuk pertama kalinya.</p><b>Penanganan:</b><p style="white-space: normal">• Karantina sampai ruam pada kulit hilang, paksakan cairan.</p><p style="white-space: normal">• Gunakan pengendali demam.</p>\')',[], nullHandler,errorHandler);
+                tx.executeSql('INSERT INTO BalitaP3K(Jenis, Konten) VALUES (\'Gondong\', \'<b>Penyebab:</b><p style="white-space: normal">Virus (inkubasi tujuh sampai dengan sepuluh hari).</p><b>Tanda dan Gejala:</b><p style="white-space: normal">• Mulai seperti flu, pada umumnya gangguan pada perut.</p><p style="white-space: normal">• 2-3 hari kemudian kelenjar membengkak lunak dibawah daun telinga.</p><p style="white-space: normal">• Terasa sakit untuk membuka rahang.</p><p style="white-space: normal">• Bertahan selama 7-10 hari.</p><p style="white-space: normal">• Demam.</p><b>Penanganan:</b><p style="white-space: normal">• Beri makanan yang halus dan lembut, pasanglah kompres dingin untuk leher.</p><p style="white-space: normal">• Berikan asetaminofen.</p><p style="white-space: normal">• Hubungi dokter bila bayi mengantuk, muntah terus-menerus, atau memiliki leher yang kaku.</p>\')',[], nullHandler,errorHandler);
+            }
+        }   
+     );
+    },errorHandler, function() {
+        var content = "";
+        $( '#balitaTabelP3K' ).html( "" );
+        db.transaction( function( tx ) {
+            tx.executeSql('SELECT * FROM BalitaP3K', [], function(transaction, result) {
+                for ( var i = 0; i < result.rows.length; i++ ) {
+                    var row = result.rows.item( i );
+                    content += '<div data-role="collapsible"><h4>' + row.Jenis + '</h4>' + row.Konten + '</div>';
+                }
+                $( '#balitaTabelP3K' ).append( content );
+            }, errorHandler );
+        }, errorHandler, nullHandler );
+    } );
 }
 
 function ibu_insert_infoPerkembanganJanin()
@@ -512,7 +651,7 @@ function balita_rekomendasi()
                 {
                     if(casein === true)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM=0 AND A_Laktosa="T" AND A_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM=0 AND A_Laktosa="T" AND A_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -528,7 +667,7 @@ function balita_rekomendasi()
                     }
                     else if(casein===false)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM=0 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T")', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM=0 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T")', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -547,7 +686,7 @@ function balita_rekomendasi()
                 {
                     if(casein === true)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM=0 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM=0 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -563,7 +702,7 @@ function balita_rekomendasi()
                     }
                     else if(casein === false)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM=0 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") ', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM=0 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") ', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -585,7 +724,7 @@ function balita_rekomendasi()
                 {
                     if(casein === true)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 6 AND A_Laktosa="T" AND A_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 6 AND A_Laktosa="T" AND A_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -597,7 +736,7 @@ function balita_rekomendasi()
                                 }
                             }
                         },errorHandler);
-                        transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 6 AND Rsp_Laktosa="T" AND Rsp_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 6 AND Rsp_Laktosa="T" AND Rsp_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -611,7 +750,7 @@ function balita_rekomendasi()
                     }
                     else if(casein===false)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <=6 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T")', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <=6 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T")', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -623,7 +762,7 @@ function balita_rekomendasi()
                                 }
                             }
                         },errorHandler);
-                        transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep=6 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T")', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep=6 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T")', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -640,7 +779,7 @@ function balita_rekomendasi()
                 {
                     if(casein === true)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 6 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 6 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -652,7 +791,7 @@ function balita_rekomendasi()
                                 }
                             }
                         },errorHandler);
-                        transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 6 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 6 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -666,7 +805,7 @@ function balita_rekomendasi()
                     }
                     else if(casein === false)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <=6 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") ', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <=6 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") ', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -678,7 +817,7 @@ function balita_rekomendasi()
                                 }
                             }
                         },errorHandler);
-                        transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep =6 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") ', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep =6 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") ', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -698,7 +837,7 @@ function balita_rekomendasi()
                 {
                     if(casein === true)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 8 AND A_Laktosa="T" AND A_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 8 AND A_Laktosa="T" AND A_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -710,7 +849,7 @@ function balita_rekomendasi()
                                 }
                             }
                         },errorHandler);
-                        transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 7 AND Rsp_Laktosa="T" AND Rsp_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 7 AND Rsp_Laktosa="T" AND Rsp_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -724,7 +863,7 @@ function balita_rekomendasi()
                     }
                     else if(casein===false)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <=8 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T")', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <=8 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T")', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -736,7 +875,7 @@ function balita_rekomendasi()
                                 }
                             }
                         },errorHandler);
-                        transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep=7 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T")', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep=7 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T")', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -753,7 +892,7 @@ function balita_rekomendasi()
                 {
                     if(casein === true)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 8 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 8 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -765,7 +904,7 @@ function balita_rekomendasi()
                                 }
                             }
                         },errorHandler);
-                        transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 7 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 7 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -779,7 +918,7 @@ function balita_rekomendasi()
                     }
                     else if(casein === false)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 8 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") ', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 8 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") ', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -791,7 +930,7 @@ function balita_rekomendasi()
                                 }
                             }
                         },errorHandler);
-                        transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 7 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") ', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 7 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") ', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -813,7 +952,7 @@ function balita_rekomendasi()
                     {
                         if(telur === true)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T"', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T"', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -825,7 +964,7 @@ function balita_rekomendasi()
                                     }
                                 }
                             },errorHandler);
-                            transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 9 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND Rsp_Telur="T"', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 9 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND Rsp_Telur="T"', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -839,7 +978,7 @@ function balita_rekomendasi()
                         }
                         else if(telur === false)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -851,7 +990,7 @@ function balita_rekomendasi()
                                     }
                                 }
                             },errorHandler);
-                            transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 9 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y")', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 9 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y")', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -868,7 +1007,7 @@ function balita_rekomendasi()
                     {
                         if(telur === true)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T"', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T"', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -880,7 +1019,7 @@ function balita_rekomendasi()
                                     }
                                 }
                             },errorHandler);
-                            transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 9 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND Rsp_Telur="T"', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 9 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND Rsp_Telur="T"', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -894,7 +1033,7 @@ function balita_rekomendasi()
                         }
                         else if(telur === false)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -906,7 +1045,7 @@ function balita_rekomendasi()
                                     }
                                 }
                             },errorHandler);
-                            transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 9 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND (Rsp_Telur="T" OR Rsp_Telur="Y")', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 9 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND (Rsp_Telur="T" OR Rsp_Telur="Y")', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -926,7 +1065,7 @@ function balita_rekomendasi()
                     {
                         if(telur === true)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T"', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T"', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -938,7 +1077,7 @@ function balita_rekomendasi()
                                     }
                                 }
                             },errorHandler);
-                            transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 9 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND Rsp_Telur="T"', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 9 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND Rsp_Telur="T"', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -952,7 +1091,7 @@ function balita_rekomendasi()
                         }  
                         if(telur === false)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -964,7 +1103,7 @@ function balita_rekomendasi()
                                     }
                                 }
                             },errorHandler);
-                            transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 9 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y")', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 9 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y")', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -981,7 +1120,7 @@ function balita_rekomendasi()
                     {
                         if(telur === true)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T"', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T"', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -993,7 +1132,7 @@ function balita_rekomendasi()
                                     }
                                 }
                             },errorHandler);
-                            transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 9 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND Rsp_Telur="T"', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 9 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND Rsp_Telur="T"', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -1007,7 +1146,7 @@ function balita_rekomendasi()
                         }  
                         if(telur === false)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -1019,7 +1158,7 @@ function balita_rekomendasi()
                                     }
                                 }
                             },errorHandler);
-                            transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 9 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND (Rsp_Telur="T" OR Rsp_Telur="Y")', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 9 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND (Rsp_Telur="T" OR Rsp_Telur="Y")', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -1044,7 +1183,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1056,7 +1195,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 12 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 12 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1070,7 +1209,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1082,7 +1221,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 12 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 12 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1099,7 +1238,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1111,7 +1250,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 12 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 12 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1125,7 +1264,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1137,7 +1276,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 12 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 12 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1157,7 +1296,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1169,7 +1308,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 12 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 12 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1183,7 +1322,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1195,7 +1334,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler); 
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 12 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 12 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1212,7 +1351,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1224,7 +1363,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 12 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 12 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1238,7 +1377,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1250,7 +1389,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 12 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 12 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1273,7 +1412,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1285,7 +1424,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1299,7 +1438,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1311,7 +1450,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1328,7 +1467,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1340,7 +1479,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1354,7 +1493,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1366,7 +1505,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1386,7 +1525,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1398,7 +1537,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1412,7 +1551,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1424,7 +1563,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1441,7 +1580,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1453,7 +1592,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1467,7 +1606,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1479,7 +1618,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 12 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1505,7 +1644,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1517,7 +1656,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 18 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 18 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1531,7 +1670,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1543,7 +1682,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep = 18 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep = 18 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1560,7 +1699,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1572,7 +1711,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 18 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 18 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1586,7 +1725,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1598,7 +1737,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 18 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 18 AND Rsp_Laktosa="T" AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1618,7 +1757,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1630,7 +1769,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 18 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 18 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1644,7 +1783,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1656,7 +1795,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 18 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 18 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1673,7 +1812,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1685,7 +1824,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 18 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 18 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1699,7 +1838,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1711,7 +1850,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 18 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 18 AND Rsp_Laktosa="T" AND (Rsp_Casein="Y" OR Rsp_Casein="T") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1734,7 +1873,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1746,7 +1885,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1760,7 +1899,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1772,7 +1911,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1789,7 +1928,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1801,7 +1940,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1815,7 +1954,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1827,7 +1966,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND Rsp_Casein="T" AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1847,7 +1986,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1859,7 +1998,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND Rsp_Telur="T" AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1873,7 +2012,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1885,7 +2024,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND Rsp_Telur="T" AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1902,7 +2041,7 @@ function balita_rekomendasi()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1914,7 +2053,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND Rsp_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1928,7 +2067,7 @@ function balita_rekomendasi()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1940,7 +2079,7 @@ function balita_rekomendasi()
                                         }
                                     }
                                 },errorHandler);
-                                transaction.executeSql('SELECT * FROM BalitaResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiResep WHERE UsiaResep= 18 AND (Rsp_Laktosa="Y" OR Rsp_Laktosa="T") AND (Rsp_Casein="T" OR Rsp_Casein="Y") AND (Rsp_Telur="T" OR Rsp_Telur="Y") AND (Rsp_IkanLaut="T" OR Rsp_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -1977,7 +2116,7 @@ function balita_bolehkah()
                 {
                     if(casein === true)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM=0 AND A_Laktosa="T" AND A_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM=0 AND A_Laktosa="T" AND A_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -1997,7 +2136,7 @@ function balita_bolehkah()
                     }
                     else if(casein===false)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM=0 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T")', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM=0 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T")', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -2020,7 +2159,7 @@ function balita_bolehkah()
                 {
                     if(casein === true)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM=0 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM=0 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -2040,7 +2179,7 @@ function balita_bolehkah()
                     }
                     else if(casein === false)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM=0 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") ', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM=0 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") ', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -2066,7 +2205,7 @@ function balita_bolehkah()
                 {
                     if(casein === true)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 6 AND A_Laktosa="T" AND A_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 6 AND A_Laktosa="T" AND A_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -2086,7 +2225,7 @@ function balita_bolehkah()
                     }
                     else if(casein===false)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <=6 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T")', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <=6 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T")', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -2109,7 +2248,7 @@ function balita_bolehkah()
                 {
                     if(casein === true)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 6 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 6 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -2129,7 +2268,7 @@ function balita_bolehkah()
                     }
                     else if(casein === false)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <=6 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") ', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <=6 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") ', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -2155,7 +2294,7 @@ function balita_bolehkah()
                 {
                     if(casein === true)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 8 AND A_Laktosa="T" AND A_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 8 AND A_Laktosa="T" AND A_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -2175,7 +2314,7 @@ function balita_bolehkah()
                     }
                     else if(casein===false)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <=8 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T")', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <=8 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T")', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -2198,7 +2337,7 @@ function balita_bolehkah()
                 {
                     if(casein === true)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 8 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T"', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 8 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T"', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -2218,7 +2357,7 @@ function balita_bolehkah()
                     }
                     else if(casein === false)
                     {
-                        transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 8 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") ', [], function(transaction, result) 
+                        transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 8 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") ', [], function(transaction, result) 
                         {
                             if (result !== null && result.rows !== null) 
                             {
@@ -2246,7 +2385,7 @@ function balita_bolehkah()
                     {
                         if(telur === true)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T"', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T"', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -2266,7 +2405,7 @@ function balita_bolehkah()
                         }
                         else if(telur === false)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -2289,7 +2428,7 @@ function balita_bolehkah()
                     {
                         if(telur === true)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T"', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T"', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -2309,7 +2448,7 @@ function balita_bolehkah()
                         }
                         else if(telur === false)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -2335,7 +2474,7 @@ function balita_bolehkah()
                     {
                         if(telur === true)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T"', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T"', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -2355,7 +2494,7 @@ function balita_bolehkah()
                         }  
                         if(telur === false)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -2378,7 +2517,7 @@ function balita_bolehkah()
                     {
                         if(telur === true)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T"', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T"', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -2398,7 +2537,7 @@ function balita_bolehkah()
                         }  
                         if(telur === false)
                         {
-                            transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
+                            transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 11 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y")', [], function(transaction, result) 
                             {
                                 if (result !== null && result.rows !== null) 
                                 {
@@ -2429,7 +2568,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2449,7 +2588,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2472,7 +2611,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2492,7 +2631,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2518,7 +2657,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2538,7 +2677,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2561,7 +2700,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2581,7 +2720,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2610,7 +2749,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2630,7 +2769,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2653,7 +2792,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2673,7 +2812,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2699,7 +2838,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2719,7 +2858,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2742,7 +2881,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2762,7 +2901,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 17 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2794,7 +2933,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2814,7 +2953,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2837,7 +2976,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2857,7 +2996,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2883,7 +3022,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2903,7 +3042,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2926,7 +3065,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2946,7 +3085,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND A_Laktosa="T" AND (A_Casein="Y" OR A_Casein="T") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2975,7 +3114,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -2995,7 +3134,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -3018,7 +3157,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -3038,7 +3177,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND A_Casein="T" AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -3064,7 +3203,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -3084,7 +3223,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND A_Telur="T" AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -3107,7 +3246,7 @@ function balita_bolehkah()
                         {
                             if(ikan === true)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND A_IkanLaut="T"', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {
@@ -3127,7 +3266,7 @@ function balita_bolehkah()
                             }
                             else if(ikan === false)
                             {
-                                transaction.executeSql('SELECT * FROM BalitaBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
+                                transaction.executeSql('SELECT * FROM BalitaNutrisiBahanMakanan WHERE UsiaBM <= 18 AND (A_Laktosa="Y" OR A_Laktosa="T") AND (A_Casein="T" OR A_Casein="Y") AND (A_Telur="T" OR A_Telur="Y") AND (A_IkanLaut="T" OR A_IkanLaut="Y")', [], function(transaction, result) 
                                 {
                                     if (result !== null && result.rows !== null) 
                                     {

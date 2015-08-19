@@ -9,7 +9,11 @@
 - Febryan Yeremi Sianipar (5112 100 166)
 
 ## Perkembangan Versi Aplikasi
-####v2.0.4
+####v2.0.5
+> - Membuat konten dari aplikasi lebih dinamis, tanpa 'hard-code'
+> - Perbaikan bug
+
+#####v2.0.4
 > - Perbaikan bug
 > - Tersedia informasi perkembangan janin per minggu
 > - Tersedia informasi olahraga saat masa kehamilan
