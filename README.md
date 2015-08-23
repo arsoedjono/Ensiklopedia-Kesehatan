@@ -9,7 +9,33 @@
 - Febryan Yeremi Sianipar (5112 100 166)
 
 ## Perkembangan Versi Aplikasi
-####v1.0.1
+####V2.0.6
+> - Tersedia fitur Rekomendasi nutrisi dan informasi makanan untuk ibu hamil
+> - Penyesuaian letak
+
+#####v2.0.5
+> - Membuat konten dari aplikasi lebih dinamis, tanpa 'hard-code'
+> - Perbaikan bug
+
+#####v2.0.4
+> - Perbaikan bug
+> - Tersedia informasi perkembangan janin per minggu
+> - Tersedia informasi olahraga saat masa kehamilan
+> - Tersedia informasi pemeriksaan rutin saat masa kehamilan
+> - Tersedia informasi tips yang berguna saat masa kehamilan
+> - Tersedia informasi persiapan kehamilan dan tips persiapan kehamilan
+> - Tersedia jawaban atas pertanyaan yang sering ditanyakan (FAQ)
+
+#####v2.0.3
+> - Perbaikan bug
+> - Pengelompokan kategori balita dan ibu hamil
+> - Penambahan UI: informasi kehamilan, tips, persiapan persalinan, dan FAQ
+
+#####v2.0.2
+> - Perbaikan UI
+> - Menambahkan penyakit Hipertensi untuk rekomendasi nutrisi ibu hamil
+
+#####v2.0.1
 > - Refaktorisasi kode sumber
 > - Penambahan menu utama untuk memilih kategori subjek panduan ibu hamil
 > - Penambahan fitur panduan nutrisi untuk ibu hamil
