@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bayi Sehat</title>
+        <title>ENSIKLOPEDIA KESEHATAN</title>
         <link rel="stylesheet" href="js/jquery-mobile/jquery.mobile.min.css">   
         <link rel="stylesheet" href="js/themes/themes.min.css" />
         <link rel="stylesheet" href="js/themes/jquery.mobile.icons.min.css" />
@@ -33,7 +33,7 @@
                     </li>
                     <li>
                         <a href="#ibuhamil-main">
-                            <img src="img/ibuhamil-logo.png" style="margin-left: 10px" class="ui-li-thumb">
+                            <img src="img/ibuhamil-logo.png" style="margin-left: 20px; margin-top: 4px" class="ui-li-thumb">
                             <h3>Ibu Hamil</h3>
                         </a>
                     </li>
@@ -54,25 +54,25 @@
                 <ul data-role="listview" data-inset="true">
                     <li>
                         <a href="#ibuhamil-rekomendasi">
-                            <img src="img/balita-nutrisi.jpg" class="ui-li-thumb">
+                            <img src="img/balita-nutrisi.png" class="ui-li-thumb">
                             <h3>Nutrisi</h3>                           
                         </a>
                     </li>
                     <li>
-                        <a href="#ibuhamil-infoPersiapan">
+                        <a href="#ibuhamil-informasi">
                             <img src="img/balita-perkembangan.jpg" class="ui-li-thumb">
                             <h3>Informasi Kehamilan</h3>            
                         </a>
                     </li>
                     <li>
                         <a href="#ibuhamil-persiapan">
-                            <img src="img/balita-p3k.jpg" class="ui-li-thumb">
+                            <img src="img/balita-p3k.png" class="ui-li-thumb"  style="background-color:white;">
                             <h3>Persiapan</h3>                
                         </a>
                     </li>
                     <li>
                         <a href="#ibuhamil-faq">
-                            <img src="" class="ui-li-thumb">
+                            <img src="img/ibuhamil-faq.png" class="ui-li-thumb"  style="background-color:white;">
                             <h3>FAQ</h3>                
                         </a>
                     </li>
@@ -86,155 +86,666 @@
             <div class="ui-header"  data-role="header" data-position="fixed">       
                 <h1 class="ui-title" role="heading">Nutrisi</h1>    
                 <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#" class="ui-btn-active">Rekomendasi</a></li>
+                        <li><a href="#ibuhamil-informasimakanan">Informasi Makanan</a></li>
+                    </ul>
+                </div>
             </div>
             <div data-role="content">                
-                <p>Source: <a href="http://bidanku.com/makanan-untuk-ibu-hamil-1-bulan">click here</a></p>
                 <fieldset data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false">
                     <legend>Pencarian</legend>
-                    <label><b>Usia kehamilan:</b></label>
-                    <select name="ibuHamilSlctUmurHamil" id="ibuHamilSlctUsiaHamil" data-mini="true">
-                        <option value="1">1 bulan</option>
-                        <option value="2">2 bulan</option>
-                        <option value="3">3 bulan</option>
-                        <option value="4">4 bulan</option>
-                        <option value="5">5 bulan</option>
-                        <option value="6">6 bulan</option>
-                        <option value="7">7 bulan</option>
-                        <option value="8">8 bulan</option>
-                        <option value="9">9 bulan</option>
-                    </select>
                     <label><b>Pola hidup:</b></label>
                     <div data-role="controlgroup" data-mini="true">
-                        <input type="checkbox" name="ibuHamilAVegetarian" id="ibuHamilAVegetarian">
-                        <label for="ibuHamilAVegetarian" style="white-space: normal">Vegetarian</label>
+                        <input type="checkbox" name="vegetarian" id="vegetarian">
+                        <label for="vegetarian" style="white-space: normal">Vegetarian</label>
                     </div>
                     <label><b>Penyakit:</b></label>
                     <div data-role="controlgroup" data-mini="true">
-                        <input type="checkbox" name="ibuHamilHasDiabetes" id="ibuHamilHasDiabetes">
-                        <label for="ibuHamilHasDiabetes" style="white-space: normal">Diabetes</label>
-                        <input type="checkbox" name="ibuHamilHasHipertensi" id="ibuHamilHasHipertensi">
-                        <label for="ibuHamilHasHipertensi" style="white-space: normal">Hipertensi</label>
+                        <input type="checkbox" name="diabetes" id="diabetes">
+                        <label for="diabetes" style="white-space: normal">Diabetes</label>
+                        <input type="checkbox" name="hipertensi" id="hipertensi">
+                        <label for="hipertensi" style="white-space: normal">Hipertensi</label>
                     </div>
-                    <label><b>Makanan yang harus dihindari:</b></label>
-                    <div data-role="controlgroup" data-mini="true">
-                        <input type="checkbox" name="ibuHamilNoFish" id="ibuHamilNoFish">
-                        <label for="ibuHamilNoFish" style="white-space: normal">Ikan</label>
-                        <input type="checkbox" name="ibuHamilNoEgg" id="ibuHamilNoEgg">
-                        <label for="ibuHamilNoEgg" style="white-space: normal">Telur</label>
-                    </div>
-                    <button data-mini="true" onclick="ibu_rekomendasi()">Cari...</button>
+                    <button data-mini="true" onclick="RekomendasiIbuHamil()">Cari...</button>
                 </fieldset>
                 <div data-role="collapsibleset">
                     <div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false" >
                         <h4>Bahan Makanan</h4>
-                        <ul data-role="listview" data-inset="false" id="ibuHamilListviewBahanMakanan">  
+                        <ul data-role="listview" data-inset="false" id="listviewBahanMakananIbuHamil">  
                         </ul>
                     </div>
                     <div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
                         <h4>Resep</h4>
-                        <ul data-role="listview" data-inset="false" id="ibuHamilListviewResepIbu">  
+                        <ul data-role="listview" data-inset="false" id="listviewResepIbuHamil">  
                         </ul>
                     </div>
                 </div>                
-            </div>            
+            </div>          
         </div>
         <!-- /REKOMENDASI -->
 
+        <!-- INFORMASI MAKANAN -->
+         <div data-role="page" id="ibuhamil-informasimakanan" data-url="ibuhamil-informasimakanan">  
+                <div class="ui-header"  data-role="header" data-position="fixed">       
+                    <h1 class="ui-title" role="heading">Nutrisi</h1>    
+                    <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+                    <div data-role="navbar">
+                        <ul>
+                            <li><a href="#ibuhamil-rekomendasi">Rekomendasi</a></li>
+                            <li><a href="#" class="ui-btn-active ui-state-persist">Informasi Makanan</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div data-role="content">
+                    <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariInformasiMakananIbuHamil">
+                        <div data-role="collapsible">
+                            <h4>Masa Kehamilan 1 Bulan</h4>
+                            <ul data-role="listview" data-inset="false" >
+                                <li style="white-space: normal">                                
+                                    <b>Folid Acid</b>
+                                    <p style="white-space: normal">
+                                        Pada bulan pertama kehamilan, umumnya baru disadari oleh ibu hamil setelah kehamilan 2-3 minggu. Sehingga sangat penting untuk segera menyesuaikan kebutuhan nutrisi ibu hamil. Salah satu yang diperlukan oleh ibu hamil di bulan pertama adalah folid acid. Folid acid terdapat pada kembang kol, brokoli, jagung, wortel, kacang kedelai, jambu, alpukat dan gandum.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Asam Folat</b>
+                                    <p style="white-space: normal">
+                                        Makanan yang sangat diperlukan pada bulan ke 1. Sayuran hijau memang baik karena mengandung asam folat. Salah satu sayur hijau yang tinggi asam folat adalah bayam. Asam folat memiliki peran di awal kehamilan yaitu untuk mencegah kecacatan tabung saraf. Bahkan kandungan asam folat akan mengurangi risiko cacat lahir otak dan juga sumsung tulang belakang. Lengkapi kebutuhan asam folat denga mencukupi 600 mcg per hari. Bahkan asam folat sangat baik untuk dikonsumsi 3 bulan sebelum kehamilan. Bahkan di 4 minggu pembentukan janin pertama. Konsumsi makanan yang kaya asam folat yaitu kacang merah, kuning telur, sereal, susu dan sayuran hijau.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Zat Besi</b>
+                                    <p style="white-space: normal">
+                                        Makanan yang sangat diperlukan pada bulan ke 1. Sayuran hijau memang baik karena mengandung asam folat. Salah satu sayur hijau yang tinggi asam folat adalah bayam. Asam folat memiliki peran di awal kehamilan yaitu untuk mencegah kecacatan tabung saraf. Bahkan kandungan asam folat akan mengurangi risiko cacat lahir otak dan juga sumsung tulang belakang. Lengkapi kebutuhan asam folat denga mencukupi 600 mcg per hari. Bahkan asam folat sangat baik untuk dikonsumsi 3 bulan sebelum kehamilan. Bahkan di 4 minggu pembentukan janin pertama. Konsumsi makanan yang kaya asam folat yaitu kacang merah, kuning telur, sereal, susu dan sayuran hijau.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Kalsium</b>
+                                    <p style="white-space: normal">
+                                        Makanan yang sangat diperlukan pada bulan ke 1. Sayuran hijau memang baik karena mengandung asam folat. Salah satu sayur hijau yang tinggi asam folat adalah bayam. Asam folat memiliki peran di awal kehamilan yaitu untuk mencegah kecacatan tabung saraf. Bahkan kandungan asam folat akan mengurangi risiko cacat lahir otak dan juga sumsung tulang belakang. Lengkapi kebutuhan asam folat denga mencukupi 600 mcg per hari. Bahkan asam folat sangat baik untuk dikonsumsi 3 bulan sebelum kehamilan. Bahkan di 4 minggu pembentukan janin pertama. Konsumsi makanan yang kaya asam folat yaitu kacang merah, kuning telur, sereal, susu dan sayuran hijau.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>  
+                        <div data-role="collapsible">
+                            <h4>Masa Kehamilan 2 Bulan</h4>
+                             <ul data-role="listview" data-inset="false" >
+                                <li style="white-space: normal">                                
+                                    <b>Asam Folat</b>
+                                    <p style="white-space: normal">
+                                        Asam folat memang penting untuk ibu hamil. Di awal anda merencanakan kehamilan. Kandungan asam folat ada pada sayuran hijau , hati sapi, alpukat dan jeruk. Dengan asam folat yang tercukupi maka akan membantu dalam sistem saraf pusat dan juga darah janin. Bahkan asam folat yang tercukupi maka akan mengurangi risiko bayi lahir cacat.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Zat Besi</b>
+                                    <p style="white-space: normal">
+                                        Pada bulan ke dua kehamilan, anda membutuhkan zat besi. Zat besi yang kurang pada ibu hamil maka akan menganggu siklus pelepasan sel telur pada ibu hamil. Zat besi terdapat pada sayuran hijau, daging merah, kuning telur, jeruk dan hati.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Zat Seng</b>
+                                    <p style="white-space: normal">
+                                        Taukah anda bahwa zat seng juga dapat membantu dalam produksi materi generatik ketika terjadinya pembuahan. Adapun makanan yang mengandung zat besi diantaranya adalah, yaitu kacang-kacangan, biji-bijian, telur dan daging.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Vitamin C</b>
+                                    <p style="white-space: normal">
+                                        Lengkapi konsumsi makanan anda dengan kandungan vitamin C.Vitamin C dapat membantu pembentukan jaringan tubuh janin selain itu dengan kandungan vitamin C yang tercukupi maka akan membantu dalam penyerapan besi yang maksimal dan mengurangi risiko preeklampsia. Adapun sumber vitamin C yang baik untuk ibu hamil di bulan ke dua yaitu jeruk, kiwi,  brokoli dan strawberry.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Vitamin A, B, D, dan E</b>
+                                    <p style="white-space: normal">
+                                        Tidak kalah penting yaitu vitamin A, B, D dan E yang dapat membantu tumbuh kembang dalam membentuk sel darah baru, pembentukan gigi, tulang dan metabolisme. Oleh karena itu lengkapi semua vitamin dari buah dan sayur yang bervariasi warna.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Karbohidrat</b>
+                                    <p style="white-space: normal">
+                                        Tidak kalah penting adalah kandungan karbohidrat. Pada bulan ke dua pertumbuhan janin sangat pesat sehingga kebutuhan energi ibu hamil harus tetap terjaga. Anda dapat mengatur asupan karbohidrat meskipun morning sickness mengganggu.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>  
+                        <div data-role="collapsible">
+                            <h4>Masa Kehamilan 3 Bulan</h4>
+                             <ul data-role="listview" data-inset="false" >
+                                <li style="white-space: normal">                                
+                                    <b>Kacang Almond</b>
+                                    <p style="white-space: normal">
+                                        Kacang almond mengandung vitamin E, protein dan omega 3. Kandungan vitamin E yang ada di dalam kacang almond akan meningkatkan jumlah darah di dalam tubuh, vitamin E menyiapkan tempat janin dan menyiapkan makan selama di dalam kandungan. Kekurangan vitamin E akan mengakibatkan bahaya pada janin dan ibu hamil. Anda dapat mengkonsumsi vitamin E dalam jumlah yang cukup sesuai dosis setiap harinya.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Asparagus</b>
+                                    <p style="white-space: normal">
+                                        Ibu hamil membutuhkan vitamin D untuk dapat mencerna kalsium. Selain itu vitamin D akan membantu ibu hamil dalam mengatasi gangguan kehamilan yang seringkali dirasakan di akhir bulan ke 3 kehamilan, yaitu insomnia. Disarankan anda mengkonsumsi asparagus yang megandung vitamin D membantu menjaga kesehatan anda dan anak anda. Selain itu aroma asparagus dapat mengatasi morning sickness.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Bayam</b>
+                                    <p style="white-space: normal">
+                                        Ibu hamil memerlukan bahan makanan yang mengandung zat besi. Salah satunya berasal dari sayuran hijau yaitu bayam. Zat besi dapat membantu memproduksi sel darah merah dan menjaga aliran darah ke rahim. Selain itu kandungan zat besi dapat menurunkan risiko anemia yang seringkali dialami oleh ibu hamil.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Salmon</b>
+                                    <p style="white-space: normal">
+                                        Ikan salmon mengandung berbagai macam gizi. Kandungan gizi yang utama yang terdapat di dalam ikan salmon adalah asam lemak omega 3, kalsium dan vitamin D. Ikan salmon juga merupakan jenis ikan yang aman di konsumsi ibu hamil karena kandungan merkuri yang rendah bahkan kadarnya mendekati tidak ada. Selain itu salmon sangat kecil menimbulkan alergi.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Telur</b>
+                                    <p style="white-space: normal">
+                                        Pada bulan ke 3 kehamilan, anda dapat meningkatkan konsumsi telur. Ingat proses memasak telur harus benar-benar matang diantaranya adalah dengan digoreng, rebus, orak-orak atau yang   lainnya. Terpenting jangan mengkonsumsi telur setengah matang atau telur mentah karena bakterinya tidak baik untuk tumbuh kembang janin.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Sayuran dengan berbagai warna</b>
+                                    <p style="white-space: normal">
+                                        Sayuran memiliki manfaat untuk mengurangi morning sickness. Morning sickness sangat menggangu ibu hamil sehingga mengurangi nafsu makan. Dengan sayuran hijau maka akan mengurangi gejala morning sickness yang sering ibu alami di bulan ke 2-4 kehamilan. Selain itu sayur hijau mengandung mineral yang dibutuhkan oleh tubuh ibu hamil dan janin.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>  
+                        <div data-role="collapsible">
+                            <h4>Masa Kehamilan 4 Bulan</h4>
+                             <ul data-role="listview" data-inset="false" >
+                                <li style="white-space: normal">                                
+                                    <b>Serat</b>
+                                    <p style="white-space: normal">
+                                        Pada awal bulan ke 4 anda dapat mengkonsumsi lebih banyak serat. Karena kondisi fisik yang semakin berubah di bulan ke 4 seringkali menimbulkan keluhan. Untuk mengurangi keluhan selama kehamilan yang berhubungan dengan pencernaan maka anda dapat mengkonsumsi serat untuk mengurangi risiko sembelit. Anda dapat mengkonsumsi makanan yang kaya serat seperti jeruk, kacang-kacangan, semangka atau brokoli
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Kalsium</b>
+                                    <p style="white-space: normal">
+                                        Makanan yang mengandung kalsium memang sangat dibutuhkan. Bahkan kalsium sudah sangat dibutuhkan di awal kehamilan. Peranan kalsium sangat penting dalam tumbuh kembang tulang rawan pada janin. Anda dapat menyediakan kalsium yang cukup dengan mengkonsumsi keju, susu dan sayuran yang berdaun hijau. Hal ini untuk mengurangi resiko kalsium yang terambil di dalam tubuh ibu.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Protein</b>
+                                    <p style="white-space: normal">
+                                        Selama perkembangan janin di dalam kandungan anda membutuhkan protein. Protein selalu dibutuhkan sehingga setiap anda mengkonsumsi makanan pastikan dilengkapi dengan protein nabati atau protein hewani. Anda dapat memilih bahan makanan yang terkandung di sayuran, buah-buaham, suu atau telur. Anda sediakan protein yang berkecukupan sehingga dapat proses pembelahan sel.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Rendah Lemak</b>
+                                    <p style="white-space: normal">
+                                        Berat badan akan mulai meningkat pada kehamilan bulan ke 4. Sehingga asupan lemak pada ibu hamil harus dikontrol. Anda dapat mengkonsumsi makanan yang rendah lemak sebagai menu harian anda. Pilihlah susu yang rendah lemak dan daging tanpa lemak yang baik untuk kesehatan sehingga baik di bulan ke 4  kehamilan anda.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Zat Besi</b>
+                                    <p style="white-space: normal">
+                                        Ibu hamil mudah terserang anemia sehingga anda harus dapat menjaga asupan zat besi di dalam tubuh. Asupan zat besi sangat penting untuk membentuk darah dan membantu nutrisi yang cukup selama janin di dalam kandungan. Anda dapat mengkonsumsi makanan yang kaya akan kandungan zat besi diantaranya adalah kurma, pisang, atau labu.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>  
+                        <div data-role="collapsible">
+                            <h4>Masa Kehamilan 5 Bulan</h4>
+                            <ul data-role="listview" data-inset="false" >
+                                <li style="white-space: normal">                                
+                                    <b>Kalsium dan Vitamin D</b>
+                                    <p style="white-space: normal">
+                                        Kandungan kalsium yang terdapat di beberapa menu makananan sangat baik dikonsumsi oleh ibu hamil. Kalsium akan dibutuhkan oleh ibu hamil di awal pemebentukan tulang dan gigi. Dengan kalsium yang cukup maka ibu hamil akan terhindar dari osteoporosis, sehingga mengurangi risiko terjadinya kalsium yang diambil dati tulang.Anda dapat mengkonsumsi susu di bulan ke 5 kehamilan tanpa merasakan morning sickness karena pada bulan ke 5 kehamilan sudah ibu hamil tidak mengeluhkan mual dan muntah. Selain kalsium, lengkapi dengan vitamin D yang akan membantu dalam penyerapan kalsium secara maksimal. Vitamin D bisa didapatkan dari susu, hati ikan atau kuning telur.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Omega 3</b>
+                                    <p style="white-space: normal">
+                                        Konsumsi juga omega 3 yang akan mendukung perkembangan otak sehingga dapat menunjang janin selama di dalam kandungan. Omega 3 bisa anda dapatkan di berbagai macam bahan makanan seperti ikan salmon, makarel, sardin, telur, sayuran hijau atau kacang kedelai. Anda dapat mempersiapkan kecukupan omega 3 dari bulan ke 1 kehamilan anda.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Vitamin A</b>
+                                    <p style="white-space: normal">
+                                        Vitamin A memiliki fungsi untuk penglihatan, pertumbuhan kulit dan tulang. Selain itu vitamin A memiliki fungsi dalam menunjang pertumbuhan janin dan untuk imunitas pada bayi. Konsumsi vitamin A dengan jumlah yang wajar dan tidak berlebihan. Anda dapat mendapatkan vitamin A dari bahan makanan seperti wortel, bayam, tomat pepaya, apel atau buah naga.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Zat Besi dan Vitamin C</b>
+                                    <p style="white-space: normal">
+                                        Anda dapat mengkonsumsi zat besi yang terdapat di dalam daging, ikan atau hati. Zat besi memiliki fungsi untuk membentuk sel darah merah sehingga mengurangi resiko terkena anemia. Lengkapi pula dengan vitamin C yang akan membantu dalam penyerapan zat besi dan membnatu untuk melindungi jaringan dan membantu anda memberikan antioksidan.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>  
+                        <div data-role="collapsible">
+                            <h4>Masa Kehamilan 6 Bulan</h4>
+                             <ul data-role="listview" data-inset="false" >
+                                <li style="white-space: normal">                                
+                                    <b>Ikan Salmon</b>
+                                    <p style="white-space: normal">
+                                        Kandungan ikan salmon yang terdiri dari omega 3 berfungsi untuk kesehatan janin di dalam kandungan. Perhatikan pula pilihan ikan laut yang anda konsumsi jangan sampai banyak mengandung merkuri. Merkuri akan menggangu perkembangan saraf bayi sehingga mengkonsumsi salmon selain memiliki kandungan omega 3 yang baik termasuk dalam ikan laut yang rendah merkuri. Anda dapat mengkonsumsinya dengan porsi yang sesuai kebutuhan, 12 ons per minggu.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Telur</b>
+                                    <p style="white-space: normal">
+                                        Telur mengandung kalori bahkan di dalam kandungannya banyak mengandung vitamin, protein dan mineral. Telur merupakan makanan untuk ibu hamil yang mendorong pertumbuhan janin dan kaya akan kandungan kolin. Ibu hamil yang mengkonsumsi telur sebaiknya hindari mengkonsumsi mentah atau setengah matang.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Buncis</b>
+                                    <p style="white-space: normal">
+                                        Buncis adalah salah satu jenis kacang-kacangan yang baik dikonsumsi ibu hamil. Buncis mengandung protein dan serat yang lebih banyak dibandingkan dengan jenis kacang-kacangan lainnya. Kandungan protein nya akan membantu dalam menjaga jannin begitu pula serat yang dibutuhkan ibu hamil dalam melancarkan pencernaan. Ibu hamil di bulan ke 6 seringkali mengeluhkan gangguan pada pencernaan sehingga sebaiknya anda konsumsi makanan yang banyak mengandung serat.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Ubi Jalar</b>
+                                    <p style="white-space: normal">
+                                        Ubi jalar yang berwarna orange mengandung karatenoid yang banyak memberikan vitamin A. Seain itu ubi jalar membantu perkembangan janin dan juga mencukupi kebutuhan nutrisi ibu hamil diantaranya folat dan vitamin C. Ubi jalar dapat anda konsumsi direbus  atau dijadikan tambahan untuk sayur bening.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Daging tanpa lemak</b>
+                                    <p style="white-space: normal">
+                                        Memperhatikan berat badan tubuh anda selama kehamilan bukan berarti tidak mengkonsumsi makanan akan tetapi anda membatasi dengan pilihan yang tepat. Lengkapi kebutuhan gizi harian anda dari daging, pilihlah daging tanpa lemak. Daging tanpa lemak baik untuk ibu hamil.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Sayuran Hijau</b>
+                                    <p style="white-space: normal">
+                                        Anda dapat mengkonsumsi sayuran hijau yang sangat baik untuk kesehatan ibu dan janin. Bahkan bagi ibu yang sudah terbiasa mengkonsumsi sayuran akan membuat bayi anda mudah menerima sayuran di masa pemberian makanan pendamping ASI.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>  
+                        <div data-role="collapsible">
+                            <h4>Masa Kehamilan 7 Bulan</h4>
+                             <ul data-role="listview" data-inset="false" >
+                                <li style="white-space: normal">                                
+                                    <b>Kalori</b>
+                                    <p style="white-space: normal">
+                                        Pada trimester ke tiga ibu hamil membutuhkan kalori. Sehingga untuk memenuhi kebutuhan kalori ibu hamil dapat mengkonsumsi makanan yang mengandung karbohidrat dalam porsi sesuai yang dibutuhkan.Beberapa makanan yang mengandung kalori seperti kentang, singkong, umbi atau nasi.Penghitungan kalori yang tepat sesuai dengan porsi yang dibutuhkan oleh tubuh akan membantu dalam mengontrol berat badan ibu hamil dan mengurngi keluhan selama kehamilan di bulan ke 7.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Vitamin B</b>
+                                    <p style="white-space: normal">
+                                        Vitamin B dibutuhkan oleh tubuh terutama adalah vitamin B6 yang akan membantu dalam proses kimia dengan bantuan enzim. Selain itu Vitamin B6 akan membantu dalam proses metabolisme. Anda dapat melengkapi kebutuhan vitamin B6 dari bahan makanan seperti ikan, ayam atau daging sapi.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Yodium</b>
+                                    <p style="white-space: normal">
+                                        Yodium akan membantu dalam pembentukan sel baru dikarenakan kandungan senyawa tiroksin yang akan membantu untuk mengurangi resiko tubuh bayi kerdil.Meskipun dalam jumlah yang sedikit, anda tetap harus memperhatikan asupan yang mengandung yodium seperti dari ikan laut atau garam dapur beryodium. Meskipun demikian anda tetap harus memperhatikan asupannya jangan terlalu berlebihan.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Kalsium</b>
+                                    <p style="white-space: normal">
+                                        Kalsium akan membantu ibu menjaga kesehatan tulang selama kehamilan termasuk ketika memasuki bulan ke 7 kehamilan, bobot tubuh ibu hamil akan semakin berat, kekurangan kalsium akan menyebabkan mengikis tulang ibu ketika janin membutuhkan kalsium untuk pertumbuhan. Anda dapat mengkonsumsi susu yang mengandung protein dan kalsium yang baik untuk ibu hamil di bulan ke 7. Dengan membiasakan ibu hamil minum susu akan membantu antibodi yang baik untuk ibu hamil.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Buah-buahan</b>
+                                    <p style="white-space: normal">
+                                        Semua buah-buahan baik untuk kesehatan. Manfaat yang di dapatkan oleh ibu hamil yang mengkonsumsi pepaya adalah dapat mengurangi kondisi heartburn. Kondisi heartburn adalah kondisi dimana ibu hamil mengalami panas pada bagian perut. Pepaya akan membantu proses pencernaan sehinga mengurangi asam hidrolarat lambung.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>  
+                        <div data-role="collapsible">
+                            <h4>Masa Kehamilan 8 Bulan</h4>
+                             <ul data-role="listview" data-inset="false" >
+                                <li style="white-space: normal">                                
+                                    <b>Nasi merah dan umbi-umbian</b>
+                                    <p style="white-space: normal">
+                                        Pada usia kehamilan 8 bulan ibu hamil harus dapat menjaga asupan nutrisi.Salah satunya sumber kalori, ibu hamil harus tetap memperhatikan kalori untuk plasenta dan pertumbuhan janin. Ibu hamil dapat memperoleh asupan kalori dari kentang, singkong, kacang-kacangan, beras dan umbi-umbian. Disarankan ibu hamil mengkonsumsi beras merah karena selain memiliki kandungan serat yang biasanya dialami oleh ibu hamil menjelang persalinan adalah sembelit.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Sayuran warna orange dan hijau</b>
+                                    <p style="white-space: normal">
+                                        Sayuran dengan warna orange memiliki kandungan vitamin A yang lebih banyak sehingga dapat membantu dalam imunitas, perkembangan embrio dan pertumbuhan. Dengan mengkonsumsi vitamin A yang cukup maka akan mengurangi risiko bayi lahir prematur dan bayi lahir dengan berat badan yang rendah. Selain sayurana yang berwarna orange dan hijau anda dapat melengkapi kebutuhan vitamin A dari hati ayam, kuning telur dan susu.Variasikan menu harian anda dengan mengkonsumsi sayuran hijau.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Kacang kedelai</b>
+                                    <p style="white-space: normal">
+                                        Kacang kedelai memiliki kandungan vitamin B yang bermanfaat untuk ibu hamil di bulan ke 8. Vitamin B1 dan Vitamin B2 akan membantu dalam proses metabolisme sedangkan untuk vitamin B12 dan vitamin B6 akan membantu dalam pembentukan sel darah merah dan DHA. Sedangkan untuk B6 akan membantu dalam proses metabolisme yang berperan dalam sel saraf. Anda dapat melengkapi kebutuhan Vitamin B6 selain dari kacang kedelai yaitu dari ikan, susu atau gandum.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Jeruk dan brokoli</b>
+                                    <p style="white-space: normal">
+                                        Kandungan vitamin C yang terdapat di dalam sayur dan buah di atas dapat membantu untuk memberikan antioksidan dan melindungi kerusakan jaringan. Selain itu vitamin C sangat baik untuk penyerapan zat besi sehingga membantu ibu di kehamilan 8 bulan untuk mempersiapkan persalinan tanpa resiko anemia. Selain Jeruk dan brokoli anda dapat mengonsumsi tomat atau strawberry yang memberikan kandungan vitamin C.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Air</b>
+                                    <p style="white-space: normal">
+                                        Dehidrasi akan mengakibatkan gangguan kesehatan untuk ibu hamil sehingga yang dapat anda lakukan di bulan ke 8 salah satunya dengan menjaga asupan cairan yang dapat mengatur suhu tubuh dan mengatur proses metabolisme sehingga dapat menjaga kesehatan mempersiapkan menjelang persalinan.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>  
+                        <div data-role="collapsible">
+                            <h4>Masa Kehamilan 9 Bulan</h4>
+                             <ul data-role="listview" data-inset="false" >
+                                <li style="white-space: normal">                                
+                                    <b>Kurma</b>
+                                    <p style="white-space: normal">
+                                        Kurma dapat memberikan kalori pada ibu hamil, selain itu kandungan di dalam kurma akan memberikan manfaat untuk mengalirkan oksigen ke janin. Anda dapat mengkonsumsi buah kurma dua butir ketika sarapan dan juga makan siang.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Pisang</b>
+                                    <p style="white-space: normal">
+                                        Kandungan yang terdapat di dalam pisang adalah zat besi dan mineral, sangat baik untuk menu sarapan anda yang dicampur dengan gandum. Bahkan pisang dapat membantu mengurangi risiko anemia menjelang persalinan.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Bayam</b>
+                                    <p style="white-space: normal">
+                                        Sayuran hijau yang mudah untuk anda dapatkan ini memiliki manfaat sebagai zat besi dan juga asam folat. Sehingga ibu hamil yang mengkonsumsi bayam akan mengurangi risiko anemia menjelang persalinan.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Brokoli</b>
+                                    <p style="white-space: normal">
+                                        Kandungan yang terdapat di dalam brokoli adalah zat besi, asam folat dan vitamin. Bagi ibu hamil menjelang persalinan. Konsumsi sayuran hijau seperti brokoli akan menjaga proses pencernaan dan mengurangi risiko anemia.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Madu</b>
+                                    <p style="white-space: normal">
+                                        Kandungan madu sangat baik untuk kehamilan. Di bulan ke 9 kehamilan, konsumsi madu akan mengurangi risiko anemia. Madu merupakan sumber yang kaya akan zat besi. Anda dapat mengkonsumsi madu dengan campuran buah-buahan sehingga vitamin yang terdapat dalam variasi buah-buahan akan membantu anda menjaga asupan nutrisi.
+                                    </p>
+                                </li>
+                                <li style="white-space: normal">
+                                    <b>Tambahan</b>
+                                    <p style="white-space: normal">
+                                        Selain makanan di atas, anda dapat mengkonsumsi makanan yang mengandung kalori. Kalori dibutuhkan oleh tubuh ibu hamil menjelang persalinan. Kalori akan membantu dalam prose penting tumbuh kembang janin dan mempersiapkan energi untuk proses persalinan. Anda dapat menjaga asupan kalori dari nasi, umbi-umbian atau gandum. Porsi yang sesuai dengan ibu hamil akan membatu menjaga kesehatan dan berat badan yang ideal untuk ibu hamil di bulan 9 kehamilan.
+                                        Ibu hamil dengan berat badan yang berlebih akan mengakibatkan gangguan pada proses persalinan begitu pula dengan ibu hamil yang mengalami berat badan yang kurang menjelang persalinan. Perhatikan pula asupan cairan tubuh, minum air putih sebanyak 8 gelas perhari sangat disarankan untuk mengurangi risiko sembelit.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- /INFORMASI MAKANAN -->
+
         <!-- INFORMASI KEHAMILAN -->
-        <div data-role="page" id="ibuhamil-infoPersiapan" data-url="ibuhamil-infoPersiapan"> 
+        <div data-role="page" id="ibuhamil-informasi" data-url="ibuhamil-informasi"> 
             <div class="ui-header"  data-role="header" data-position="fixed">       
                 <h1 class="ui-title" role="heading">Informasi</h1>    
                 <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
                 <div data-role="navbar">
                     <ul>
                         <li><a href="#" class="ui-btn-active">Perkembangan janin</a></li>
-                        <li><a href="#ibuhamil-infoOlahraga">Olahraga</a></li>
-                        <li><a href="#ibuhamil-infoPemeriksaan">Pemeriksaan</a></li>
-                        <li><a href="#ibuhamil-infoTips">Tips</a></li>
+                        <li><a href="#ibuhamil-olahraga">Olahraga</a></li>
+                        <li><a href="#ibuhamil-tips">Tips</a></li>
                     </ul>
                 </div>
             </div>
             <div data-role="content">
+                <p>Source: <a href="http://perkembanganjanin.blogspot.com/2008/10/perkembangan-janin-dari-minggu-ke.html">click here</a></p>
                 <form>
-                    <input data-type="search" id="ibuHamilCariInformasiPerkembanganJanin" placeholder="Cari...">
+                    <input data-type="search" id="cariInformasiPerkembanganJanin" placeholder="Cari..."> 
                 </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#ibuHamilCariInformasiPerkembanganJanin" id="ibuHamilTabelInfoPerkembanganJanin">
-                    <!-- ibu_insert_infoPerkembanganJanin() @ projectEnsiklopedia.js -->
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariInformasiPerkembanganJanin">
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-1</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li >                                
+                                Keterampilan Utama
+                                <p style="white-space: normal">Menunjukkan perilaku pemicu kasih sayang, menangis, meringkuk, mendekut</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Terbaring seperti ketika masih di dalam rahim</p>
+                                <p>Ototnya seperti pegas</p>
+                                <p>Kepala sedikit diangkat</p>
+                                <p style="white-space: normal">Otot terkadang kejang kaki tidak merasakan berat</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Tangan terkepal erat</p>
+                                <p style="white-space: normal">Tidak dapat menggenggam giring-giring</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Menangis karena meminta sesuatu</p>
+                                <p style="white-space: normal">Mendengkur dengan suara tenggorokan</p>
+                                <p style="white-space: normal">Tersenyum-senyum</p>
+                                <p style="white-space: normal">Menangis disaat tidur</p>
+                                <p style="white-space: normal">Mengenali orang tuanya sebagai "si suara asing"</p>
+                                <p style="white-space: normal">Penglihatan paling baik berjarak 8-10 inci dan masih buram</p>
+                                <p style="white-space: normal">Tidur, bangun, makan secara tidak menentu</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p>
+                                <p style="white-space: normal">Tingkah lakunya lebih sering dilakukan secara refleks (otomatis) dibandingkan dengan berpikir dulu</p>
+                                <p style="white-space: normal">Mengantisipasi bahwa dengan hilangnya stres akan diikuti dengan kenyamanan</p>
+                                <p style="white-space: normal">Mulai belajar mempercayai</p>
+                            </li>
+                            <li>
+                                Tips
+                                <p style="white-space: normal"><b>Kiat untuk mempertahankan perhatian visual bayi:</b></p>
+                                <p style="white-space: normal">Dudukkan atau pegang tubuh bayi dalam posisi tegak, tunggu bayi hingga dalam keadaan diam, pegang objek atau wajah dalam jarak dalam jarak sekitar 25cm dari wajah bayi, gunakan gerakan wajah yang lucu (mulut dan mata terbuka lebar) sambil berbicara perlahan, berirama, serta nada yang dilebih-lebihkan</p>
+                                <p style="white-space: normal">*bayi yang baru lahir suka melihat wajah, terutama yang ia kenal.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-2</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-3</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-4</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-5</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-6</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-7</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-8</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-9</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-10</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-11</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-12</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-13</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-14</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-15</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-16</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-17</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-18</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-19</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-20</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-21</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-22</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-23</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-24</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-25</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-26</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-27</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-28</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-29</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-30</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-31</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-32</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-33</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-34</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-35</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-36</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-37</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Minggu ke-38 hingga 40</h4>
+                    </div>
                 </div>
             </div>
         </div>
         <!-- /INFORMASI KEHAMILAN -->
 
         <!-- OLAHRAGA -->
-        <div data-role="page" id="ibuhamil-infoOlahraga" data-url="ibuhamil-infoOlahraga">
-            <div class="ui-header"  data-role="header" data-position="fixed">
-                <h1 class="ui-title" role="heading">Informasi</h1>    
-                <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#ibuhamil-infoPersiapan">Perkembangan janin</a></li>
-                        <li><a href="#" class="ui-btn-active">Olahraga</a></li>
-                        <li><a href="#ibuhamil-infoPemeriksaan">Pemeriksaan</a></li>
-                        <li><a href="#ibuhamil-infoTips">Tips</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div data-role="content">
-                <form>
-                    <input data-type="search" id="ibuHamilCariInformasiOlahraga" placeholder="Cari..."> 
-                </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#ibuHamilCariInformasiOlahraga" id="ibuHamilTabelInfoOlahraga">
-                    <!-- ibu_insert_infoOlahraga() -->
-                </div>
-            </div>
-        </div>
-        <!-- /OLAHRAGA -->
-
-        <!-- PEMERIKSAAN -->
-        <div data-role="page" id="ibuhamil-infoPemeriksaan" data-url="ibuhamil-infoPemeriksaan"> 
-            <div class="ui-header"  data-role="header" data-position="fixed">
-                <h1 class="ui-title" role="heading">Informasi</h1>    
-                <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#ibuhamil-infoPersiapan">Perkembangan janin</a></li>
-                        <li><a href="#ibuhamil-infoOlahraga">Olahraga</a></li>
-                        <li><a href="#" class="ui-btn-active">Pemeriksaan</a></li>
-                        <li><a href="#ibuhamil-infoTips">Tips</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div data-role="content">
-                <form>
-                    <input data-type="search" id="ibuHamilCariInformasiPemeriksaan" placeholder="Cari..."> 
-                </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#ibuHamilCariInformasiPemeriksaan" id="ibuHamilTabelInfoPemeriksaan">
-                    <!-- ibu_insert_infoPemeriksaan() -->
-                </div>
-            </div>
-        </div>
-        <!-- /PEMERIKSAAN -->
-
-        <!-- TIPS -->
-        <div data-role="page" id="ibuhamil-infoTips" data-url="ibuhamil-infoTips"> 
+        <div data-role="page" id="ibuhamil-olahraga" data-url="ibuhamil-olahraga"> 
             <div class="ui-header"  data-role="header" data-position="fixed">       
                 <h1 class="ui-title" role="heading">Informasi</h1>    
                 <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#ibuhamil-infoPersiapan">Perkembangan janin</a></li>
-                        <li><a href="#ibuhamil-infoOlahraga">Olahraga</a></li>
-                        <li><a href="#ibuhamil-infoPemeriksaan">Pemeriksaan</a></li>
-                        <li><a href="#" class="ui-btn-active">Tips</a></li>
+                        <li><a href="#ibuhamil-informasi">Perkembangan janin</a></li>
+                        <li><a href="#" class="ui-btn-active">Olahraga</a></li>
+                        <li><a href="#ibuhamil-tips">Tips</a></li>
                     </ul>
                 </div>
             </div>
             <div data-role="content">
+                <p>Source: <a href="http://bidanku.com/jenis-jenis-dan-manfaat-olahraga-untuk-ibu-hamil">click here</a></p>
                 <form>
-                    <input data-type="search" id="ibuHamilCariInformasiTips" placeholder="Cari..."> 
+                    <input data-type="search" id="cariInformasiOlahraga" placeholder="Cari..."> 
                 </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#ibuHamilCariInformasiTips" id="ibuHamilTabelInfoTips">
-                    <!-- ibu_insert_infoTips() -->
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariInformasiOlahraga">
+                    <div data-role="collapsible">
+                        <h4>Jalan Kaki</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li >                                
+                                Keterampilan Utama
+                                <p style="white-space: normal">Menunjukkan perilaku pemicu kasih sayang, menangis, meringkuk, mendekut</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Terbaring seperti ketika masih di dalam rahim</p>
+                                <p>Ototnya seperti pegas</p>
+                                <p>Kepala sedikit diangkat</p>
+                                <p style="white-space: normal">Otot terkadang kejang kaki tidak merasakan berat</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Tangan terkepal erat</p>
+                                <p style="white-space: normal">Tidak dapat menggenggam giring-giring</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Menangis karena meminta sesuatu</p>
+                                <p style="white-space: normal">Mendengkur dengan suara tenggorokan</p>
+                                <p style="white-space: normal">Tersenyum-senyum</p>
+                                <p style="white-space: normal">Menangis disaat tidur</p>
+                                <p style="white-space: normal">Mengenali orang tuanya sebagai "si suara asing"</p>
+                                <p style="white-space: normal">Penglihatan paling baik berjarak 8-10 inci dan masih buram</p>
+                                <p style="white-space: normal">Tidur, bangun, makan secara tidak menentu</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p>
+                                <p style="white-space: normal">Tingkah lakunya lebih sering dilakukan secara refleks (otomatis) dibandingkan dengan berpikir dulu</p>
+                                <p style="white-space: normal">Mengantisipasi bahwa dengan hilangnya stres akan diikuti dengan kenyamanan</p>
+                                <p style="white-space: normal">Mulai belajar mempercayai</p>
+                            </li>
+                            <li>
+                                Tips
+                                <p style="white-space: normal"><b>Kiat untuk mempertahankan perhatian visual bayi:</b></p>
+                                <p style="white-space: normal">Dudukkan atau pegang tubuh bayi dalam posisi tegak, tunggu bayi hingga dalam keadaan diam, pegang objek atau wajah dalam jarak dalam jarak sekitar 25cm dari wajah bayi, gunakan gerakan wajah yang lucu (mulut dan mata terbuka lebar) sambil berbicara perlahan, berirama, serta nada yang dilebih-lebihkan</p>
+                                <p style="white-space: normal">*bayi yang baru lahir suka melihat wajah, terutama yang ia kenal.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Berenang</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Senam Hamil</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Yoga</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Latihan Beban</h4>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Peregangan</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /OLAHRAGA -->
+
+        <!-- TIPS -->
+        <div data-role="page" id="ibuhamil-tips" data-url="ibuhamil-tips"> 
+            <div class="ui-header"  data-role="header" data-position="fixed">       
+                <h1 class="ui-title" role="heading">Informasi</h1>    
+                <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#ibuhamil-informasi">Perkembangan janin</a></li>
+                        <li><a href="#ibuhamil-olahraga">Olahraga</a></li>
+                        <li><a href="#" class="ui-btn-active">Tips</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -245,63 +756,68 @@
             <div class="ui-header"  data-role="header" data-position="fixed">       
                 <h1 class="ui-title" role="heading">Persiapan</h1>    
                 <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#" class="ui-btn-active">Persiapan Kehamilan</a></li>
-                        <li><a href="#ibuhamil-persiapanTips">Tips</a></li>
-                    </ul>
-                </div>
             </div>
             <div data-role="content">
+                <p>Source tanda: <a href="http://bidanku.com/tanda-tanda-akan-melahirkan">click here</a></p>
+                <p>Source persalinan: <a href="http://bidanku.com/persiapan-persalinan">click here</a></p>
                 <form>
-                    <input data-type="search" id="ibuHamilCariPersiapan" placeholder="Cari..."> 
+                    <input data-type="search" id="cariInformasiOlahraga" placeholder="Cari..."> 
                 </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#ibuHamilCariPersiapan" id="ibuHamilTabelPersiapan">
-                    <!-- ibu_insert_persiapan() -->
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariInformasiOlahraga">
+                    <div data-role="collapsible">
+                        <h4>Tanda-tanda kelahiran</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li >                                
+                                Keterampilan Utama
+                                <p style="white-space: normal">Menunjukkan perilaku pemicu kasih sayang, menangis, meringkuk, mendekut</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Terbaring seperti ketika masih di dalam rahim</p>
+                                <p>Ototnya seperti pegas</p>
+                                <p>Kepala sedikit diangkat</p>
+                                <p style="white-space: normal">Otot terkadang kejang kaki tidak merasakan berat</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Tangan terkepal erat</p>
+                                <p style="white-space: normal">Tidak dapat menggenggam giring-giring</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Menangis karena meminta sesuatu</p>
+                                <p style="white-space: normal">Mendengkur dengan suara tenggorokan</p>
+                                <p style="white-space: normal">Tersenyum-senyum</p>
+                                <p style="white-space: normal">Menangis disaat tidur</p>
+                                <p style="white-space: normal">Mengenali orang tuanya sebagai "si suara asing"</p>
+                                <p style="white-space: normal">Penglihatan paling baik berjarak 8-10 inci dan masih buram</p>
+                                <p style="white-space: normal">Tidur, bangun, makan secara tidak menentu</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p>
+                                <p style="white-space: normal">Tingkah lakunya lebih sering dilakukan secara refleks (otomatis) dibandingkan dengan berpikir dulu</p>
+                                <p style="white-space: normal">Mengantisipasi bahwa dengan hilangnya stres akan diikuti dengan kenyamanan</p>
+                                <p style="white-space: normal">Mulai belajar mempercayai</p>
+                            </li>
+                            <li>
+                                Tips
+                                <p style="white-space: normal"><b>Kiat untuk mempertahankan perhatian visual bayi:</b></p>
+                                <p style="white-space: normal">Dudukkan atau pegang tubuh bayi dalam posisi tegak, tunggu bayi hingga dalam keadaan diam, pegang objek atau wajah dalam jarak dalam jarak sekitar 25cm dari wajah bayi, gunakan gerakan wajah yang lucu (mulut dan mata terbuka lebar) sambil berbicara perlahan, berirama, serta nada yang dilebih-lebihkan</p>
+                                <p style="white-space: normal">*bayi yang baru lahir suka melihat wajah, terutama yang ia kenal.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Persiapan persalinan</h4>
+                    </div>
                 </div>
             </div>
         </div>
         <!-- /PERSIAPAN -->
 
-        <!-- TIPS PERSIAPAN -->
-        <div data-role="page" id="ibuhamil-persiapanTips" data-url="ibuhamil-persiapanTips"> 
-            <div class="ui-header"  data-role="header" data-position="fixed">       
-                <h1 class="ui-title" role="heading">Persiapan</h1>    
-                <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#ibuhamil-persiapan">Persiapan Kehamilan</a></li>
-                        <li><a href="#" class="ui-btn-active">Tips</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div data-role="content">
-                <form>
-                    <input data-type="search" id="ibuHamilCariPersiapanTips" placeholder="Cari..."> 
-                </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#ibuHamilCariPersiapanTips" id="ibuHamilTabelPersiapanTips">
-                    <!-- ibu_insert_persiapanTips() -->
-                </div>
-            </div>
-        </div>
-        <!-- /TIPS PERSIAPAN -->
-
-        <!-- FAQ -->
-        <div data-role="page" id="ibuhamil-faq" data-url="ibuhamil-faq"> 
-            <div class="ui-header"  data-role="header" data-position="fixed">
-                <h1 class="ui-title" role="heading">FAQ (Frequently Asked Question)</h1>    
-                <a href="#ibuhamil-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
-            </div>
-            <div data-role="content">
-                <form>
-                    <input data-type="search" id="ibuHamilCariFAQ" placeholder="Cari..."> 
-                </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#ibuHamilCariFAQ" id="ibuHamilTabelFAQ">
-                    <!-- ibu_insert_FAQ() -->
-                </div>
-            </div>
-        </div>
-        <!-- /FAQ -->
+        <!-- PERSIAPAN -->
+        <!-- /PERSIAPAN -->
         <!-- /IBU HAMIL -->
 
         <!-- BALITA -->
@@ -316,7 +832,7 @@
                 <ul data-role="listview" data-inset="true">
                     <li>
                         <a href="#balita-rekomendasi">
-                            <img src="img/balita-nutrisi.jpg" class="ui-li-thumb">
+                            <img src="img/balita-nutrisi.png" class="ui-li-thumb">
                             <h3>Nutrisi</h3>                           
                         </a>
                     </li>
@@ -328,7 +844,7 @@
                     </li>
                     <li>
                         <a href="#balita-P3K">
-                            <img src="img/balita-p3k.jpg" class="ui-li-thumb">
+                            <img src="img/balita-p3k.png" class="ui-li-thumb"  style="background-color:white;">
                             <h3>P3K</h3>                            
                         </a>
                     </li>
@@ -354,7 +870,7 @@
                 <fieldset data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false">
                     <legend>Pilih Usia dan Jenis Alergi</legend>
                     <label><b>Usia:</b></label>
-                    <select name="balitaSlctUmurBM" id="balitaSlctUsiaBM" data-mini="true">
+                    <select name="slctUmurBM" id="slctUsiaBM" data-mini="true">
                         <option value="1">0-6 bulan</option>
                         <option value="2">6 bulan</option>
                         <option value="3">7-9 bulan</option>
@@ -364,26 +880,26 @@
                     </select>
                     <label><b>Alergi:</b></label>
                     <div data-role="controlgroup" data-mini="true">
-                        <input type="checkbox" name="balitaChkLaktosa" id="balitaChkLaktosa">
-                        <label for="balitaChkLaktosa" style="white-space: normal">Laktosa Intoleran</label>
-                        <input type="checkbox" name="balitaChkCasein" id="balitaChkCasein">
-                        <label for="balitaChkCasein" style="white-space: normal">Casein Susu Sapi</label>
-                        <input type="checkbox" name="balitaChkTelur" id="balitaChkTelur">
-                        <label for="balitaChkTelur" style="white-space: normal">Telur</label>
-                        <input type="checkbox" name="balitaChkIkan" id="balitaChkIkan">
-                        <label for="balitaChkIkan" style="white-space: normal">Ikan Laut</label>
+                        <input type="checkbox" name="chkLaktosa" id="chkLaktosa">
+                        <label for="chkLaktosa" style="white-space: normal">Laktosa Intoleran</label>
+                        <input type="checkbox" name="chkCasein" id="chkCasein">
+                        <label for="chkCasein" style="white-space: normal">Casein Susu Sapi</label>
+                        <input type="checkbox" name="chkTelur" id="chkTelur">
+                        <label for="chkTelur" style="white-space: normal">Telur</label>
+                        <input type="checkbox" name="chkIkan" id="chkIkan">
+                        <label for="chkIkan" style="white-space: normal">Ikan Laut</label>
                     </div>
-                    <button data-mini="true" onclick="balita_rekomendasi()">Cari...</button>
+                    <button data-mini="true" onclick="RekomendasiBalita()">Cari...</button>
                 </fieldset>
                 <div data-role="collapsibleset">
                     <div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false" >
                         <h4>Bahan Makanan</h4>
-                        <ul data-role="listview" data-inset="false" id="balitaListviewBahanMakanan">  
+                        <ul data-role="listview" data-inset="false" id="listviewBahanMakanan">  
                         </ul>
                     </div>
                     <div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
                         <h4>Resep</h4>
-                        <ul data-role="listview" data-inset="false" id="balitaListviewResep">  
+                        <ul data-role="listview" data-inset="false" id="listviewResep">  
                         </ul>
                     </div>
                 </div>                
@@ -408,7 +924,7 @@
                 <fieldset data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false">
                     <legend>Masukkan data yang ditanyakan...</legend>
                     <label><b>Usia:</b></label>
-                    <select name="balitaSlctUmurBK" id="balitaSlctUmurBK" data-mini="true">
+                    <select name="slctUmurBK" id="slctUmurBK" data-mini="true">
                         <option value="1">0-6 bulan</option>
                         <option value="2">6 bulan</option>
                         <option value="3">7-9 bulan</option>
@@ -418,17 +934,17 @@
                     </select>
                     <label><b>Alergi:</b></label>
                     <div data-role="controlgroup" data-mini="true">
-                        <input type="checkbox" name="balitaChkLaktosaBK" id="balitaChkLaktosaBK">
-                        <label for="balitaChkLaktosaBK" style="white-space: normal">Laktosa Intoleran</label>
-                        <input type="checkbox" name="balitaChkCaseinBK" id="balitaChkCaseinBK">
-                        <label for="balitaChkCaseinBK" style="white-space: normal">Casein Susu Sapi</label>
-                        <input type="checkbox" name="balitaChkTelurBK" id="balitaChkTelurBK">
-                        <label for="balitaChkTelurBK" style="white-space: normal">Telur</label>
-                        <input type="checkbox" name="balitaChkIkanBK" id="balitaChkIkanBK">
-                        <label for="balitaChkIkanBK" style="white-space: normal">Ikan Laut</label>
+                        <input type="checkbox" name="chkLaktosaBK" id="chkLaktosaBK">
+                        <label for="chkLaktosaBK" style="white-space: normal">Laktosa Intoleran</label>
+                        <input type="checkbox" name="chkCaseinBK" id="chkCaseinBK">
+                        <label for="chkCaseinBK" style="white-space: normal">Casein Susu Sapi</label>
+                        <input type="checkbox" name="chkTelurBK" id="chkTelurBK">
+                        <label for="chkTelurBK" style="white-space: normal">Telur</label>
+                        <input type="checkbox" name="chkIkanBK" id="chkIkanBK">
+                        <label for="chkIkanBK" style="white-space: normal">Ikan Laut</label>
                     </div>
                     <label><b>Bahan Makanan:</b></label>
-                    <select id="balitaSlctBahanBK" data-native-menu="false" data-mini="true">
+                    <select id="slctBahanBK" data-native-menu="false" data-mini="true">
                         <option value="ASI">ASI</option>
                         <option value="Susu Formula">Susu Formula</option>
                         <option value="Susu Formula Bebas Laktosa">Susu Formula Bebas Laktosa</option>
@@ -491,10 +1007,10 @@
                         <option value="Puding Bergizi">Puding Bergizi</option> 
                         <option value="Madu">Madu</option>
                     </select>
-                    <button data-mini="true" onclick="balita_bolehkah()">Bolehkah?</button>
+                    <button data-mini="true" onclick="Bolehkah()">Bolehkah?</button>
                     <br>
                     <label><b>Hasil:</b></label> 
-                    <label id="balitaJawabanBK" style="color: red; font-style: italic"></label>
+                    <label id="jawabanBK" style="color: red; font-style: italic"></label>
                 </fieldset>               
             </div>            
         </div>
@@ -514,8 +1030,57 @@
                 </div>
 	        </div>
             <div data-role="content">
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#balitaCariNutrisiInfo" id="balitaTabelNutrisiInfo">
-                    <!-- balita_insert_nutrisiInformasi() -->
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan">
+                    <div data-role="collapsible">
+                        <h4>Alergi</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li data-role="list-divider" style="white-space: normal"><b><big>Laktosa Intoleran</big></b></li>
+                            <li style="white-space: normal">
+                                Alergi laktosa intoleran tidaklah murni sebuah alergi. Hal ini merupakan suatu keadaan dimana laktosa (gula yang terkandung dalam susu) tidak dapat dicerna karena kurang atau tidak adanya enzim laktose. Biasanya pengidap alergi ini adalah keturunan. Umumnya hal ini dapat terjadi seumur hidup.<br><br>
+                                <b>Gejala:</b><br> mual, kram, diare, kembung perut, dan muka bengkak. Biasanya muncul setelah 30 menit mengonsumsi susu. 
+                                <br><br><b>Cara mengatasi:</b><br> berikan susu bebas laktose, dapat juga diberikan susu kedelai tetapi untuk bayi berumur 6 bulan keatas.
+                            </li>        
+                            <li data-role="list-divider" style="white-space: normal"><b><big>Casein Susu Sapi</big></b></li>
+                            <li style="white-space: normal">
+                                Alergi ini merupakan kondisi dimana bayi alergi terhadap protein susu sapi yang disebut casein. Apabila hal ini terjadi, segera konsultasikan dengan dokter dan hati-hati sebelum memutuskan untuk memberikan susu formula pada bayi.<br><br>
+                                <b>Cara mengatasi:</b><br>Apabila bayi menampakkan alergi terhadap casein, dianjurkan agar si ibu juga harus membatasi konsumsi susu sapi atau produk olahannya agar tidak mempengaruhi kualitas ASI. Biasanya dokter akan memberikan nasihat untuk mengganti susu formula biasa dengan formula hidrolisa (rendah alergen).
+                            </li>
+                            <li data-role="list-divider" style="white-space: normal"><b><big>Telur</big></b></li>
+                            <li style="white-space: normal">
+                                Telur yang sering mengandung bakteri Salmonella yg dapat menyebabkan gejala alergi bahkan keracunan adalah telur bebek/itik. Hal ini banyak disebabkan oleh konsumsi telur bebek atau telur yang direbusnya tidak matang.<br><br>
+                                <b>Gejala:</b><br>Dimulai dengan sakit perut, mual, muntah, panas tubuh meningkat, dan terkadang disertai diare.
+                                <br><br><b>Cara mengatasi:</b><br>Agar tidak terjadi risiko alergi terhadap telur, maka sebaiknya bayi baru boleh diberi telur setelah melewati usia 6 bulan. Telur yg diberikan harus matang, baik putih maupun kuningnya. Telur setengah matang baru boleh diberikan setelah bayi berumur 1 tahun.
+                            </li>
+                            <li data-role="list-divider" style="white-space: normal"><b><big>Kacang-kacangan</big></b></li>
+                            <li style="white-space: normal">
+                                Kacang-kacangan, terutama kacang tanah dan hasil olahannya dapat menyebabkan reaksi alergi yang berbahaya yang disebut <i>shock anaphylactic</i> (kejang-kejang), bahkan dapat menyebabkan kematian.<br><br>
+                                <b>Cara mengatasi:</b><br>bagi mereka yang mempunyai sejarah alergi seperti eksim dan asma, sangat dianjurkan untuk menghindari kacang tanah dan produk olahannya, sampai bayi/anak minimal berusia 3 tahun. Mintalah nasihat dokter terlebih dahulu sebelum memperbolehkan bayi/anak mengonsumsi kacang tanah dalam menu makanannya. 
+                            </li>
+                            <li data-role="list-divider" style="white-space: normal"><b><big>Tomat dan Stroberi</big></b></li>
+                            <li style="white-space: normal">
+                                Buah tomat yang mengandung laktin bisa mengakibatkan alergi pada bayi. Selain tomat, sebagian anak juga ada yang alergi terhadap buah stroberi.<br><br>
+                                <b>Gejala:</b><br>Timbul ruam kulit seperti eksim.
+                                <br><br><b>Cara mengatasi:</b><br>Jangan memberikan makanan yang berbahan tomat mentah atau olahan seperti saus tomat, pasta tomat ataupun tomat kemasan. Jika, anak sudah memiliki riwayat alergi tomat, tunda dulu memberikan tomat pada bayi hingga usia 9 bulan.
+                                <br><br>Untuk anak yang alergi stroberi, sebaiknya ibu tidak memberikan buah jeruk segar yang berasa masam atau kecut, yogurt buah, labu, dan permen jeruk. Lebih baik memberikan buah pepaya, pisang, alpukat, atau jus apel yang lebih aman untuk tubuh bayi.
+                            </li>
+                            <li data-role="list-divider" style="white-space: normal"><b><big>Ikan Laut</big></b></li>
+                            <li style="white-space: normal">
+                                Ikan adalah makanan yang kaya akan protein yang bisa membentuk kecerdasan pada anak. Tapi sayangnya banyak kasus anak alergi terhadap ikan, khususnya ikan laut, seperti salmon dan jenis makanan laut lainya, misal tuna, salmon, cumi, udang dan kepiting.<br><br>
+                                <b>Gejala:</b><br>Anak yang alergi makanan laut akan muncul rasa gatal dan bintik kemerahan di kulit.
+                                <br><br><b>Cara mengatasi:</b><br>Anda sebaiknya jangan dulu memberi ikan pada bayi sebelum usianya mencapai 6 bulan karena masih dalam masa pemberian ASI eksklusif. Setelah usia bayi Ibu mencapai 8 atau 12 bulan, ikan bisa menjadi bagian dari menu yang seimbang. Alergi makanan karena ikan laut paling mudah terdeteksi karena gejala yang ditimbulkan relatif cepat. Biasanya kurang dari 8 jam keluhan alergi sudah bisa dikenali.
+                            </li>                            
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Zat Gizi</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li><a href="#balita-karbohidrat">Karbohidrat</a></li>
+                            <li><a href="#balita-lemak">Lemak</a></li>
+                            <li><a href="#balita-protein">Protein</a></li>
+                            <li><a href="#balita-vitamin">Vitamin</a></li>
+                            <li><a href="#balita-mineral">Mineral</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -523,12 +1088,48 @@
 
         <!-- KARBOHIDRAT -->
         <div data-role="page" id="balita-karbohidrat" data-url="balita-karbohidrat"> 
-            <div class="ui-header"  data-role="header" data-position="fixed">
+            <div class="ui-header"  data-role="header" data-position="fixed">		
 		        <h1 class="ui-title" role="heading">Sumber Zat Gizi</h1>
                 <a href="#balita-informasi" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
             </div>
-            <div data-role="content" id="balitaKontenKarbohidrat">
-                <!-- balita_insert_nutrisiInformasi() -->
+            <div data-role="content">
+                <b>Karbohidrat</b>
+                <p>Karbohidrat berfungsi sebagai sumber energi, satu gram karbohidrat setara dengan 4 kkal.</p>
+                <b>Sumber makanan:</b>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan">
+                    <div data-role="collapsible">
+                        <h4>Karbohidrat baik</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li style="white-space: normal">Buah/sayuran tertentu yang berasa manis madu</li>
+                            <li>Gandum kasar</li>
+                            <li>Beras merah</li>
+                            <li>Beras tumbuk</li>
+                            <li>Kentang</li>
+                            <li>Pisang</li>
+                            <li>Jagung</li>
+                            <li>Sagu, dan lain-lain</li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Karbohidrat jahat</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li>Gula pasir</li>
+                            <li>Gula merah</li>
+                            <li>Soft drink</li>
+                            <li>Permen</li>
+                            <li>Biskuit</li>
+                            <li>Kue</li>
+                            <li>Terigu</li>
+                            <li>Pasta</li>  
+                            <li>Beras putih</li>
+                            <li>Tepung beras</li>
+                            <li>Maizena</li>
+                            <li>Roti</li>
+                            <li>Mie</li>
+                            <li>Bihun, dan lain-lain</li>
+                        </ul>
+                    </div>
+                </div>             
             </div>
         </div>
         <!-- /KARBOHIDRAT -->
@@ -539,8 +1140,52 @@
 		        <h1 class="ui-title" role="heading">Sumber Zat Gizi</h1>
                 <a href="#balita-informasi" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
             </div>
-            <div data-role="content" id="balitaKontenLemak">
-                <!-- balita_insert_nutrisiInformasi() -->
+            <div data-role="content">
+                <b>Lemak</b>
+                <p>Lemak berfungsi untuk komponen sel-sel syaraf, membran seluler, senyawa menyerupai hormon; pengangkut vitamin A, D, E,K; sumber energi; menjaga kesehatan kulit; melindungi organ-organ  vital tubuh; melindungi tubuh dari kehilangan panas yang berlebihan.</p>
+                <b>Sumber makanan:</b>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan">
+                    <div data-role="collapsible">
+                        <h4>Asam lemak tidak jenuh</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li>Minyak zaitun</li>
+                            <li>Minyak jagung</li>
+                            <li>Minyak bunga matahari</li>
+                            <li style="white-space: normal">Biji-bijian (baru boleh diberikan pada anak usia di atas 12 bulan)</li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Asam lemak omega 3/DHA</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li>Ikan salmon</li>
+                            <li>Tuna</li>
+                            <li>Sarden</li>
+                            <li>Makarel</li>
+                            <li>Telur organik</li>
+                            <li>Wijen</li>
+                            <li style="white-space: normal">Biji bunga matahari/minyak</li>
+                            <li style="white-space: normal">Kedelai dan produk olahannya</li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Asam lemak omega 6/AA/ARA</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li>Almond</li>
+                            <li>Kenari</li>
+                            <li>Alpukat</li>
+                            <li style="white-space: normal">Kedelai dan produk olahannya</li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Asam lemak jenuh</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li style="white-space: normal">Minyak kelapa dan minyak kelapa sawit</li>
+                            <li>Mentega</li>
+                            <li style="white-space: normal">Susu <i>whole fat</i> atau produk susu beserta olahannya termasuk keju.</li>
+                            <li style="white-space: normal">Daging merah</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- /LEMAK -->
@@ -551,9 +1196,35 @@
 		        <h1 class="ui-title" role="heading">Sumber Zat Gizi</h1>
                 <a href="#balita-informasi" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
             </div>
-            <div data-role="content" id="balitaKontenProtein">
-                <!-- balita_insert_nutrisiInformasi() -->
-            </div>
+            <div data-role="content">
+                <b>Protein</b>
+                <p>Fungsi utama protein adalah sebagai bahan dasar pembentukan sel-sel dan jaringan tubuh. Fungsi lainnya yaitu berperan dalam proses pertumbuhan, pemeliharaan, dan perbaikan jaringan tubuh yang rusak, membantu proses pembuatan sel darah merah, serta membantu membentuk anti bodi untuk melawan penyakit dan infeksi.</p>
+                <b>Sumber makanan:</b>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan">
+                    <div data-role="collapsible">
+                        <h4>Protein hewani</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li style="white-space: normal">Daging sapi</li>
+                            <li>Daging kambing</li>
+                            <li>Daging kambing</li>
+                            <li>Daging domba</li>
+                            <li>Ikan</li>
+                            <li>Udang</li>
+                            <li>Telur</li>
+                            <li style="white-space: normal">Susu dan produk olahannya</li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Protein nabati</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li style="white-space: normal">Kacang kedelai dan produk olahannya</li>
+                            <li>Kacang almond</li>
+                            <li>Kacang polong</li>
+                            <li>Gandum</li>
+                        </ul>
+                    </div>
+                </div>
+             </div>            
         </div>
         <!-- /PROTEIN -->
 
@@ -563,8 +1234,113 @@
 		        <h1 class="ui-title" role="heading">Sumber Zat Gizi</h1>
                 <a href="#balita-informasi" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
             </div>
-            <div data-role="content" id="balitaKontenVitamin">
-                <!-- balita_insert_nutrisiInformasi() -->
+            <div data-role="content">
+                <b>Vitamin</b>
+                <p>Vitamin adalah zat-zat organik kompleks yang dibutuhkan dalam jumlah yang relatif kecil dan pada umumnya tidak dapat dibentuk atau disintesis oleh tubuh.</p>
+                <b>Sumber makanan:</b>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan">
+                    <div data-role="collapsible">
+                        <h4>Vitamin A</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li>Hati</li>
+                            <li>Kuning Telur</li>
+                            <li>Minyak ikan</li>
+                            <li>Wortel</li>
+                            <li>Brokoli</li>
+                            <li>Labu kuning</li>
+                            <li>Kentang</li>
+                            <li>Mangga</li>
+                            <li>Pepaya</li>
+                            <li>Jeruk</li>
+                            <li>Lemon</li>
+                            <li>Tomat</li>
+                            <li>Aprikot</li>
+                            <li>Peach</li>
+                            <li>Telur</li>
+                            <li>Selada air</li>
+                            <li>Mentega</li>
+                            <li>Margarin</li>
+                            <li>Susu penuh</li>
+                            <li style="white-space: normal"><small>Berperan untuk pertumbuhan tulang, kulit, rambut, dan mata. Serta meningkatkan daya tahan tubuh terhadap infeksi, melindungi tubuh dari serangan jenis kanker tertentu.</small></li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Vitamin B kompleks</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li>Biji-bijian</li>
+                            <li>Kacang-kacangan</li>
+                            <li>Sayuran hijau</li>
+                            <li style="white-space: normal">Susu dan produk olahannya</li>
+                            <li>Telur</li>
+                            <li>Ikan berlemak</li>
+                            <li>Daging merah</li>
+                            <li style="white-space: normal"><small>Terdiri dari vitamin B1 (thiamin), vitamin B2 (riboflavin), vitamin B3 (niacin), vitamin B5 (asam pantotenat), vitamin B6 (piridoksin), vitamin B12 (cianocabalamin), asam folat, dan biotin. Berfungsi untuk mengubah makanan menjadi energi, membantu proses pertumbuhan, menjaga kesehatan sistem saraf, menjaga lambung dan usus tetap sehat, dan menghindari infeksi.</small></li>                            
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Vitamin C</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li style="white-space: normal">Pada umumnya ditemukan pada sayuran dan buah-buahan.</li>
+                            <li>Brokoli</li>
+                            <li>Kol</li>
+                            <li>Taoge</li>
+                            <li>Cabai</li>
+                            <li>Jeruk</li>
+                            <li>bluberi</li>
+                            <li>Melon</li>
+                            <li>Pepaya</li> 
+                            <li>Stroberi</li>
+                            <li>Tomat</li>
+                            <li style="white-space: normal"><small>Diperlukan untuk pertumbuhan, kesehatan jaringan tubuh, dan penyembuhan luka serta membantu dalam proses penyerapan zat besi. Selain itu penting untuk mengatur laju basal metabolisme dan menjaga suhu tubuh, membantu pembuluh darah agar tetap elastis dan kuat sehingga mencegah luka memar pada tubuh.</small></li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Vitamin D</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li>Minyak ikan</li>
+                            <li>Ikan berlemak, misal: tuna</li>
+                            <li>Hati</li>
+                            <li>Minyak</li>
+                            <li>Telur</li>
+                            <li>Margarin</li>
+                            <li>Susu olahan</li>
+                            <li style="white-space: normal">Dapat dibuat melalui kulit dengan bantuan sinar ultraviolet/matahari</li>
+                            <li style="white-space: normal"><small>Bersama dengan kalsium vitamin D berguna dalam pembentukan dan menjaga kesehatan tulang dan gigi.</small></li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Vitamin E</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li>Telur</li>
+                            <li>Minyak</li>
+                            <li>Sayuran</li>
+                            <li>Margarin</li>
+                            <li>Tepung gandum</li>
+                            <li>Kentang</li>
+                            <li>Sayuran hijau daun</li>
+                            <li>Alpukat</li>
+                            <li>Kacang-kacangan</li>
+                            <li style="white-space: normal"><small>Penting untuk proses metabolisme, menjaga kesehatan kulit dan otot, melindungi lemak dan zat-zat yang terkandung di dalamnya dari kerusakan dan komposisi struktur sel. Selain itu, membantu membuat dan memelihara sel darah merah.</small></li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Vitamin K</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li>Sayuran hijau</li>
+                            <li>Kol</li>
+                            <li>Kacang polong</li>
+                            <li>Kentang</li>
+                            <li>Hati</li>
+                            <li>Tomat</li>
+                            <li>Yoghurt</li>
+                            <li>Daging</li>
+                            <li>Telur</li>
+                            <li>Susu</li>
+                            <li>Kacang-kacangan</li>
+                            <li style="white-space: normal"><small>Berguna untuk pembentukan darah dan pertumbuhan tulang, membantu proses penyerapan di dalam usus, menghindari penyakit jantung dan menghentikan pendarahan.</small></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- /VITAMIN -->
@@ -575,24 +1351,633 @@
 		        <h1 class="ui-title" role="heading">Sumber Zat Gizi</h1>
                 <a href="#balita-informasi" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back ui-btn-icon-notext"></a>
             </div>
-            <div data-role="content" id="balitaKontenMineral">
-                <!-- balita_insert_nutrisiInformasi() -->
+            <div data-role="content">
+                <b>Mineral</b>
+                <p>Mineral merupakan bagian yang memegang peranan penting dalam pemeliharaan fungsi tubuh, baik pada tingkat sel, jaringan, organ maupun fungsi tubuh secara keseluruhan. Disamping itu mineral berperan dalam berbagai tahap proses metabolisme, terutama sebagai kofaktor dalam aktifitas enzim-enzim.</p>
+                <b>Sumber makanan:</b>
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan">
+                    <div data-role="collapsible">
+                        <h4>Kalsium (Ca)</h4>
+                        <ul data-role="listview" data-inset="false" >  
+                            <li style="white-space: normal">Susu dan produk olahannya</li>
+                            <li>Ikan</li>
+                            <li>Buah Kering</li>
+                            <li>Roti dan tepung</li>
+                            <li>Brokoli</li>
+                            <li>Kacang polong</li>
+                            <li style="white-space: normal"><small>Kalsium diperlukan gar tulang dan gigi menjadi kuat, menjaga keseimbangan cairan tubuh, membantu proses pembekuan darah, membantu penyerapan vitamin B12, serta penting untuk perkembangan sel-sel saraf dan otak.</small></li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Zat besi (Fe)</h4>
+                        <ul data-role="listview" data-inset="false" >  
+                            <li>Hati</li>
+                            <li>Ginjal</li>
+                            <li>Daging merah</li>
+                            <li>Minyak ikan</li>
+                            <li>Kuning telur</li>
+                            <li>Sereal gandum utuh</li>
+                            <li>Kacang polong</li>
+                            <li>Sayuran berdaun hijau</li>
+                            <li>Cokelat</li>
+                            <li style="white-space: normal"><small>Diperlukan untuk pembentukan sel darah merah, kesehatan darah dan otot, serta penting untuk mencegah infeksi.</small></li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Seng (Zn)</h4>
+                        <ul data-role="listview" data-inset="false" >  
+                            <li>Kacang-kacangan</li>
+                            <li>Daging merah</li>
+                            <li>Ikan</li>
+                            <li>Telur</li>
+                            <li>Gandum</li>
+                            <li>Bawang</li>
+                            <li style="white-space: normal"><small>Diperlukan untuk pembentukan enzim maupun protein. Serta diperlukan untuk memperlancar peredaran vitamin A dan cadangannya dari hati ke aliran darah.</small></li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Fosfor (P)</h4>
+                        <ul data-role="listview" data-inset="false" >  
+                            <li style="white-space: normal">Kacang-kacangan dan olahannya</li>
+                            <li>Daging merah</li>
+                            <li>Ikan</li>
+                            <li>Telur</li>
+                            <li>Gandum</li>
+                            <li>Ayam</li>
+                            <li style="white-space: normal">Susu dan olahannya</li>
+                            <li>Serealia</li>
+                            <li style="white-space: normal"><small>Berperan dalam mengatur pengalihan energi, keseimbangan asam-basa, absorpsi dan transportasi zat gizi, serta membantu proses pengerasan tulang dan gigi.</small></li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Magnesium (MG)</h4>
+                        <ul data-role="listview" data-inset="false" >  
+                            <li>Daging merah</li>
+                            <li>Kacang-kacangan</li>
+                            <li>Biji-bijian</li>
+                            <li>Sayuran hijau</li>
+                            <li style="white-space: normal">Susu dan olahannya</li>
+                            <li>Serealia tumbuk</li>
+                            <li style="white-space: normal"><small>Berperan dalam mencegah kerusakan gigi, membantu dalam proses metabolisme tubuh, transmisi syaraf, kontraksi otot dan pembekuan darah.</small></li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Iodium (I)</h4>
+                        <ul data-role="listview" data-inset="false" >  
+                            <li style="white-space: normal">Pada umunya terdapat pada makanan laut</li>
+                            <li>Ikan</li>
+                            <li>Udang</li>
+                            <li>Kerang</li>
+                            <li>Ganggang laut</li>
+                            <li style="white-space: normal"><small>Berperan dalam mengatur pertumbuhan dan perkembangan, membantu mengatur suhu tubuh, pembentukan sel darah merah, membantu dalam proses sintesis protein, absorpsi karbohidrat dan sintesis kolesterol darah.</small></li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Selenium (SE)</h4>
+                        <ul data-role="listview" data-inset="false" >  
+                            <li>Makanan laut</li>
+                            <li>Hati</li>
+                            <li>Ginjal</li>
+                            <li>Daging merah</li>
+                            <li>Ayam</li>
+                            <li>Serealia</li>
+                            <li>Biji-bijian</li>
+                            <li>Kacang-kacangan</li>
+                            <li style="white-space: normal"><small>Berperan sebagai antioksidan yang dapat melindungi membran sel dari kerusakan oksidatif sehingga berpontensi untuk mencegah penyakit kanker (antikanker) dan penyakit degeneratif lainnya.</small></li>
+                        </ul>
+                    </div>
+                </div>                
             </div>
         </div>
         <!-- /MINERAL -->
 
         <!-- PERKEMBANGAN -->
         <div data-role="page" id="balita-perkembangan" data-url="balita-perkembangan"> 
-            <div class="ui-header"  data-role="header" data-position="fixed">
+            <div class="ui-header"  data-role="header" data-position="fixed">		
 		        <h1 class="ui-title" role="heading">Perkembangan</h1>
                 <a href="#balita-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
             </div>
             <div data-role="content">
                 <form>
-                    <input data-type="search" id="balitaCariPerkembangan" placeholder="Cari..."> 
+                    <input data-type="search" id="cariPerkembangan" placeholder="Cari..."> 
                 </form>
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#balitaCariPerkembangan" id="balitaTabelPerkembangan">
-                    <!-- balita_insert_perkembangan() -->
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan">
+                    <div data-role="collapsible">
+                        <h4>1 Bulan</h4>
+                        <ul data-role="listview" data-inset="false" >
+                            <li >                                
+                                Keterampilan Utama
+                                <p style="white-space: normal">Menunjukkan perilaku pemicu kasih sayang, menangis, meringkuk, mendekut</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Terbaring seperti ketika masih di dalam rahim</p>
+                                <p>Ototnya seperti pegas</p>
+                                <p>Kepala sedikit diangkat</p>
+                                <p style="white-space: normal">Otot terkadang kejang kaki tidak merasakan berat</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Tangan terkepal erat</p>
+                                <p style="white-space: normal">Tidak dapat menggenggam giring-giring</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Menangis karena meminta sesuatu</p>
+                                <p style="white-space: normal">Mendengkur dengan suara tenggorokan</p>
+                                <p style="white-space: normal">Tersenyum-senyum</p>
+                                <p style="white-space: normal">Menangis disaat tidur</p>
+                                <p style="white-space: normal">Mengenali orang tuanya sebagai "si suara asing"</p>
+                                <p style="white-space: normal">Penglihatan paling baik berjarak 8-10 inci dan masih buram</p>
+                                <p style="white-space: normal">Tidur, bangun, makan secara tidak menentu</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Tingkah laku bawaan sejak lahir sebagai pemicu kasih sayang: tangisan untuk meminta kenyamanan atau makanan</p>
+                                <p style="white-space: normal">Tingkah lakunya lebih sering dilakukan secara refleks (otomatis) dibandingkan dengan berpikir dulu</p>
+                                <p style="white-space: normal">Mengantisipasi bahwa dengan hilangnya stres akan diikuti dengan kenyamanan</p>
+                                <p style="white-space: normal">Mulai belajar mempercayai</p>
+                            </li>
+                            <li>
+                                Tips
+                                <p style="white-space: normal"><b>Kiat untuk mempertahankan perhatian visual bayi:</b></p>
+                                <p style="white-space: normal">Dudukkan atau pegang tubuh bayi dalam posisi tegak, tunggu bayi hingga dalam keadaan diam, pegang objek atau wajah dalam jarak dalam jarak sekitar 25cm dari wajah bayi, gunakan gerakan wajah yang lucu (mulut dan mata terbuka lebar) sambil berbicara perlahan, berirama, serta nada yang dilebih-lebihkan</p>
+                                <p style="white-space: normal">*bayi yang baru lahir suka melihat wajah, terutama yang ia kenal.</p>
+                            </li>
+                        </ul>
+                    </div>  
+                    <div data-role="collapsible">
+                        <h4>2 Bulan</h4>
+                        <ul data-role="listview" data-inset="false">
+                            <li>
+                                Keterampilan Utama
+                                <p style="white-space: normal">Terhubung secara visual dengan orang tua</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Lengan dan kaki rilaks direnggangkan ke luar</p>
+                                <p style="white-space: normal">Kepala diangkat setinggi 45 derajat</p>
+                                <p style="white-space: normal">Kepala masih terhuyung bila digendong dalam keadaan duduk</p>
+                                <p style="white-space: normal">Kekejangan otot berkurang</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Sebagian jari tangan mulai membuka</p>
+                                <p style="white-space: normal">Pukulan dilayangkan tanpa arah</p>
+                                <p style="white-space: normal">Mulai dapat menggenggam giring-giring</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Mendekut, menjerit, mendenguk</p>
+                                <p style="white-space: normal">Membuat suara seperti sedang minum, dada berbunyi</p>
+                                <p style="white-space: normal">Tersenyum dengan responsif</p>
+                                <p style="white-space: normal">Menunjukkan emosi: kesenangan, tidak adanya tekanan</p>
+                                <p style="white-space: normal">Membaca suasana hati: sedih bila orangtua tidak memiliki suasana hati yang bagus</p>
+                                <p style="white-space: normal">Menyibukkan diri sendiri dengan ibu jari</p>
+                                <p style="white-space: normal">Mengadakan kontak mata, mengamati wajah</p>
+                                <p style="white-space: normal">Samar-samar meniru mimik wajah</p>
+                                <p style="white-space: normal">Memerhatikan orang yang bergerak</p>
+                                <p style="white-space: normal">Menangis bila diturunkan dari gendongan</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Menunjukkan perangai untuk mengajak: senang berkomunikasi, protes bila kebutuhannya tidak terpenuhi</p>
+                                <p style="white-space: normal">Memberi isyarat, melihat tanggapan, memercayai keduanya</p>
+                                <p style="white-space: normal">Membuat asosiasi: tangisan-digendong atau diberi makan</p>
+                            </li>
+                            <li>
+                                Tips
+                                <p style="white-space: normal"><b>Apa yang suka dilihat oleh bayi:</b></p>
+                                <p style="white-space: normal">Wajah anda (selalu menjadi favoritnya), kekontrasan (terutama hitam dan putih), siluet, sesuatu yang bergerak khususnya dengan desain yang kontras hitan dan putih, kipas dan kayu di langit-langit.</p>
+                                <p style="white-space: normal"><b>Kiat untuk berbicara dengan bayi anda:</b></p>
+                                <p style="white-space: normal">1. Pandanglah mata bayi anda sebelum memulai percakapan.</p>
+                                <p style="white-space: normal">2. Panggil bayi anda dengan menggunakan namanya.</p>
+                                <p style="white-space: normal">3. Perjelas huruf vokal, contoh "baaaayi caaantik".</p>
+                                <p style="white-space: normal">4. Gunakan "mama" dan "papa" untuk menyebutkan diri anda.</p>
+                                <p style="white-space: normal">5. Asosiasikan ucapan dengan sikap tubuh.</p>
+                                <p style="white-space: normal">6. Bicarakan hal yang sedang anda lakukan, misalnya saat sedang memandikan bayi anda "sekarang mama buka dulu ya bajunya ... sekarang pakai sabun ...".</p>
+                                <p style="white-space: normal">7. Setelah berbicara berikan bayi anda waktu untuk meresponsnya, perhatikan pula sinyal yang diberikan oleh bayi anda apakah anda harus melanjutkannya atau berhenti.</p>
+                            </li>
+                        </ul>
+                    </div>                
+                    <div data-role="collapsible">
+                        <h4>3 Bulan</h4>
+                        <ul data-role="listview" data-inset="false">
+                            <li>
+                                Keterampilan Utama
+                                <p style="white-space: normal">Memainkan tangan</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Lengan dan kaki digerakkan secara sempurna; dapat membuat gerakan bebas dan memutar</p>
+                                <p style="white-space: normal">Kepala diangkat lebih tinggi daripada punggung, seperti mencari sesuatu</p>
+                                <p style="white-space: normal">Mulai merasakan beban pada kaki</p>
+                                <p style="white-space: normal">Kepala bisa diangkat hingga tegak saat digendong</p>
+                                <p style="white-space: normal">Dari posisi telentang berguling ke samping</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Tangan terbuka seperti mengajak</p>
+                                <p style="white-space: normal">Dapat membuat gerakan-gerakan seperti memukul, lebih banyak meleset daripada mengenai sasaran</p>
+                                <p style="white-space: normal">Sudah dapat menggenggam dan menggoyangkan giring-giring lebih lama</p>
+                                <p style="white-space: normal">Dapat menghisap ibu jari dan meninjuk</p>
+                                <p style="white-space: normal">Bermain dengan tangan, tepuk tangan</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Membuat suara-suara: "aah, eee, oooh"</p>
+                                <p style="white-space: normal">Membuat suara yang lebih keras, memekik</p>
+                                <p style="white-space: normal">Tangisannya berbeda untuk kebutuhan yang berbeda, membuat jeda disela-sela tangisan</p>
+                                <p style="white-space: normal">Mulai tertawa</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Mempelajari sebab dan akibat: mendorong mobil-mobilan dan bergerak!</p>
+                                <p style="white-space: normal">Mempelajari kompetensi: bisa menyebabkan orang bereaksi dengan senyum, tangisan, bahasa tubuh</p>
+                            </li>
+                            <li>
+                                Tips
+                                <p style="white-space: normal"><b>Kiat untuk memilih mainan untuk bayi anda:</b></p>
+                                <p style="white-space: normal">1. Ringan dan mudah digenggam.</p>
+                                <p style="white-space: normal">2. Hitam dan putih atau warna yang kontras.</p>
+                                <p style="white-space: normal">3. Berbahan plastik.</p>
+                                <p style="white-space: normal">4. Mainan yang tidak dapat ditelan dan tidak memiliki bagian yang tajam atau bagian yang dapat dilepaskan.</p>
+                                <p style="white-space: normal"><b>Kiat sikap tubuh bayi untuk merangsang permainan tangan:</b></p>
+                                <p style="white-space: normal">Bayi harus berada pada posisi semi tegak pada gendongan anda atau pada kursi bayi. Pada saat mengangkat bayi anda pada posisi tersebut pastikan bahwa wajahnya akan menghadap ke depan. Sikap badan yang semi-tegak mendorong lengan dan tangan untuk bergerak bersama-sama, sehingga merangsang bayi untuk bermain dengan tangannya atau dengan mainan yang ada dihadapannya. Hal tersebut akan membantu bayi untuk melatih keseimbangannya.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>4 Bulan</h4>
+                        <ul data-role="listview" data-inset="false">
+                            <li>
+                                Keterampilan Utama
+                                <p style="white-space: normal">Menunjukkan pengamatan visual yang akurat</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Berdiri dengan berpegangan</p>
+                                <p style="white-space: normal">Duduk bertumpu pada lengan</p>
+                                <p style="white-space: normal">Kepala diangkat hingga 90 derajat, dan dapat menengokkan kepala hingga 180 derajat</p>
+                                <p style="white-space: normal">Bersandar pada siku</p>
+                                <p style="white-space: normal">Dari posisi telungkup berguling ke samping</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Bisa memeluk dengan dua tangan</p>
+                                <p style="white-space: normal">Dapat menjangkau secara tepat mainan yang memiliki benang atau sesuatu yang menjuntai</p>
+                                <p style="white-space: normal">Mengamati pakaian, memegang dada ibu</p>
+                                <p style="white-space: normal">Menggenggam seperti menggunakan sarung tangan</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Mengubah bentuk mulut untuk membuat suara: "ah-oh"</p>
+                                <p style="white-space: normal">Meniup gelembung, bercakap dengan lantang, tertawa geli kalau dikelitiki</p>
+                                <p style="white-space: normal">Sikap sosial: mengangkat lengan sebagai isyarat "gendonglah aku"</p>
+                                <p style="white-space: normal">Penglihatan binokular berkembang: presepsi yang lebih baik, melihat dengan sungguh-sungguh, mengamati dengan akurat</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Membentuk gambaran mental tentang hal yang ia harapkan apabila memberi isyarat (contohnya disusui)</p>
+                                <p style="white-space: normal">Tahu bahwa orang dan benda itu memiliki nama</p>
+                            </li>
+                            <li>
+                                Tips
+                                <p style="white-space: normal"><b>Melatih keterampilan visual:</b></p>
+                                <p style="white-space: normal">Permainan saling menatap; ketika bayi sedang diam, tangkaplah perhatiannya dengan menempatkan posisi pandangan. Miringkan kepala anda secara perlahan. Amati bahwa bayi anda akan memiringkan kepalanya juga. Putarlah tubuhnya, dan lihatlah bahwa ia akan memutar kepalanya untuk tetap dapat melihat wajah anda.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>5 Bulan</h4>
+                        <ul data-role="listview" data-inset="false">
+                            <li>
+                                Keterampilan Utama
+                                <p style="white-space: normal">Meraih sesuatu dengan tepat</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Duduk bertumpu pada lantai dan bantal di atas kursi bayi</p>
+                                <p style="white-space: normal">Berdiri, berpegangan hanya untuk menjaga keseimbangan</p>
+                                <p style="white-space: normal">Berguling ke belakang</p>
+                                <p style="white-space: normal">Perut digerak-gerakkan: seperti pesawat terbang</p>
+                                <p style="white-space: normal">Seperti posisi push-up: dada dan sebagian perut diangkat dari lantai</p>
+                                <p style="white-space: normal">Bergoyang maju sejauh beberapa meter</p>
+                                <p style="white-space: normal">Leher dijulurkan ke depan untuk melihat benda</p>
+                                <p style="white-space: normal">Jari kaki dapat dijangkau</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Dapat meraih dengan satu tangan-sudah cukup pandai melakukannya</p>
+                                <p style="white-space: normal">Mainan dapat dipindahkan dengan muda dari tangan yang satu ke tangan yang lain dan ke mulut</p>
+                                <p style="white-space: normal">Mulai bermain dengan balok-balok</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Mengumumkan "ba-ba-ba" untuk mendapatkan perhatian</p>
+                                <p style="white-space: normal">Menengok ke arah orang yang berbicara</p>
+                                <p style="white-space: normal">Berusaha meniru suara, infleksi, dan sikap tubuh</p>
+                                <p style="white-space: normal">Memerhatikan gerakan mulut menyuarakan bunyi yang berbeda untuk kebutuhan yang berbeda</p>
+                                <p style="white-space: normal">Menunjukkan minat dini terhadap makanan padat</p>
+                                <p style="white-space: normal">Menunjukkan ketertarikan pada warna</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Mempelajari suara dan mimik wajah yang akan ditanggapi orang</p>
+                                <p style="white-space: normal">Menunjukkan ekspresi pengambilan keputusan sewaktu bermain-main dengan tangannya</p>
+                                <p style="white-space: normal">Mencari tahu objek dan mengubah bentuk tangan untuk mengakomodasi bentuk objek sebelum melakukan kontak</p>
+                                <p style="white-space: normal">Menggunakan tangan untuk mendorong lengan anda apabila anda memberinya obat</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>6 Bulan</h4>
+                        <ul data-role="listview" data-inset="false">
+                            <li>
+                                Keterampilan Utama
+                                <p style="white-space: normal">Duduk</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Duduk sendiri dengan sempurna, menggunakan lengan agar seimbang dan tidak jatuh, dapat merosot ke depan</p>
+                                <p style="white-space: normal">Duduk di kursi bayi</p>
+                                <p style="white-space: normal">Berdiri dengan berpegangan</p>
+                                <p style="white-space: normal">Berguling-guling</p>
+                                <p style="white-space: normal">Jari kaki dan tangan digunakan untuk menggerakkan mainan</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Meraih dengan tepat</p>
+                                <p style="white-space: normal">Menunjuk mainan</p>
+                                <p style="white-space: normal">Memanipulasi permainan menggunakan balok-balok</p>
+                                <p style="white-space: normal">Menggunakan seluruh tangan untuk mengait dan mengambil benda kecil dengan cara dijumput</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Menjulurkan tangan lebih panjang dengan suara yang lebih bervariasi</p>
+                                <p style="white-space: normal">Bereksperimen dengan pola tangga nada dan volume suara yang baru serta memerhatikan reaksi yang terjadi</p>
+                                <p style="white-space: normal">Senang akan suara dan bahasa tubuh: berteriak, tertawa perut, menepuk lengan, mendengkur, menggeram, bermuka sedih</p>
+                                <p style="white-space: normal">Meniru sikap wajah dengan lebih baik</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Menunjukkan "ketertarikan" yang lebih tinggi selama bermain: mencoba mencari tahu cara mengambil balok ketiga dengan kedua tangan yang telah penuh dengan balok</p>
+                                <p style="white-space: normal">Menghabiskan waktu lebih lama untuk mempelajari mainan dan memahami tindakan yang harus dilakukan dengan mereka</p>
+                            </li>
+                            <li>
+                                Tips
+                                <p style="white-space: normal"><b>Tips untuk membatu bayi yang baru bisa duduk:</b></p>
+                                <p style="white-space: normal">Letakkan bantal di sekeliling bayi untuk menjaga agar bayi tidak jatuh ke samping atau ke belakang. Gunakan interaksi dengan mainan untuk melatih keseimbangan bayi. Bayi akan menggunakan tangannya untuk meraih mainan sehingga bayi yang baru bisa duduk "lupa" untuk menggunakan tangannya sebagai penjaga keseimbangan.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>6-9 Bulan</h4>
+                        <ul data-role="listview" data-inset="false">
+                            <li>
+                                Keterampilan Utama
+                                <p style="white-space: normal">Merangkak, menjumput dengan jari-jarinya</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Duduk tegak tanpa ditopang</p>
+                                <p style="white-space: normal">Badan condong ke depan untuk meraih mainan</p>
+                                <p style="white-space: normal">Merangkak dengan tangan dan lutut</p>
+                                <p style="white-space: normal">Berputar pada sumbu</p>
+                                <p style="white-space: normal">Mendorong badan ke atas sampai berdiri</p>
+                                <p style="white-space: normal">Berdiri berpegangan  pada perabotan</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Mengambil objek kecil dengan ibu jari dan telunjuk</p>
+                                <p style="white-space: normal">Makan sendiri (berantakan)</p>
+                                <p style="white-space: normal">Menyambar mainan yang bergerak, menjatuhkan dan memerhatikan jatuhnya mainan</p>
+                                <p style="white-space: normal">Minum dari gelas</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Menggumamkan kombinasi acak vokal dan konsonan ("ah, da, ma, ba, di, mu") serta mengocehkan suara-suara tersebut secara bersamaan</p>
+                                <p style="white-space: normal">Menambah gerakan lidah untuk mengubah suara: 'ah-da'</p>
+                                <p style="white-space: normal">Terus merespons bila namanya disebut</p>
+                                <p style="white-space: normal">Gerakan sosial: menggunakan lengan untuk mengajak pengasuh bermain, mengangkat lengan sebagai tanda, "gendonglah aku"</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Memberikan label: mengasosiasikan gambaran dalam otak dengan bahasa dan gambar (contohnya: "kucing")</p>
+                                <p style="white-space: normal">Mengembangkan konsep "masuk" dan "keluar" - memerhatikan bagaimana wadah yang lebih kecil bisa masuk ke yang lebih besar</p>
+                                <p style="white-space: normal">Menunjukkan keinginan yang aneh</p>
+                            </li>
+                            <li>
+                                Tips
+                                <p style="white-space: normal"><b>Permainan untuk merangsang keterampilan merangkak dan mengambil sesuatu dengan jari telunjuk</b></p>
+                                <p style="white-space: normal">1. Bermain bola</p>
+                                <p style="white-space: normal">Gunakan bola yang cukup besar untuk dipegang dengan menggunakan kedua tangan, lebih baik yang berbahan busa atau kain sehingga bayi dapat memegangnya dengan satu tangan.</p>
+                                <p style="white-space: normal">2. Bermain dengan cermin</p>
+                                <p style="white-space: normal">Dudukkan bayi di depan cermin sehingga bayi dapat memegang bayangannya. Perhatikan bayi yang mencoba menyesuaikan tangan dan wajahnya dengan bayangan di cermin.</p>
+                                <p style="white-space: normal">3. Permainan berguling</p>
+                                <p style="white-space: normal">Tengkurapkan bayi anda diatas guling, lalu taruh mainan pada jarak yang dapat dijangkaunya. Perhatikan tumpuan yang dilakukan bayi untuk mendorong dan menggulingkan tubuhnya ke depan dalam usahanya menjangkau mainan.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>9-12 Bulan</h4>
+                        <ul data-role="listview" data-inset="false">
+                            <li>
+                                Keterampilan Utama
+                                <p style="white-space: normal">Merangkak, tidak hanya diam ditempat</p>                                    
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Semakin pandai merangkak</p>  
+                                <p style="white-space: normal">Dapat mengubah posisi dari duduk menjadi merangkak</p>  
+                                <p style="white-space: normal">Merambat dan memanjat perabotan</p>  
+                                <p style="white-space: normal">Merangkak menaiki tangga, belum bisa menuruninya</p>  
+                                <p style="white-space: normal">Berkeliling disekitar perabotan</p>  
+                                <p style="white-space: normal">Berdiri tanpa berpegangan</p>  
+                                <p style="white-space: normal">Berjalan dengan dipegangi si penuntun</p>  
+                                <p style="white-space: normal">Langkah pertama masih kaku, belum tegap, lebar-lebar, kadang terjatuh</p>  
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Menggenggam erat</p>  
+                                <p style="white-space: normal">Menunjuk dan mencongkel dengan jari telunjuk</p>  
+                                <p style="white-space: normal">Mengubah bentuk tangan untuk menyesuaikan bentuk objek</p>  
+                                <p style="white-space: normal">Menumpuk dan menjatuhkan balok-balok</p>  
+                                <p style="white-space: normal">Menunjukkan dominasi tangan</p>  
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Membuat suara dua suku kata ("ma-ma, da-da") dan mengasosiasikannya dengan orang yang tepat</p>  
+                                <p style="white-space: normal">Mengerti kata "tidak"</p>  
+                                <p style="white-space: normal">Membuat suara-suara tiruan: batuk, menjentikkan lidah</p>  
+                                <p style="white-space: normal">Mengerti sikap tubuh: lambaian perpisahan</p>  
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Menunjukkan ingatannya akan kejadian yang baru berlalu</p>  
+                                <p style="white-space: normal">Kata-kata isyarat memicu gambaran mental dari kegiatan yang ia harapkan: "pergi ..."-melihat ke arah pintu</p>  
+                                <p style="white-space: normal">Ingat letak mainannya ketika tertutupi</p>  
+                                <p style="white-space: normal">"Mama datang" memicu gambaran mental tentang mama-berhenti menangis</p>  
+                                <p style="white-space: normal">Menunjukkan kegelisahan akibat perpisahan</p>  
+                            </li>
+                            <li>
+                                Tips
+                                <p style="white-space: normal"><b>Membantu bayi belajar berjalan</b></p>
+                                <p style="white-space: normal">Pegang kedua tangan bayi, asosiasikan bayi diantara kaki anda atau disamping. Secara bertahap, lepaskan salah satu tangannya lalu yang lainnya juga. Setelah bayi berdiri sendiri berdirilah sejauh satu kaki dihadapannya, ulurkan tangan anda seolah memanggilnya ke arah anda.</p>
+                                <p style="white-space: normal"><b>Aktifitas untuk melatih kecakapan tangan bayi</b></p>
+                                <p style="white-space: normal">1. Berikan gelas plastik atau kotak sepatu kepada bayi. Lalu berikan balok dan cermati cara bayi memperkenalkan balok dengan wadahnya. Tangan dan pikiran bekerja sama untuk mencari tahu bagaimana meletakkan balok ke dalam kotak dan mengeluarkannya. Setelah menguasainya bayi akan menggoyang wadah dan mendengarkan balok yang bergerak di dalam.</p>
+                                <p style="white-space: normal">2. Berikan panci dan baskom. Bayi suka menaruh baskom kecil ke dalam baskom yang besar serta suara bantingan ketika terjatuh.</p>
+                                <p style="white-space: normal">3. Mengisi dan menuang air. Air yang diambil dan ditumpahkan sehingga menghasilkan percikan merupakan permainan favorit bayi. </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>12-15 Bulan</h4>
+                        <ul data-role="listview" data-inset="false">
+                            <li>
+                                Keterampilan Utama
+                                <p style="white-space: normal">Berjalan</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Belajar berjalan sendiri</p>
+                                <p style="white-space: normal">Mencoba bermacam-macam gaya berjalan</p>
+                                <p style="white-space: normal">Menaiki tangga dan turun</p>
+                                <p style="white-space: normal">Mencoba memanjat kursi bayi</p>
+                                <p style="white-space: normal">Melakukan gerakan bangun-dan-jalan: merangkak, berjongkok, berdiri, dan berjalan</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Menggunakan peralatan: sikat gigi, sisir, telepon, membuka laci dan memindahkan isinya</p>
+                                <p style="white-space: normal">Mencocokkan silinder dengan tutupnya</p>
+                                <p style="white-space: normal">Melempar bola dengan tangan</p>
+                                <p style="white-space: normal">Lebih mudah bila dipakaikan baju</p>
+                                <p style="white-space: normal">Makan sendiri, memegang botol</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Mengucapkan empat hingga enam kata yang dapat dimengerti</p>
+                                <p style="white-space: normal">Menggunakan kata yang mangandung huruf b, c, d, g</p>
+                                <p style="white-space: normal">Mengucapkan kata secara terpisah: "cing" untuk "kucing"</p>
+                                <p style="white-space: normal">Mengatakan dan membuat sikap tubuh: "tidak" dan menggelengkan kepala</p>
+                                <p style="white-space: normal">Meminta bantuan dengan menunjuk dan membuat suara-suara</p>
+                                <p style="white-space: normal">Mengenali nama dan menunjuk orang yang ia kenal</p>
+                                <p style="white-space: normal">Mengerti dan mengikuti satu macam perintah: "lemparkan bolanya ke ayah"</p>
+                                <p style="white-space: normal">Tertawa saat melihat gambar yang lucu</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Kosa kata bertambah dan berkembangnya pikiran membuat kenangan lebih mudah terbentuk</p>
+                                <p style="white-space: normal">Mengasosiakan orang dan benda yang dikenal dengan kata-kata yang diucapkan untuk mereka</p>
+                                <p style="white-space: normal">Memberikan impresi bahwa kata-kata dan sikap tubuh memicu pikiran-pikirannya</p>
+                                <p style="white-space: normal">Mulai mempelajari cara mencocokkan sesuatu: mencoba untuk mencocokkan tutup suatu benda, menumpuk balok</p>
+                            </li>
+                            <li>
+                                Tips
+                                <p style="white-space: normal"><b>Melatih anak berjalan</b></p>
+                                <p style="white-space: normal">Berdiri di hadapan anak anda, pegang bola di tangan anda dan biarkan anak juga memegang bola tersebut. Mulailah berjalan mundur, hal tersebut akan menyebabkan anak anda ikut berjalan.</p>
+                                <p style="white-space: normal">berikan mainan yang dapat ditarik atau didorong, misal: kereta dorong.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>15-18 Bulan</h4>
+                        <ul data-role="listview" data-inset="false">
+                            <li>
+                                Keterampilan Utama
+                                <p style="white-space: normal">Mengerti bahasa yang sederhana</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Berjalan berbelok, mundur, berputar</p>
+                                <p style="white-space: normal">Berjalan lebih cepat, berlari-lari kecil, melompat-lompat</p>
+                                <p style="white-space: normal">Berhenti dan membungkuk untuk memungut mainan</p>
+                                <p style="white-space: normal">Memanjat perabotan, mencoba untuk memanjat keluar dari ranjangnya</p>
+                                <p style="white-space: normal">Mengendarai mainan beroda empat</p>
+                                <p style="white-space: normal">Mencoba menendang bola, sering meleset</p>
+                                <p style="white-space: normal">Mencari posisi sendiri diatas kursi</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Menuliskan kalimat acak dan menggambar separuh lingkaran</p>
+                                <p style="white-space: normal">Membuka laci</p>
+                                <p style="white-space: normal">Menurut bila dipakaikan baju</p>
+                                <p style="white-space: normal">Melempar bola dengan seluruh kekuatan lengannya</p>
+                                <p style="white-space: normal">Mengonsumsi makanan berkuah</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Mengatakan 10-20 kata yang bisa dimengerti</p>
+                                <p style="white-space: normal">Menggunakan kata yang lengkap: '"cing" menjadi "kucing"</p>
+                                <p style="white-space: normal">Menggabungkan dua kata bersama-sama</p>
+                                <p style="white-space: normal">Membentuk kalimat pertama</p>
+                                <p style="white-space: normal">Menanggapi permintaan verbal tanpa diikuti bahasa tubuh</p>
+                                <p style="white-space: normal">Mengobrol dan meniru perkataan</p>
+                                <p style="white-space: normal">Mengerti kata-kata: naik, turun, mati, panas</p>
+                                <p style="white-space: normal">Menggunakan kata-kata untuk meminta: "num-num" atau "ba-ba"</p>
+                                <p style="white-space: normal">Mengerti kata "yang lain"</p>
+                                <p style="white-space: normal">Menggunakan isyarat "shhh" untuk "diam"</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Mengamati bermacam bentuk, menyusun gelang-gelang</p>
+                                <p style="white-space: normal">Belajar dengan menjelajahi seisi rumah</p>
+                                <p style="white-space: normal">Mengenali gambar yang dikenal pada buku: "cari seekor kucing"</p>
+                                <p style="white-space: normal">Mencocokkan batang yang bundar dengan lubang yang bundar</p>
+                                <p style="white-space: normal">Kegelisahan akan perpisahan berkurang: dapat membayangkan gambaran mental dari seseorang ketika mereka tidak terlihat</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>18-24 Bulan</h4>
+                        <ul data-role="listview" data-inset="false">
+                            <li>
+                                Keterampilan Utama
+                                <p style="white-space: normal">Mencari tahu sebelum bertindak, mengerti bahasa sehari-hari</p>
+                            </li>
+                            <li>
+                                Keterampilan Motorik Kasar
+                                <p style="white-space: normal">Berlari, mencoba untuk melarikan diri dari si pengasuh</p>
+                                <p style="white-space: normal">Melihat ke bawah untuk menghindari rintangan</p>
+                                <p style="white-space: normal">Meloncat-loncat ditempat dan mundur</p>
+                                <p style="white-space: normal">Mengayuh pedal sepeda pertamanya</p>
+                                <p style="white-space: normal">Menendang bola tanpa terjatuh</p>
+                                <p style="white-space: normal">Bisa memanjat keluar dari ranjangnya</p>
+                                <p style="white-space: normal">Menaiki tangga tanpa bantuan, kedua kaki pada tiap anak tangga, bisa saja meminta tolong untuk turun</p>
+                                <p style="white-space: normal">Membuka pintu</p>
+                            </li>
+                            <li style="white-space: normal">
+                                Keterampilan Tangan dan Kemampuan Menolong Diri Sendiri
+                                <p style="white-space: normal">Membuka bungkusan</p>
+                                <p style="white-space: normal">Melepaskan baju, mencuci tangan</p>
+                                <p style="white-space: normal">Memasang tutup kotak sepatu</p>
+                                <p style="white-space: normal">Membangun menara yang terdiri dari enam buah balok</p>
+                                <p style="white-space: normal">Meremas kertas, menyelesaikan <i>puzzle</i> yang mudah</p>
+                                <p style="white-space: normal">Melempar bola dengan ayunan tangan yang tinggi</p>
+                                <p style="white-space: normal">Duduk dikursi tanpa bantuan</p>
+                            </li>
+                            <li>
+                                Keterampilan Berbahasa dan Sosial
+                                <p style="white-space: normal">Mengatakan 20-25 kata-kata yang bisa dimengerti</p>
+                                <p style="white-space: normal">Mencoba kata-kata multi suku kata: "Ben-ben-ben" untuk "Benjamin"</p>
+                                <p style="white-space: normal">Menjawab: "apa yang dikatakan anjing itu?"</p>
+                                <p style="white-space: normal">Membuat kalimat yang terdiri dari tiga kata, seperti dalam telegram: "kami mau lagi"</p>
+                                <p style="white-space: normal">Biasanya "becicara sedikit, tetapi mengerti semuanya"</p>
+                                <p style="white-space: normal">Suka kata-kata yang menantang ("helikopter", "dinosaurus"), dengan sedikit acak-acakan</p>
+                                <p style="white-space: normal">Dapat menyebutkan nama lengkapnya</p>
+                                <p style="white-space: normal">Bersenandung dan bernyanyi</p>
+                                <p style="white-space: normal">Tingkah laku normal: marah, merengek, menggigit, dan menjerit</p>
+                            </li>
+                            <li>
+                                Keterampilan Kognitif (Berpikir)
+                                <p style="white-space: normal">Mencari tahu segala sesuatu sebelum melakukannya</p>
+                                <p style="white-space: normal">Menggambar lingkaran, membuat gambar garis</p>
+                                <p style="white-space: normal">Menyusun <i>puzzle</i> yang mudah</p>
+                                <p style="white-space: normal">Memperlihatkan suatu rangkaian pikiran: mentega kacang harus ada diatas jeli</p>
+                                <p style="white-space: normal">Mengerti dan mengingat dua macam perintah sekaligus: "pergi ke dapur dan ambilkan kue kering untuk ayah!"</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -600,13 +1985,186 @@
 
         <!-- P3K -->
         <div data-role="page" id="balita-P3K" data-url="balita-P3K"> 
-            <div class="ui-header"  data-role="header" data-position="fixed">
+            <div class="ui-header"  data-role="header" data-position="fixed">		
 		        <h1 class="ui-title" role="heading">P3K</h1>
                 <a href="#balita-main" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home ui-btn-icon-notext">Menu</a>
             </div>                        
             <div data-role="content">                    
-                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#balitaCariP3K" id="balitaTabelP3K">
-                    <!-- balita_insert_p3k() -->
+                <div data-role="collapsibleset"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-filter="true" data-children="> div, > div div ul li, > div div ul li p" data-input="#cariPerkembangan">
+                    <div data-role="collapsible">
+                        <h4>Tersedak</h4>
+                        <p style="white-space: normal">Tersedak bermakna bahwa anak sedang berusaha untuk mengeluarkan sesuatu dari saluran udara yang sebagian terhalang atau berupaya sekuat tenaga untuk mendapatkan udara. Ini adalah salah satu penyebab kematian yang paling umum pada anak-anak.</p>
+                        <b>Ciri-ciri:</b>
+                        <p style="white-space: normal">• Sulit bernafas atau wajah berubah biru.<br></p>
+                        <p style="white-space: normal">• Pucat (dan anda curiga bahwa dia tersedak).<br></p>
+                        <p style="white-space: normal">• Memperlihatkan ekspresi “aku sedang tersedak”: mata lebar, mulut terbuka, meneteskan air liur, wajah tampak panik.<br></p>
+                        <b>Penanganan:</b>
+                        <p style="white-space: normal">• Tengkurapkan anak di lengan bawah anda. Sangga leher dan dagunya dengan jari jari anda. Posisikan bayi sehingga kepala lebih rendah dari dadanya.<br></p>
+                        <p style="white-space: normal">• Tepuklah punggungnya sebanyak 5 kali, tepatnya antara tulang belikat, dengan pangkal telapak tangan yang lain.<br></p>
+                        <p style="white-space: normal">• Jika tidak ada benda yang keluar, telentangkan bayi anda dan letakkan di atas meja atau lantai.<br></p>
+                        <p style="white-space: normal">• Tempatkan 2 jari anda ditengah tulang dadanya dan tekanlah cepat sebanyak 5 kali.<br></p>
+                        <p style="white-space: normal">• Ulangi proses yaitu 5 tepukan dipunggung dan 5 tekanan dada sampai benda tersebut keluar atau anak kembali bernapas.<br></p>
+                        <p style="white-space: normal">• Jika bayi pingsan, lakukan CPR (bantuan napas). Setiap memberi bantuan napas, carilah benda didalam mulutnya dan coba keluarkan. Jangan masukan jari jari anda kedalam tenggorokan, bisa bisa anda malah membuat benda itu semakin masuk kedalam.<br></p>                           
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Pendarahan</h4>      
+                        <b>Pendarahan Besar</b>
+                        <p style="white-space: normal">• Beri tekanan.</p>
+                        <p style="white-space: normal"><small>Gunakan kain kasa atau selembar sapu tangan bersih untuk menekan lokasi yang berdarah selama dua menit. Kemudian bila memungkinkan cek kondisi luka dibawah air leding dingin yang mengalir. Lalu lakukan kembali tekanan dengan perban selama setidaknya 20 menit lagi.</small></p>
+                        <p style="white-space: normal">• Tenangkan anak anda.</p>
+                        <p style="white-space: normal">• Posisikan anak anda dengan tepat.</p>
+                        <p style="white-space: normal"><small>Baringkan anak anda, dan angkatlah lokasi pendarahan sehingga lebih tinggi dari jantung. Misal: meniggikan tangan.</small></p>
+                        <p style="white-space: normal">• Dapatkan bantuan medis.</p>
+                        <b>Pendarahan Kecil</b>
+                        <p style="white-space: normal">• Tetap tenang</p>
+                        <p style="white-space: normal">• Cuci luka, gunakan air dingin yang mengalir untuk membersihkan luka.</p>
+                        <p style="white-space: normal">• Berikan perban pada luka</p>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Luka Bakar</h4> 
+                        <b>Penanganan pertama:</b>
+                        <p style="white-space: normal">• Langsung celupkan area yang terbakar ke air dingin, paling tidak selama 20 menit. Jangan gunakan es karena akan meningkatkan kerusakan jaringan. Jika luka terdapat pada wajah, usapkan handuk yang direndam air dingin, atau pegang pipi di bawah air leding yang mengalir. Jangan mengoleskan mentega, lemak, atau bedak diatas luka bakar.</p>
+                        <p style="white-space: normal">• Nilailah kegawatan luka bakar. Jika hanya merah tetapi tidak menggelembung, rendamlah luka tersebut di dalam air dingin selama mungkin. Biarkan luka bakar tetap terbuka dan perhatikan perubahannya.</p>
+                        <p style="white-space: normal">• Jika kulit menggelembung, berwarna putih, atau hangus, oleskan salep antiseptik dan tutup, jangan terlalu rapat, dengan kain bersih atau perban yang tidak melekat. Hubungi dokter.</p>
+                        <p style="white-space: normal">• Selain merendam kulit yang terbakar di dalam air dingin, berikan asetaminofen kepada anak anda.</p>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Sawan</h4>      
+                        <p style="white-space: normal">Sawan disebaban oleh pelepasan aliran elektrik abnormal di dalam otak. Kegawatan sawan berkisar dari hentakan otot di beberapa bagian tubuh sampai guncangan seluruh badan, yang disebut <i>grand mal seizure</i> (tingkat sawan yang paling berbahaya), yang mungkin membuat si penderita jatuh dan menggeliat-geliat di tempat, bola matanya bergerak ke atas, mulutnya berbuih, lidahnya tergigit, dan si penderita kehilangan kesadaran untuk sementara waktu.</p>
+                        <b>Penanganan</b>
+                        <p style="white-space: normal">• Baringkan anak anda dengan aman di atas lantai, telungkupkan atau miringkan dia agar lidahnya dapat terjulur ke depan dan lendir bisa mengalir dari kerongkongan karena gaya berat.</p>
+                        <p style="white-space: normal">• Jangan memberikan makanan atau minuman apa pun kepada anak anda selama atau segera setelah sawan terjadi; dan anda juga jangan mencoba untuk menahan anak anda dari goncangan</p>
+                        <p style="white-space: normal">• Jika bibir anak anda tidak berwarna biru dan bayi bernapas secara normal, jangan cemas.</p>
+                        <p style="white-space: normal">• Jika bibir anak anda berubah menjadi biru atau ia tidak bernapas, berikan pernapasan buatan mulut-ke-mulut.</p>
+                        <p style="white-space: normal">• Agar anak yang menggeliat-geliat tidak menyentuh mebel, bersihkan area dengan segera.</p>
+                        <p style="white-space: normal">• Kurangi suhu badan anak yang tinggi dengan mengusapkan handuk dingin. Hal ini berguna untuk mengurangi kejang-kejang pada anak.</p>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Mimisan</h4>
+                        <b>Penanganan:</b>
+                        <p style="white-space: normal">• Dudukkan anak di atas pangkuan anda, posisi anak bersandar agak condong ke depan.</p>
+                        <p style="white-space: normal">• Lakukan penekanan dengan menyisipkan potongan lilitan kapas basah ke lubang hidung yang berdarah, dengan ukuran yang pas untuk mengisi sekitar setengah lubang hidung.</p>
+                        <p style="white-space: normal">• Jika ini tidak menghentikan pendarahan, lakukan penekanan ke pembuluh darah utama yang mengalir ke hidung, yang letaknya tepat dibawah lubang hidung tempat bertemunya bibir bagian atas dengan gusi. Tempatkan sejumlah kapas basah di bagian dalam bibir atas dan tekanlah bagian bawah bibir dengan dua jari ke arah atas, ke arah lubang hidung, atau dengan menekan satu jari diatas bibir atas, tepat dibawah lubang hidung.</p>
+                        <p style="white-space: normal">• Jaga posisi anak anda tetap tegak lurus supaya darah tidak menetes ke lehernya.</p>
+                        <p style="white-space: normal">• Doronglah anak anda agar terus membuka mulutnya.</p>
+                        <p style="white-space: normal">• Setelah pendarahan berhenti tinggalkan kapas dalam lubang hidung dalam beberapa jam untuk menyumbat pendarahan, agar pembekuan terjadi.</p>
+                        <p style="white-space: normal">• Jika tindakan  ini tidak menghentikan mimisan, bawalah anak anda ke dokter atau UGD.</p>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Demam</h4>
+                        <b>Penanganan:</b>
+                        <p style="white-space: normal">• Amati dan pikirkan penyebabnya. Bila disusul dengan batuk pilek, Anda pun lega karena jelas penyebabnya adalah ISPA. </p>
+                        <p style="white-space: normal">• Amati tanda kegawatdaruratan. Misalnya, penurunan kesadaran (perilaku anak  merupakan parameter kuat untuk menentukan ada tidaknya kegawa daruratan), dehidrasi, kejang, sesak napas, dan sakit kepala hebat (pada anak yang sudah bisa mengkomunikasikan keluhannya).</p>
+                        <p style="white-space: normal">• Berikan cairan lebih sering dari biasanya, karena kebutuhan akan cairan akan meningkat saat demam. Demam akan meningkatkan risiko dehidrasi (kekurangan cairan tubuh), padahal dehidrasi akan membuat suhu tubuh lebih meningkat lagi. Ketika sakit, wajarlah jika selera makan anak menurun. Jadi, tawarkan makanan ringan, yang segar, rasanya enak, dan tampilannya menarik. Yang penting pada saat ini adalah asupan cairannya.</p>
+                        <p style="white-space: normal">• Berikan obat demam, bila perlu. Obat demam tidak akan menormalkan suhu dan tidak menyembuhkan penyebab demam, melainkan agar anak merasa agak nyaman (karena efek pain killer-nya) dan untuk menurunkan 1 atau 2 derajat saja.  Obat demam diberikan saat anak sangat rewel karena merasa tak nyaman atau saat suhu tinggi (sedikitnya di atas 38,5°C). Dengan atau tanpa obat demam, suhu akan naik turun sesuai siklusnya.</p>
+                        <p style="white-space: normal">• Kadang, bila suhu sangat tinggi, anak merasa sangat tidak nyaman. Anda bisa mencoba menurunkan suhu tubuh dengan menyeka tubuh anak atau mengompres dengan handuk yang sudah dibasahi air hangat. Kompres air dingin sejenak seolah menurunkan suhu tubuh, padahal selain membuat anak menggigil tak nyaman, kompres dingin justru akan meningkatkan suhu tubuh. Mengapa? Karena saat dikompres dingin, informasi yang diperoleh tubuh adalah di luar suhu dingin. Otomatis termostat pusat pengatur suhu tubuh di otak akan meningkatkan suhu tubuh agar tidak kedinginan.</p>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Asma</h4>
+                        <b>Penyebab:</b>
+                        <p style="white-space: normal">Alergi makanan atau lingkungan, infeksi paru-paru.</p>
+                        <b>Tanda dan Gejala:</b>
+                        <p style="white-space: normal">• Napasnya berbunyi.</p>
+                        <p style="white-space: normal">• Saat menghembuskan napas terdengar suara berisik; serangan asma ditandai dengan adanya napas yang berbunyi, kesulitan bernapas, dan lekukan yang dalam di atas leher, tulang rusuk, serta bagian atas perut.</p>
+                        <b>Penanganan:</b>
+                        <p style="white-space: normal">• Istirahat, relaksasi.</p>
+                        <p style="white-space: normal">• Tidur tegak bila mungkin.</p>
+                        <p style="white-space: normal">• Perawatan dengan uap air di dalam kamar mandi.</p>
+                        <p style="white-space: normal">• Tepuk-tepuklah dada untuk mendorong batuk.</p>
+                        <p style="white-space: normal">• Untuk asma kronis, coba hindari makanan dan lingkungan yang menimbulkan alergi.</p>
+                        <p style="white-space: normal">• untuk bayi yang sedang diberi ASI, hindari pemberian produk olahan berbahan susu dan sebagai makanan yang menimbulkan alergi pada pola makan ibu.</p>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Bisul</h4>
+                        <b>Penyebab:</b>
+                        <p style="white-space: normal">Bakteri, biasanya <i>Staohylococcus.</i></p>
+                        <b>Tanda dan Gejala:</b>
+                        <p style="white-space: normal">Kulit terangkat, berwarna merah, dan pembengkakan yang terasa hangat pada kulit</p>
+                        <b>Penanganan:</b>
+                        <p style="white-space: normal">• Gunakan kompres panas sepuluh kali setiap hari selama beberapa menit agar bisul menjadi matang.</p>
+                        <p style="white-space: normal">• Lanjutkan beberapa hari setelah bisul pecah dan mengeluarkan cairan.</p>
+                        <p style="white-space: normal">• Tetap ditutup sampai pengeluaran cairan berhenti.</p>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Bronkiolitis</h4>
+                        <b>Penyebab:</b>
+                        <p style="white-space: normal">Virus disebut <i>RSV</i></p>
+                        <b>Tanda dan Gejala:</b>
+                        <p style="white-space: normal">Seperti asma pada bayi, napas cepat, pendek-pendek, berbunyi dan tersengal-sengal, batuk berirama, pucat, lelah, ketakutan, gejala flu.</p>
+                        <b>Penanganan:</b>
+                        <p style="white-space: normal">• Berikan kenyamanan dan ketenangan pada bayi.</p> 
+                        <p style="white-space: normal">• Bujuklah bayi untuk tidur dengan ditopang setinggi 45 derajat.</p> 
+                        <p style="white-space: normal">• Pergunakan uap hangat.</p>
+                        <p style="white-space: normal">• Belilah ekspekoran yang dijual bebas untuk mengendurkan dada yang sesak.</p>
+                        <p style="white-space: normal">• Beri lebih banyak cairan, beri makanan dalam porsi kecil tapi sering</p> 
+                        <p style="white-space: normal">• Cobalah penepukan dada.</p>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Bronkitis</h4>
+                        <b>Penyebab:</b>
+                        <p style="white-space: normal">Pada umumnya virus atau alergi, kadang-kadang bakteri.</p>
+                        <b>Tanda dan Gejala:</b>
+                        <p style="white-space: normal">• Gejala flu, demam rendah (38,3°C - 38,9°C) batuknya pendek-pendek dan bersuara dalam, lebih buruk pada malam hari, pucat, lelah.</p>
+                        <p style="white-space: normal">• Anak-anak mungkin mengeluarkan napas yang berbunyi, seperti pada asma.</p>
+                        <b>Penanganan:</b>
+                        <p style="white-space: normal">• Istirahat, relaksasi.</p> 
+                        <p style="white-space: normal">• Tidur tegak bila mungkin; perawatan dengan uap air di dalam kamar mandi.</p> 
+                        <p style="white-space: normal">• Tepuk-tepuklah dada untuk mendorong batuk.</p>
+                        <p style="white-space: normal">• Pemberian ekspektoran yang dijual bebas selama saing hari.</p>
+                        <p style="white-space: normal">• Bila timbul banyak gejala, berikan obat batuk pada malam hari.</p>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Cacar Air</h4>
+                        <b>Penyebab:</b>
+                        <p style="white-space: normal">Virus (inkubasi 7-21 hari).</p>
+                        <b>Tanda dan Gejala:</b>
+                        <p style="white-space: normal">• Gejala mirip flu, demam 38,3°C.</p>
+                        <p style="white-space: normal">• Ruam pada kulit yang semula seperti bekas gigitan segera melepuh dan menyebar pada tubuh, wajah, mulut, kemudian anggota badan.</p> 
+                        <p style="white-space: normal">• Gatal.</p>
+                        <p style="white-space: normal">• Noda baru muncul setiap hari selama beberapa hari.</p>
+                        <b>Penanganan:</b>
+                        <p style="white-space: normal">• Potong kuku jari tangan dan kenakan pakaian panjang untuk menghindari penggarukan.</p> 
+                        <p style="white-space: normal">• Bila timbul rasa gatal gunakan salep antibiotik untuk kulit yang terinfeksi.</p>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Flu</h4>
+                        <b>Penyebab:</b>
+                        <p style="white-space: normal">Virus (inkubasi satu sampai dengan tiga hari).</p>
+                        <b>Tanda dan Gejala:</b>
+                        <p style="white-space: normal">Demam, badan nyeri, muntah-muntah, diare, kerongkongan sakit, sakit kepala, batuk, hidung basah, mata merah.</p>
+                        <b>Penanganan:</b>
+                        <p style="white-space: normal">• Beri isapan cairan, kepingan es, larutan elektrolit secara oral.</p>
+                        <p style="white-space: normal">• Pemberian makan dengan porsi kecil dengan frekuensi sering.</p> 
+                        <p style="white-space: normal">• Beri perawatan bila terjadi gejala yang paling mengganggu dengan pengobatan flu dan demam bla diperlukan.</p>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Campak</h4>
+                        <b>Penyebab:</b>
+                        <p style="white-space: normal">Virus (inkubasi 8-12 hari).</p>
+                        <b>Tanda dan Gejala:</b>
+                        <p style="white-space: normal">• Mulai seperti pilek, kemudian demam 40°C, batuk.</p> 
+                        <p style="white-space: normal">• Mata kemerah-merahan, sensitif terhadap cahaya.</p>
+                        <p style="white-space: normal">• Sekitar empat hari timbul bintik-bintik (merah tua, berkumpul) mulai pada wajah, menyebar keseluruh badan.</p> 
+                        <p style="white-space: normal">• Anak merasa sakit ketika bintik-bintik muncul untuk pertama kalinya.</p>
+                        <b>Penanganan:</b>
+                        <p style="white-space: normal">• Karantina sampai ruam pada kulit hilang, paksakan cairan.</p> 
+                        <p style="white-space: normal">• Gunakan pengendali demam.</p>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Gondong</h4>
+                        <b>Penyebab:</b>
+                        <p style="white-space: normal">Virus (inkubasi tujuh sampai dengan sepuluh hari).</p>
+                        <b>Tanda dan Gejala:</b>
+                        <p style="white-space: normal">• Mulai seperti flu, pada umumnya gangguan pada perut.</p> 
+                        <p style="white-space: normal">• 2-3 hari kemudian kelenjar membengkak lunak dibawah daun telinga.</p>
+                        <p style="white-space: normal">• Terasa sakit untuk membuka rahang.</p>
+                        <p style="white-space: normal">• Bertahan selama 7-10 hari.</p>
+                        <p style="white-space: normal">• Demam.</p>
+                        <b>Penanganan:</b>
+                        <p style="white-space: normal">• Beri makanan yang halus dan lembut, pasanglah kompres dingin untuk leher.</p> 
+                        <p style="white-space: normal">• Berikan asetaminofen.</p>
+                        <p style="white-space: normal">• Hubungi dokter bila bayi mengantuk, muntah terus-menerus, atau memiliki leher yang kaku.</p>
+                    </div>
                 </div>
             </div>
         </div>
