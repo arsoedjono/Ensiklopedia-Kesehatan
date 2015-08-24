@@ -34,7 +34,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Resources;
 
 
-namespace com.aranda
+namespace com.aranda.ensiklopedia
 {
     public partial class MainPage : PhoneApplicationPage
     {

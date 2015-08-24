@@ -9,7 +9,10 @@
 - Febryan Yeremi Sianipar (5112 100 166)
 
 ## Perkembangan Versi Aplikasi
-####V2.0.6
+####v2.0.7
+> melakukan build terhadap project aplikasi
+
+#####V2.0.6
 > - Tersedia fitur Rekomendasi nutrisi dan informasi makanan untuk ibu hamil
 > - Penyesuaian letak
 

@@ -4,7 +4,7 @@
     <Languages xmlns="">
         <Language code="en-US" />
     </Languages>
-    <App Author="Apache Cordova Team" BitsPerPixel="32" Description="A sample Apache Cordova application that responds to the deviceready event." Genre="apps.normal" ProductID="{19524d80-3f3c-11e5-a1ee-7335ebad5cef}" Publisher="Apache Cordova Team" PublisherID="{db093ed5-53b1-45f7-af72-751e8f36ab80}" RuntimeType="Silverlight" Title="Ensiklopedia Ibu Hamil dan Balita" Version="0.0.1" xmlns="">
+    <App Author="Aranda Rizki Soedjono" BitsPerPixel="32" Description="Aplikasi panduan kesehatan bagi ibu hamil dan balita" Genre="apps.normal" ProductID="{19524d80-3f3c-11e5-a1ee-7335ebad5cef}" Publisher="Aranda Rizki Soedjono" PublisherID="{db093ed5-53b1-45f7-af72-751e8f36ab80}" RuntimeType="Silverlight" Title="Ensiklopedia Ibu Hamil dan Balita" Version="2.0.6" xmlns="">
         <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
         <Capabilities>
             <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />

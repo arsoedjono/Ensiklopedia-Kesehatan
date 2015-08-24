@@ -1,0 +1,51 @@
+@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../font/Dosis.woff) format('woff');
+}
+body, input, select, textarea, button, .ui-btn, .leaflet-container {
+  font-family: 'Dosis', sans-serif;
+}
+
+table {
+    color: black;
+    background: #ffebdb;
+    border: 1px solid #cc453b;
+    padding: 0;
+    margin-top:10px;
+    width: 100%;
+    -webkit-border-radius: 8px;
+}
+
+table thead tr th
+{
+    /* color: #666; */
+    border-bottom: 1px solid #cc453b;
+    border-right: 1px solid #cc453b;
+    padding: 10px 10px 10px 10px;
+}
+
+table tr td {
+    color: black;
+    border-bottom: 1px solid #cc453b;
+    border-right: 1px solid #cc453b;
+    padding: 10px 10px 10px 10px;
+}
+
+table thead tr th:last-child
+{
+    border-right: none;
+}
+
+table tr td:last-child {
+    border-right: none;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+.ui-collapsible-themed-content .ui-listview:not(.ui-listview-inset)>li, .ui-collapsible-themed-content .ui-listview:not(.ui-listview-inset)>li>a.ui-btn {
+white-space: normal;
+}
