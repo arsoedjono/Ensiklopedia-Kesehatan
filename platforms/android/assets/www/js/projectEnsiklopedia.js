@@ -38,14 +38,28 @@ $.mobile.document.on( "listviewcreate", "#slctBahanBK-menu", function( e ) {
             .prependTo( destination );
     });
 
-$( function()
-    {
-        if (!window.openDatabase) {
-        alert('Databases are not supported in this browser.');
-        }
-        db = openDatabase(shortName, version, displayName,maxSize);
-        createSemuaTabel();               
-        insertSemuaDataTabel();
+$( function() {
+    if (!window.openDatabase) {
+    alert('Databases are not supported in this browser.');
+    }
+    db = openDatabase(shortName, version, displayName,maxSize);
+    createSemuaTabel();               
+    insertSemuaDataTabel();
+
+    $("a[data-role=tab]").each(function () {
+        var anchor = $(this);
+        anchor.bind("click", function () {
+            $.mobile.changePage(anchor.attr("href"), {
+                transition: "none",
+                changeHash: false
+            });
+            return false;
+        });
+    });
+
+    $("div[data-role=page]").bind("pagebeforeshow", function (e, data) {
+        $.mobile.silentScroll(0);
+    });
  });
 
 function errorHandler(transaction, error) { 

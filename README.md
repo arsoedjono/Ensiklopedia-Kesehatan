@@ -9,7 +9,10 @@
 - Febryan Yeremi Sianipar (5112 100 166)
 
 ## Perkembangan Versi Aplikasi
-####v2.0.9
+####v2.0.10
+> perbaikan pada tombol kembali
+
+#####v2.0.9
 > perbaikan pada tombol kembali
 
 #####v2.0.8
