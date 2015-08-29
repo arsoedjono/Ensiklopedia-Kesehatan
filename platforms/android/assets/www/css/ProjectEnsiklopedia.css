@@ -47,5 +47,9 @@ table tr:last-child td {
 }
 
 .ui-collapsible-themed-content .ui-listview:not(.ui-listview-inset)>li, .ui-collapsible-themed-content .ui-listview:not(.ui-listview-inset)>li>a.ui-btn {
-white-space: normal;
+  white-space: normal;
+}
+
+div ul li a:visited {
+  background-color: inherit;
 }

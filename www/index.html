@@ -21,7 +21,7 @@
         <!-- MAIN MENU -->
         <div data-role="page" id="main-menu" data-url="main-menu">
             <div class="ui-header" data-role="header" data-position="fixed">
-                <h1 class="ui-title" role="heading">MENU UTAMA ENSIKLOPEDIA KESEHATAN</h1>
+                <h1 class="ui-title" role="heading">ENSIKLOPEDIA KESEHATAN</h1>
             </div>
             <div data-role="main" class="ui-content">
                 <ul data-role="listview" data-inset="true">
@@ -96,18 +96,6 @@
             <div data-role="content">
                 <fieldset data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-collapsed="false">
                     <legend>Pencarian</legend>
-                    <label><b>Usia kehamilan:</b></label>
-                    <select name="ibuHamilSlctUmurHamil" id="ibuHamilSlctUsiaHamil" data-mini="true">
-                        <option value="1">1 bulan</option>
-                        <option value="2">2 bulan</option>
-                        <option value="3">3 bulan</option>
-                        <option value="4">4 bulan</option>
-                        <option value="5">5 bulan</option>
-                        <option value="6">6 bulan</option>
-                        <option value="7">7 bulan</option>
-                        <option value="8">8 bulan</option>
-                        <option value="9">9 bulan</option>
-                    </select>
                     <label><b>Pola hidup:</b></label>
                     <div data-role="controlgroup" data-mini="true">
                         <input type="checkbox" name="ibuHamilAVegetarian" id="ibuHamilAVegetarian">
@@ -121,12 +109,6 @@
                         <label for="ibuHamilHasHipertensi" style="white-space: normal">Hipertensi</label>
                     </div>
                     <label><b>Makanan yang harus dihindari:</b></label>
-                    <div data-role="controlgroup" data-mini="true">
-                        <input type="checkbox" name="ibuHamilNoFish" id="ibuHamilNoFish">
-                        <label for="ibuHamilNoFish" style="white-space: normal">Ikan</label>
-                        <input type="checkbox" name="ibuHamilNoEgg" id="ibuHamilNoEgg">
-                        <label for="ibuHamilNoEgg" style="white-space: normal">Telur</label>
-                    </div>
                     <button data-mini="true" onclick="ibu_rekomendasi()">Cari...</button>
                 </fieldset>
                 <div data-role="collapsibleset">
