@@ -9,7 +9,10 @@
 - Febryan Yeremi Sianipar (5112 100 166)
 
 ## Perkembangan Versi Aplikasi
-####v2.0.11
+####v2.0.12
+> perbaikan pada basis data
+
+#####v2.0.11
 > - mengubah judul aplikasi pada halaman utama
 > - pembenaran halaman nutrisi ibu hamil
 > - pembenaran warna menu terpilih
