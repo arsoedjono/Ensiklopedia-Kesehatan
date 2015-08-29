@@ -456,7 +456,7 @@ function ibu_insert_dataBahanMakanan()
             tx.executeSql('INSERT INTO IbuNutrisiBahanMakanan(NamaBMIH, Vegetarian, Diabetes, Hipertensi, GambarBMIH) VALUES ("Brokoli","Y","Y","Y","img/nutrisi/brokoli.jpg")',[], nullHandler,errorHandler);
             tx.executeSql('INSERT INTO IbuNutrisiBahanMakanan(NamaBMIH, Vegetarian, Diabetes, Hipertensi, GambarBMIH) VALUES ("Bunga Kol","Y","Y","Y","img/nutrisi/bungakol.jpg")',[], nullHandler,errorHandler);
             tx.executeSql('INSERT INTO IbuNutrisiBahanMakanan(NamaBMIH, Vegetarian, Diabetes, Hipertensi, GambarBMIH) VALUES ("Jagung","Y","T","Y","img/nutrisi/jagung.jpg")',[], nullHandler,errorHandler);                                          
-            tx.executeSql('INSERT INTO IbuNutrisiBahanMakanan(NamaBMIH, Vegetarian, Diabetes, Hipertensi, GambarBMIH) VALUES ("Jamur","Y","Y","Y","img/nutrisi/jamur.jpg")',[], nullHandler,errorHandler);
+            tx.executeSql('INSERT INTO IbuNutrisiBahanMakanan(NamaBMIH, Vegetarian, Diabetes, Hipertensi, GambarBMIH) VALUES ("Jamur","Y","Y","Y","img/nutrisi/jamur.JPG")',[], nullHandler,errorHandler);
             tx.executeSql('INSERT INTO IbuNutrisiBahanMakanan(NamaBMIH, Vegetarian, Diabetes, Hipertensi, GambarBMIH) VALUES ("Kacang Panjang","Y","Y","Y","img/nutrisi/kacangpanjang.jpg")',[], nullHandler,errorHandler);
             tx.executeSql('INSERT INTO IbuNutrisiBahanMakanan(NamaBMIH, Vegetarian, Diabetes, Hipertensi, GambarBMIH) VALUES ("Kecambah","Y","Y","Y","img/nutrisi/kecambah.jpg")',[], nullHandler,errorHandler);
             tx.executeSql('INSERT INTO IbuNutrisiBahanMakanan(NamaBMIH, Vegetarian, Diabetes, Hipertensi, GambarBMIH) VALUES ("Kentang","Y","T","Y","img/nutrisi/kentang.jpg")',[], nullHandler,errorHandler);
