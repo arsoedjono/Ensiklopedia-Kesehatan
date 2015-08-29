@@ -87,21 +87,21 @@ function ibuhamil_refreshListView()
 function createSemuaTabel()
 {
     db.transaction(function(tx){
-        tx.executeSql( 'DROP TABLE IF EXISTS BalitaNutrisiBahanMakanan',nullHandler,nullHandler);
-        tx.executeSql( 'DROP TABLE IF EXISTS BalitaNutrisiResep',nullHandler,nullHandler);
-        tx.executeSql( 'DROP TABLE IF EXISTS BalitaNutrisiInfo',nullHandler,nullHandler);
-        tx.executeSql( 'DROP TABLE IF EXISTS BalitaNutrisiInfoGizi',nullHandler,nullHandler);
-        tx.executeSql( 'DROP TABLE IF EXISTS BalitaPerkembangan',nullHandler,nullHandler);
-        tx.executeSql( 'DROP TABLE IF EXISTS BalitaP3K',nullHandler,nullHandler);
-        tx.executeSql( 'DROP TABLE IF EXISTS IbuInfoPerkembanganJanin',nullHandler,nullHandler);
-        tx.executeSql( 'DROP TABLE IF EXISTS IbuNutrisiBahanMakanan',nullHandler,nullHandler);
-        tx.executeSql( 'DROP TABLE IF EXISTS IbuNutrisiResep',nullHandler,nullHandler);
-        tx.executeSql( 'DROP TABLE IF EXISTS IbuInfoOlahraga',nullHandler,nullHandler);
-        tx.executeSql( 'DROP TABLE IF EXISTS IbuInfoPemeriksaan',nullHandler,nullHandler);
-        tx.executeSql( 'DROP TABLE IF EXISTS IbuInfoTips',nullHandler,nullHandler);
-        tx.executeSql( 'DROP TABLE IF EXISTS IbuPersiapan',nullHandler,nullHandler);
-        tx.executeSql( 'DROP TABLE IF EXISTS IbuPersiapanTips',nullHandler,nullHandler);
-        tx.executeSql( 'DROP TABLE IF EXISTS IbuFAQ',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE IF EXISTS BalitaNutrisiBahanMakanan',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE IF EXISTS BalitaNutrisiResep',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE IF EXISTS BalitaNutrisiInfo',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE IF EXISTS BalitaNutrisiInfoGizi',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE IF EXISTS BalitaPerkembangan',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE IF EXISTS BalitaP3K',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE IF EXISTS IbuInfoPerkembanganJanin',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE IF EXISTS IbuNutrisiBahanMakanan',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE IF EXISTS IbuNutrisiResep',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE IF EXISTS IbuInfoOlahraga',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE IF EXISTS IbuInfoPemeriksaan',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE IF EXISTS IbuInfoTips',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE IF EXISTS IbuPersiapan',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE IF EXISTS IbuPersiapanTips',nullHandler,nullHandler);
+        //tx.executeSql( 'DROP TABLE IF EXISTS IbuFAQ',nullHandler,nullHandler);
         tx.executeSql( 'CREATE TABLE IF NOT EXISTS BalitaNutrisiBahanMakanan(IdBahanMakanan INTEGER NOT NULL PRIMARY KEY, NamaBM TEXT, UsiaBM INTEGER, A_Laktosa TEXT, A_Casein TEXT, A_Telur TEXT, A_IkanLaut TEXT, A_Kacang TEXT, GambarBM TEXT)',[], nullHandler, errorHandler);
         tx.executeSql( 'CREATE TABLE IF NOT EXISTS BalitaNutrisiResep(IdResep INTEGER NOT NULL PRIMARY KEY, Resep TEXT, UsiaResep INTEGER, Rsp_Laktosa TEXT, Rsp_Casein TEXT, Rsp_Telur TEXT, Rsp_IkanLaut TEXT)',[], nullHandler, errorHandler);    
         tx.executeSql( 'CREATE TABLE IF NOT EXISTS BalitaNutrisiInfo(IdInfo INTEGER NOT NULL PRIMARY KEY, Judul TEXT, Konten TEXT)',[], nullHandler, errorHandler);

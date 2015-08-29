@@ -10,6 +10,10 @@
 
 ## Perkembangan Versi Aplikasi
 ####v2.0.12
+> - perbaikan pada basis data
+> - penyesuaian nama gambar
+
+#####v2.0.12
 > perbaikan pada basis data
 
 #####v2.0.11
